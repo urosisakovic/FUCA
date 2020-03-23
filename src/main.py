@@ -25,9 +25,9 @@ def schedule():
     return "Schedule"
 
 
-@app.route("/signin")
-def signin():
-    return "Sign In"
+@app.route("/login")
+def login():
+    return "Login"
 
 
 @app.route("/stats")
