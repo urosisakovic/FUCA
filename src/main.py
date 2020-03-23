@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = ''
@@ -7,7 +7,7 @@ app.config['SECRET_KEY'] = ''
 @app.route("/")
 @app.route("/home")
 def home():
-    return "Home"
+    return render_template('home.html')
 
 
 @app.route("/results")
@@ -25,7 +25,7 @@ def schedule():
     return "Schedule"
 
 
-@app.route("signin")
+@app.route("/signin")
 def signin():
     return "Sign In"
 
@@ -35,37 +35,37 @@ def stats():
     return "Stats"
 
 
-@app.route("bestplayers")
+@app.route("/bestplayers")
 def bestplayers():
     return "Best Players"
 
 
-@app.route("standings")
+@app.route("/standings")
 def standings():
     return "Standings"
 
 
-@app.route("bestscorers")
+@app.route("/bestscorers")
 def bestscorers():
     return "Best Scorers"
 
 
-@app.route("teams")
+@app.route("/teams")
 def teams():
     return "Teams"
 
 
-@app.route("teamresults")
+@app.route("/teamresults")
 def teamresults():
     return "Team Results"
 
 
-@app.route("teamschedule")
+@app.route("/teamschedule")
 def teamschedule():
     return "Team Schedule"
 
 
-@app.route("teamsquad")
+@app.route("/teamsquad")
 def teamsquad():
     return "Team Squad"
 
