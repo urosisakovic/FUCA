@@ -1,11 +1,7 @@
-from flask import Flask, render_template, flash, redirect, url_for
-from forms import LoginForm
-app = Flask(__name__)
-
-import dummydata
-
-#TODO: Generate real random key
-app.config['SECRET_KEY'] = '1234'
+from flask import render_template, flash, redirect, url_for
+from fuca.forms import LoginForm
+from fuca import dummydata
+from fuca import app
 
 @app.route("/")
 @app.route("/home")
@@ -82,7 +78,3 @@ def teamschedule():
 @app.route("/teamsquad")
 def teamsquad():
     return "Team Squad"
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
