@@ -82,3 +82,20 @@ stats = {
     'team2_yellow':     '3',
     'team2_red':        '0'
 }
+stats_best_player = {
+    'best_player': 'Mile Jovanovic'
+}
+stats_scorers = [
+    {
+        'scorer':       'Mile Jovanovic',
+        'assistent':    '(Janko Stosic)'
+    },
+    {
+        'scorer':       'Ivan Stoimenov',
+        'assistent':    '(penalty)'
+    },
+    {
+        'scorer':       'Antonio Rukavina',
+        'assistent':    ''
+    }
+]

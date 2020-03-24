@@ -6,4 +6,14 @@
     <p>{{ stats.team1_shots }} SHOTS {{ stats.team2_shots }}</p>
     <p>{{ stats.team1_yellow }} YELLOW CARDS {{ stats.team2_yellow }}</p>
     <p>{{ stats.team1_red }} RED CARDS {{ stats.team2_red }}</p>
+
+    <p>
+        <b>Goalscorers: </b> 
+        {% for scorer in scorers %}
+            {{ scorer.scorer }}{{ scorer.assistent }} 
+        {% endfor %}
+    </p>
+    <p>
+        <b> Player of the match: </b> {{ best_player.best_player }}
+    </p>
 {% endblock content %}

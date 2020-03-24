@@ -42,7 +42,11 @@ def login():
 
 @app.route("/stats")
 def stats():
-    return render_template('stats.html', title='Stats', stats=dummydata.stats)
+    return render_template('stats.html',
+                           title='Stats',
+                           stats=dummydata.stats,
+                           best_player=dummydata.stats_best_player,
+                           scorers=dummydata.stats_scorers)
 
 
 @app.route("/bestplayers")
