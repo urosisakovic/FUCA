@@ -64,3 +64,21 @@ schedule = [
         'team2':    'Zmajevi3'
     }
 ]
+
+stats = {
+    'team1_logo':       'LOGO1',
+    'team1_name':       'Legende',
+    'team1_goals':      '0',
+    'team1_posession':  '33',
+    'team1_shots':      '7',
+    'team1_yellow':     '2',
+    'team1_red':        '0',
+
+    'team2_logo':       'LOGO2',
+    'team2_name':       'Zmajevi',
+    'team2_goals':      '2',
+    'team2_posession':  '66',
+    'team2_shots':      '11',
+    'team2_yellow':     '3',
+    'team2_red':        '0'
+}
