@@ -16,7 +16,7 @@ Open Conda CLI. Create conda environment for this project: <br />
 `conda env create -n fuca python=3.6`<br /><br />
 Activate the created environment:<br />`conda activate fuca`<br /><br />
 
-Every future time you wish the start the project, you will have to activate `fuca` environment as well.<br />
+Every future time you wish to start the project, you will have to activate `fuca` environment as well.<br />
 
 ## Install needed Python packages
 Navigate to the root of this repo using Conda CLI. Download necessary Python packages: <br />`pip install -r requirements.txt`<br />
