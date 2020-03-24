@@ -1,13 +1,13 @@
 # Instructions for setting up the environment
 
 
-## Set up command line interface
+## Clone repository
 Have your computer connected to the internet.  
 Open command line interface and navigate to a location to which you want to clone this repo.  
-Clone this repo: `git clone https://github.com/urosisakovic/FUCA.git`<br />
+Clone this repo:<br />`git clone https://github.com/urosisakovic/FUCA.git`<br />
 
 
-## Download miniconda
+## Download Miniconda
 Follow this [link](https://docs.conda.io/en/latest/miniconda.html) and download Miniconda.
 
 
@@ -18,12 +18,12 @@ Activate the created environment:<br />`conda activate fuca`<br />
 
 
 ## Install needed Python packages
-Download necessary packages by typing<br />`pip install -r requirements.txt`<br />
+Download necessary Python packages: <br />`pip install -r requirements.txt`<br />
 
 
 ## Start the application
 Navigate to the /src subdirectory of this repo using Conda CLI.
-Start the project by runnning the python script<br />`python run.py`<br />
+Start the project by runnning the python script:<br />`python run.py`<br />
 
 
 ## Inspect the application in web browser

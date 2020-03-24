@@ -1,9 +1,9 @@
 # FUCA
 
 <p>
-    FUCA is a web application built for the imaginary local amateur football competition.
-    It has been built as a team project as part of Principles of Software Engineering 
-    course at school of Electrical Engineering, University of Belgrade.
+    FUCA is a web application built for an imaginary local amateur football competition.
+    It has been built as a team project as a homework assigment for the Principles of 
+    Software Engineering course taught at school of Electrical Engineering, University of Belgrade.
 </p>
 
 <p>
