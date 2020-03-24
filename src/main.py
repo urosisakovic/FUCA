@@ -25,7 +25,7 @@ def player():
 
 @app.route("/schedule")
 def schedule():
-    return "Schedule"
+    return render_template('schedule.html', schedule=dummydata.schedule, title='Schedule')
 
 
 @app.route("/login", methods=['GET', 'POST'])
