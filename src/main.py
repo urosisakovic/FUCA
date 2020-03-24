@@ -15,7 +15,7 @@ def home():
 
 @app.route("/results")
 def results():
-    return "Results"
+    return render_template('results.html', results=dummydata.results, title='Results')
 
 
 @app.route("/player")

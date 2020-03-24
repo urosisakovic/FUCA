@@ -21,3 +21,28 @@ player = {
     'yellow':   1,
     'red':      0
 }
+
+#TODO: Use some date format insted of the string.
+results = [
+    {
+        'date':         '28-02-2020',
+        'team1_name':   'Legende',
+        'team1_goals':  '0',
+        'team2_name':   'Zmajevi',
+        'team2_goals':  '2'
+    },
+    {
+        'date':         '28-02-2020',
+        'team1_name':   'xxxx',
+        'team1_goals':  '2',
+        'team2_name':   'xxxx',
+        'team2_goals':  '5'
+    },
+    {
+        'date':         '29-02-2020',
+        'team1_name':   'Trikolori',
+        'team1_goals':  '0',
+        'team2_name':   'Rekreativo',
+        'team2_goals':  '3'
+    }
+]
