@@ -1,7 +1,7 @@
-from flask import render_template, flash, redirect, url_for
+from flask import flash, redirect, render_template, url_for
+from fuca import app, dummydata
 from fuca.forms import LoginForm
-from fuca import dummydata
-from fuca import app
+
 
 @app.route("/")
 @app.route("/home")
