@@ -13,7 +13,7 @@
 
 <p><b>
     All the source code is written using Enlish language for the sake of not combining
-    Serbian terms with the English once. However, all the documentation files are written
+    Serbian terms with the English ones. However, all the documentation files are written
     in Serbian because they are created as a homework assigment for the course at the
     University of Belgrade.
 </b></p>

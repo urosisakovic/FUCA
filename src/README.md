@@ -2,7 +2,7 @@
 
 
 ## Clone repository
-Have your computer connected to the internet.  
+Have your computer connected to the Internet.  
 Open command line interface and navigate to a location to which you want to clone this repo.  
 Clone this repo:<br />`git clone https://github.com/urosisakovic/FUCA.git`<br />
 
