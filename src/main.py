@@ -20,7 +20,7 @@ def results():
 
 @app.route("/player")
 def player():
-    return "Player"
+    return render_template('player.html', player=dummydata.player, title=dummydata.player['name'])
 
 
 @app.route("/schedule")

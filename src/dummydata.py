@@ -11,3 +11,13 @@ news = [
         'date': '28-02-2020'
     }
 ]
+
+player = {
+    'name':     'Ivan Jokic',
+    'number':   4,
+    'points':   42,
+    'goals':    4,
+    'assists':  3,
+    'yellow':   1,
+    'red':      0
+}
