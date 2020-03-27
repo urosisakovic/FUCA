@@ -8,7 +8,7 @@
 
 <p>
     It is built using Python Flask web framework. All the source code is located
-    in /src subdirectory, whereas in the main directory other documentation files reside.
+    in /src subdirectory, whereas in /docs subdirectory other documentation files reside.
 </p>
 
 <p><b>
