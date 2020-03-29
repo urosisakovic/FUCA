@@ -3,7 +3,7 @@ from fuca import db
 
 
 class News(db.Model):
-    __tablename__ = 'News'
+    __tablename__ = 'news'
     id          = db.Column(db.Integer,     primary_key=True)
     date        = db.Column(db.DateTime,    nullable=False, default=datetime.utcnow)
     title       = db.Column(db.String(100), nullable=False)
@@ -14,7 +14,7 @@ class News(db.Model):
 
 
 class Player(db.Model):
-    __tablename__ = 'Player'
+    __tablename__ = 'player'
     id          = db.Column(db.Integer,     primary_key=True)
     name        = db.Column(db.String(100), nullable=False)
     birthdate   = db.Column(db.DateTime,    nullable=False)
@@ -30,8 +30,21 @@ class Player(db.Model):
         return f"Player('{self.name}', '{self.email}', '{self.image}')"
 
 
+class Match(db.Model):
+    __tablename__ = 'match'
+    id          = db.Column(db.Integer, primary_key=True)
+    # foreign keys
+    host_team_id    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    guest_team_id   = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    # relationships
+    statistics  = db.relationship('Statistics', backref='match', lazy=True) 
+
+    def __repr__(self):
+        return f"Match(host team id: {self.host_team}, guest team id: {self.guest_team})"
+
+
 class Team(db.Model):
-    __tablename__ = 'Team'
+    __tablename__ = 'team'
     id          = db.Column(db.Integer,     primary_key=True)
     name        = db.Column(db.String(100), nullable=False, unique=True)
     matches     = db.Column(db.Integer,     nullable=False, default=0)
@@ -43,29 +56,16 @@ class Team(db.Model):
     # foreign keys
     captain_id  = db.Column(db.Integer, db.ForeignKey('player.id'))
     # relationships
-    host_matches    = db.relationship('Match',  backref='host_team',    lazy=True,  foreign_keys='match.host_team')
-    guest_matches   = db.relationship('Match',  backref='guest_team',   lazy=True,  foreign_keys='match.guest_team')
-    players         = db.relationship('Player', backref='team',         lazy=True)
+    host_matches    = db.relationship('Match',  backref='host_team',    lazy=True,  foreign_keys=Match.host_team_id)
+    guest_matches   = db.relationship('Match',  backref='guest_team',   lazy=True,  foreign_keys=Match.guest_team_id)
+    players         = db.relationship('Player', backref='team',         lazy=True,  foreign_keys=Player.team_id)
 
     def __repr__(self):
         return f"Team('{self.name}')"
 
 
-class Match(db.Model):
-    __tablename__ = 'Match'
-    id          = db.Column(db.Integer, primary_key=True)
-    # foreign keys
-    host_team    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    guest_team   = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    # relationships
-    statistics  = db.relationship('Statistics', backref='match', lazy=True) 
-
-    def __repr__(self):
-        return f"Match(team1_id: {self.team1_id}, team2_id: {self.team2_id})"
-
-
 class Statistics(db.Model):
-    __tablename__ = 'Statistics'
+    __tablename__ = 'statistics'
     id          = db.Column(db.Integer, primary_key=True)
     goals       = db.Column(db.Integer, nullable=False)
     assists     = db.Column(db.Integer, nullable=False)
