@@ -2,6 +2,7 @@ from flask import flash, redirect, render_template, url_for
 from fuca import app, dummydata
 from fuca.models import News, Team, Player, Match, Statistics
 from fuca.forms import LoginForm
+from datetime import datetime
 
 
 @app.route("/")
@@ -14,7 +15,9 @@ def home():
 
 @app.route("/results")
 def results():
-    return render_template('results.html', results=dummydata.results, title='Results')
+    results_db = Match.query.filter(Match.date_time < datetime.now()).all()
+    results_list = [result.jinja_dict() for result in results_db]
+    return render_template('results.html', results=results_list, title='Results')
 
 
 @app.route("/player")
