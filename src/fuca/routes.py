@@ -27,7 +27,9 @@ def player():
 
 @app.route("/schedule")
 def schedule():
-    return render_template('schedule.html', schedule=dummydata.schedule, title='Schedule')
+    schedule_db = Match.query.filter(Match.date_time >= datetime.now()).all()
+    schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
+    return render_template('schedule.html', schedule=schedule_list, title='Schedule')
 
 
 @app.route("/login", methods=['GET', 'POST'])
