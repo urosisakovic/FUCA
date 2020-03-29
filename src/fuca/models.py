@@ -12,6 +12,12 @@ class News(db.Model):
     def __repr__(self):
         return f"News('{self.title}', '{self.date}')"
 
+    def jinja_dict(self):
+        return {'news_title'    : self.title,
+                'content'       : self.content,
+                'date'          : str(self.date)}
+
+
 
 class Player(db.Model):
     __tablename__ = 'player'
@@ -33,9 +39,12 @@ class Player(db.Model):
 class Match(db.Model):
     __tablename__ = 'match'
     id          = db.Column(db.Integer, primary_key=True)
+    date_time        = db.Column(db.DateTime)
+    host_team_goals  = db.Column(db.Integer, default=0)
+    guest_team_goals = db.Column(db.Integer, default=0)
     # foreign keys
-    host_team_id    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    guest_team_id   = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    host_team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    guest_team_id    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships
     statistics  = db.relationship('Statistics', backref='match', lazy=True) 
 

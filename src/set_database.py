@@ -72,12 +72,25 @@ def add_players():
     print_array(Player.query.all())
 
 
+#TODO: Make Match table goals correspond to Statistics table goals.
 def add_matches():
+    def generate_timeslot():
+        if randint(0, 2) % 2 == 0:
+            ret = datetime(2019, 8, 20, 20, 0, 0)
+        else:
+            ret = datetime(2020, 5, 20, 19, 0, 0)
+
+        return ret
+
     teams = Team.query.all()
     for host_team in teams:
         for guest_team in teams:
             if host_team != guest_team:
-                match = Match(host_team=host_team, guest_team=guest_team)
+                match = Match(host_team=host_team,
+                              guest_team=guest_team,
+                              date_time=generate_timeslot(),
+                              host_team_goals=randint(0, 7),
+                              guest_team_goals=randint(0, 7))
                 db.session.add(match)
     
     db.session.commit()

@@ -1,12 +1,15 @@
 from flask import flash, redirect, render_template, url_for
 from fuca import app, dummydata
+from fuca.models import News, Team, Player, Match, Statistics
 from fuca.forms import LoginForm
 
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', newslist=dummydata.news)
+    news_db = News.query.all()
+    news_list = [news.jinja_dict() for news in news_db]
+    return render_template('home.html', newslist=news_list)
 
 
 @app.route("/results")
