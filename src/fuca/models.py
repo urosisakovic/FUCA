@@ -40,11 +40,23 @@ class Match(db.Model):
     __tablename__ = 'match'
     id          = db.Column(db.Integer, primary_key=True)
     date_time        = db.Column(db.DateTime)
-    host_team_goals  = db.Column(db.Integer, default=0)
-    guest_team_goals = db.Column(db.Integer, default=0)
+    
+    host_team_goals         = db.Column(db.Integer, default=0)
+    host_team_yellow        = db.Column(db.Integer, default=0)
+    host_team_red           = db.Column(db.Integer, default=0)
+    host_team_shots         = db.Column(db.Integer, default=0)
+    host_team_possession    = db.Column(db.Integer, default=0)
+
+    guest_team_goals        = db.Column(db.Integer, default=0)
+    guest_team_yellow       = db.Column(db.Integer, default=0)
+    guest_team_red          = db.Column(db.Integer, default=0)
+    guestt_team_shots         = db.Column(db.Integer, default=0)
+    guest_team_possession   = db.Column(db.Integer, default=0)
+
     # foreign keys
     host_team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     guest_team_id    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    best_player_id   = db.Column(db.Integer, db.ForeignKey('player.id'))
     # relationships
     statistics  = db.relationship('Statistics', backref='match', lazy=True) 
 
@@ -53,9 +65,10 @@ class Match(db.Model):
 
     def jinja_dict(self):
         return {'date':         self.date_time,
-                'team1_name':   self.host_team.name,
-                'team1_goals':  self.host_team_goals,
-                'team2_name':   self.guest_team.name,
+                'team1_name'    : self.host_team.name,
+                'team1_goals'   : self.host_team_goals,
+                'team1_logo'    : self.team1_logo,
+                'team2_name'    : self.guest_team.name,
                 'team2_goals':  self.guest_team_goals}
 
 

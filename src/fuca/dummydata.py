@@ -9,24 +9,6 @@ player = {
     'red':      0
 }
 
-schedule = [
-    {
-        'date':     '28-02-2020',
-        'team1':    'Legende1',
-        'team2':    'Zmajevi1'
-    },
-    {
-        'date':     '29-02-2020',
-        'team1':    'Legende2',
-        'team2':    'Zmajevi2'
-    },
-    {
-        'date':     '30-02-2020',
-        'team1':    'Legende3',
-        'team2':    'Zmajevi3'
-    }
-]
-
 stats = {
     'team1_logo':       'LOGO1',
     'team1_name':       'Legende',
