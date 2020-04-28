@@ -100,16 +100,25 @@ def bestscorers():
     return render_template('best-scorers.html', players=players, title='Best Scorers')
 
 
-@app.route("/teamresults")
-def teamresults():
-    return "Team Results"
+# TODO: Add team name in results.
+# TODO: Adress invalid id.
+@app.route("/teamresults/<int:id>")
+def teamresults(id):
+    results_db = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
+        Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
+    results_list = [result.jinja_dict() for result in results_db]
+    return render_template('team-results.html', results=results_list, title='Team Results')
+
+# TODO: Add team name in results.
+# TODO: Adress invalid id.
+@app.route("/teamschedule/<int:id>")
+def teamschedule(id):
+    schedule_db = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
+        Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
+    schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
+    return render_template('team-schedule.html', schedule=schedule_list, title='Team Schedule')
 
 
-@app.route("/teamschedule")
-def teamschedule():
-    return "Team Schedule"
-
-
-@app.route("/teamsquad")
-def teamsquad():
+@app.route("/teamsquad/<int:id>")
+def teamsquad(id):
     return "Team Squad"

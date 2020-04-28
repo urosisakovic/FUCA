@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% for match in schedule %}
+        <p>{{ match.date }} {{ match.team1_name }} VS {{ match.team2_name }} </p>
+    {% endfor %}
+{% endblock content %}
