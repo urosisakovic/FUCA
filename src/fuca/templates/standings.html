@@ -7,6 +7,10 @@
     <a href="{{ url_for('standings') }}">Standings</a> | <a href="{{ url_for('bestplayers') }}">Best players</a> | <a href="{{ url_for('bestscorers') }}">Best scorers</a>
 
     {% for team in teams %}
-        <p>{{ team.logo }} {{ team.name }} {{ team.wins }} {{ team.losses }} {{ team.draws }} {{ team.matches }} {{ team.goal_diff }} </p>
+        <a href="{{ url_for('team', id=team.id)}}">
+            <p>
+                {{ team.logo }} {{ team.name }} {{ team.wins }} {{ team.losses }} {{ team.draws }} {{ team.matches }} {{ team.goal_diff }}
+            </p>
+        </a>
     {% endfor %}
 {% endblock content %}

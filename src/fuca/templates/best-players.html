@@ -4,7 +4,7 @@
     <a href="{{ url_for('standings') }}">Standings</a> | <a href="{{ url_for('bestplayers') }}">Best players</a> | <a href="{{ url_for('bestscorers') }}">Best scorers</a>
     {% for player in players %}
         <p>
-            Player name: {{ player.name }}<br>
+            <a href="{{ url_for('player', id=player.id)}}">Player name: {{ player.name }}</a><br>
             Player number: {{ player.number }}<br>
             Player points: {{ player.points }}<br>
             Player goals: {{ player.goals }}<br>

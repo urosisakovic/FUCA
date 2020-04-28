@@ -73,7 +73,8 @@ class Player(db.Model):
                 'assists'       : self.assists(),
                 'red'           : self.red(),
                 'yellow'        : self.yellow(),
-                'points'        : self.points()}
+                'points'        : self.points(),
+                'id'            : self.id}
 
     def __repr__(self):
         return f"Player('{self.name}', '{self.email}', '{self.image}')"
@@ -111,8 +112,9 @@ class Match(db.Model):
                 'team1_name'    : self.host_team.name,
                 'team1_goals'   : self.host_team_goals,
                 'team2_name'    : self.guest_team.name,
-                'team2_goals'   : self.guest_team_goals}
-
+                'team2_goals'   : self.guest_team_goals,
+                'id'            : self.id}
+                
 
 class Team(db.Model):
     __tablename__ = 'team'
@@ -145,7 +147,8 @@ class Team(db.Model):
                 'losses'        : self.losses,
                 'draws'         : self.draws,
                 'goal_diff'     : self.goal_diff,
-                'points'        : self.points() }
+                'points'        : self.points(),
+                'id'            : self.id}
 
 
 class Statistics(db.Model):
