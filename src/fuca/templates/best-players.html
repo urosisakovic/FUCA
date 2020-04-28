@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% for player in players %}
+        <p>
+            Player name: {{ player.name }}<br>
+            Player number: {{ player.number }}<br>
+            Player points: {{ player.points }}<br>
+            Player goals: {{ player.goals }}<br>
+            Player assists: {{ player.assists }}<br>
+            Player yellow: {{ player.yellow }}<br>
+            Player red: {{ player.red }}<br>
+        </p>
+    {% endfor %}
+{% endblock content %}

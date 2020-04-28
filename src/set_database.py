@@ -52,6 +52,7 @@ def add_teams():
 
 def add_players():
     player_names = ['player_name' + str(i) for i in range(PLAYER_CNT)]
+    player_numbers = [0 for _ in range(PLAYER_CNT)]
     player_birthdates = [datetime.now() for _ in range(PLAYER_CNT)]
     player_images = ['image' + str(i) + '.png' for i in range(PLAYER_CNT)]
     player_emails = ['player' + str(i) + '@gmail.com' for i in range(PLAYER_CNT)]
@@ -59,11 +60,12 @@ def add_players():
     player_team_ids = [i % (PLAYER_CNT / TEAMS_CNT) + 1 for i in range(PLAYER_CNT)]
 
     players = [Player(name=player_names[i],
-                     birthdate=player_birthdates[i],
-                     image=player_images[i],
-                     email=player_emails[i],
-                     password=player_passwords[i],
-                     team_id = player_team_ids[i]) for i in range(PLAYER_CNT)]
+                      birthdate=player_birthdates[i],
+                      number=player_numbers[i],
+                      image=player_images[i],
+                      email=player_emails[i],
+                      password=player_passwords[i],
+                      team_id = player_team_ids[i]) for i in range(PLAYER_CNT)]
 
     for player in players:
         db.session.add(player)

@@ -52,29 +52,39 @@ def stats():
                            best_player=dummydata.stats_best_player,
                            scorers=dummydata.stats_scorers)
 
+
 @app.route("/teams")
 def teams():
-    teams_db = Team.query.filter().all()
+    teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
     return render_template('teams.html', teams=teams, title='Teams')
 
 
-@app.route("/bestplayers")
-def bestplayers():
-    return "Best Players"
-
-
 @app.route("/standings")
 def standings():
-    teams_db = Team.query.filter().all()
+    teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
     teams = sorted(teams, key=lambda team: team['points'])
     return render_template('standings.html', teams=teams, title='Standings')
 
 
+@app.route("/bestplayers")
+def bestplayers():
+    players_db = Player.query.all()
+    players = [player.jinja_dict() for player in players_db]
+    players = sorted(players, key=lambda player: player['points'])
+    players = reversed(players)
+    return render_template('best-players.html', players=players, title='Best Players')
+
+
 @app.route("/bestscorers")
 def bestscorers():
-    return "Best Scorers"
+    players_db = Player.query.all()
+    players = [player.jinja_dict() for player in players_db]
+    players = sorted(players, key=lambda player: player['goals'])
+    players = reversed(players)
+    return render_template('best-scorers.html', players=players, title='Best Scorers')
+
 
 @app.route("/teamresults")
 def teamresults():

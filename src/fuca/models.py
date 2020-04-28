@@ -24,6 +24,7 @@ class Player(db.Model):
     id          = db.Column(db.Integer,     primary_key=True)
     name        = db.Column(db.String(100), nullable=False)
     birthdate   = db.Column(db.DateTime,    nullable=False)
+    number      = db.Column(db.Integer,     nullable=False)
     image       = db.Column(db.String(20),  nullable=False, default='default.jpg')
     email       = db.Column(db.String(120), unique=True,    nullable=False)
     password    = db.Column(db.String(60),  nullable=False)
@@ -31,6 +32,48 @@ class Player(db.Model):
     team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships
     statistics  = db.relationship('Statistics', backref='player', lazy=True) 
+
+    def goals(self):
+        goals = 0
+        for stat in self.statistics:
+            goals += stat.goals
+        return goals
+
+    def assists(self):
+        assists = 0
+        for stat in self.statistics:
+            assists += stat.assists
+        return assists
+
+    def red(self):
+        red = 0
+        for stat in self.statistics:
+            red += stat.red
+        return red
+
+    def yellow(self):
+        yellow = 0
+        for stat in self.statistics:
+            yellow += stat.yellow
+        return yellow
+
+    # TODO: Substitute points equation.
+    def points(self):
+        return self.goals() + self.assists() - self.yellow() - 2 * self.red()
+
+    # TODO: Create properties instead of methods for goals, assists...
+    def jinja_dict(self):
+        return {'name'          : self.name,
+                'birthdate'     : self.birthdate,
+                'image'         : self.image,
+                'email'         : self.email,
+                'team_id'       : self.team_id,
+                'number'        : self.number,
+                'goals'         : self.goals(),
+                'assists'       : self.assists(),
+                'red'           : self.red(),
+                'yellow'        : self.yellow(),
+                'points'        : self.points()}
 
     def __repr__(self):
         return f"Player('{self.name}', '{self.email}', '{self.image}')"
