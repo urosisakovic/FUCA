@@ -1,0 +1,14 @@
+{
+    "news" : [
+        {
+            "date": "11-20-2019",
+            "title": "Vest1",
+            "content": "Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1Tekst1"
+        },
+        {
+            "date": "12-08-2019",
+            "title": "Vest2",
+            "content": "Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2Tekst2"
+        }
+    ]
+}

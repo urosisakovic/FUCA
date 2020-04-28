@@ -1,0 +1,22 @@
+{
+    "players" : [
+        {
+            "id": "0",
+            "name": "Igor Milenkovic",
+            "birthdate": "01-30-1990",
+            "number": "7",
+            "image": "default_player.jpg",
+            "email": "igor.milenkovic@gmail.com",
+            "team_id": "0"
+        },
+        {
+            "id": "1",
+            "name": "Jovan Jovan",
+            "birthdate": "02-08-1999",
+            "number": "11",
+            "image": "default_player.jpg",
+            "email": "jovan.jovanovic@gmail.com",
+            "team_id": "1"
+        }
+    ]
+}

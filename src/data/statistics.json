@@ -1,0 +1,22 @@
+{
+    "statistics" : [
+        {
+            "id": "0",
+            "goals": "0",
+            "assists": "1",
+            "yellow": "0",
+            "red": "0",
+            "player_id": "0",
+            "match_id": "0"
+        },
+        {
+            "id": "1",
+            "goals": "1",
+            "assists": "2",
+            "yellow": "1",
+            "red": "0",
+            "player_id": "0",
+            "match_id": "1"
+        }
+    ]
+}

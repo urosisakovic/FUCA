@@ -1,0 +1,26 @@
+{
+    "teams" : [
+        {
+            "id": "0",
+            "name": "Real Madrid",
+            "matches": "20",
+            "wins": "7",
+            "losses": "7",
+            "draws": "6",
+            "goal_diff": "-4",
+            "logo_image": "default_team.jpg",
+            "captain_id": "1"
+        },
+        {
+            "id": "1",
+            "name": "Bayern",
+            "matches": "20",
+            "wins": "14",
+            "losses": "1",
+            "draws": "5",
+            "goal_diff": "14",
+            "logo_image": "default_team.jpg",
+            "captain_id": "0"
+        }
+    ]
+}

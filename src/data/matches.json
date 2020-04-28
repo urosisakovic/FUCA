@@ -1,0 +1,38 @@
+{
+    "matches" : [
+        {
+            "id": "0",
+            "date_time": "02-03-2020",
+            "host_team_id": "1",
+            "host_team_goals": "3",
+            "host_team_yellow": "1",
+            "host_team_red": "0",
+            "host_team_shots": "14",
+            "host_team_possession": "30",
+            "guest_team_id": "0",
+            "guest_team_goals": "8",
+            "guest_team_yellow": "2",
+            "guest_team_red": "1",
+            "guest_team_shots": "26",
+            "guest_team_possession": "70",
+            "best_player_id": "0"
+        },
+        {
+            "id": "1",
+            "date_time": "04-03-2020",
+            "host_team_id": "0",
+            "host_team_goals": "",
+            "host_team_yellow": "",
+            "host_team_red": "",
+            "host_team_shots": "",
+            "host_team_possession": "",
+            "guest_team_id": "1",
+            "guest_team_goals": "",
+            "guest_team_yellow": "",
+            "guest_team_red": "",
+            "guest_team_shots": "",
+            "guest_team_possession": "",
+            "best_player_id": ""
+        }
+    ]
+}
