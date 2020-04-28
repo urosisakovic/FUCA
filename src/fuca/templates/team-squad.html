@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% for player in players %}
+        <p>{{ player.image }} {{ player.name }} VS {{ player.number }} </p>
+    {% endfor %}
+{% endblock content %}
