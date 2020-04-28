@@ -11,7 +11,7 @@ PLAYER_CNT = 30
 assert PLAYER_CNT % TEAMS_CNT == 0, 'Every team must have the same number of players'
 
 
-def print_array(arr, newlines=3):
+def print_array(arr, newlines=2):
     for el in arr:
         print(el)
     for nl in range(newlines):
@@ -20,7 +20,7 @@ def print_array(arr, newlines=3):
 
 def init_empty_db():
     if os.path.exists('fuca/site.db'):
-        print("Removed site.db")
+        print("Removed site.db\n\n\n\n")
         os.remove('fuca/site.db')
 
     db.create_all()
