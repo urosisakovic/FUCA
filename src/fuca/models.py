@@ -111,8 +111,10 @@ class Match(db.Model):
         return {'date'          : self.date_time,
                 'team1_name'    : self.host_team.name,
                 'team1_goals'   : self.host_team_goals,
+                'team1_id'      : self.host_team_id,
                 'team2_name'    : self.guest_team.name,
                 'team2_goals'   : self.guest_team_goals,
+                'team2_id'      : self.guest_team_id,
                 'id'            : self.id}
                 
 

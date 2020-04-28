@@ -2,6 +2,7 @@
 
 {% block content %}
     {% for match in schedule %}
-        <p>{{ match.date }} {{ match.team1_name }} VS {{ match.team2_name }} </p>
+    <p>{{ match.date }} <a href="{{ url_for('team', id=match.team1_id)}}">{{ match.team1_name }}</a> VS
+        <a href="{{ url_for('team', id=match.team2_id)}}">{{ match.team2_name }}</a> {{ match.team1_goals }} {{ match.team2_goals }}</p>
     {% endfor %}
 {% endblock content %}
