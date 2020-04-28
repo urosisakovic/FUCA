@@ -145,7 +145,6 @@ class Team(db.Model):
                 'losses'        : self.losses,
                 'draws'         : self.draws,
                 'goal_diff'     : self.goal_diff,
-                'self.logo_img' : self.logo_image,
                 'points'        : self.points() }
 
 

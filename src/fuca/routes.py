@@ -21,7 +21,7 @@ def results():
 
 
 # TODO: If not such player exists, forward to some error page.
-@app.route("/player/<int:id>", methods=['GET'])
+@app.route("/player/<int:id>")
 def player(id):
     player = Player.query.get(id)
     if not player:
@@ -63,6 +63,15 @@ def teams():
     teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
     return render_template('teams.html', teams=teams, title='Teams')
+
+
+@app.route("/team/<int:id>")
+def team(id):
+    team = Team.query.get(id)
+    if not team:
+        return "404"
+    team = team.jinja_dict()
+    return render_template('team.html', team=team, title=team['name'])
 
 
 @app.route("/standings")
