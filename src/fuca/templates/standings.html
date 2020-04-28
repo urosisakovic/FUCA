@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% for team in teams %}
+        <p>{{ team.logo }} {{ team.name }} {{ team.wins }} {{ team.losses }} {{ team.draws }} {{ team.matches }} {{ team.goal_diff }} </p>
+    {% endfor %}
+{% endblock content %}

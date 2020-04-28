@@ -54,7 +54,7 @@ def stats():
 
 @app.route("/teams")
 def teams():
-    teams_db = Team.query.filter(Match.date_time >= datetime.now()).all()
+    teams_db = Team.query.filter().all()
     teams = [team.jinja_dict() for team in teams_db]
     return render_template('teams.html', teams=teams, title='Teams')
 
@@ -66,7 +66,9 @@ def bestplayers():
 
 @app.route("/standings")
 def standings():
-    return "Standings"
+    teams_db = Team.query.filter().all()
+    teams = [team.jinja_dict() for team in teams_db]
+    return render_template('standings.html', teams=teams, title='Standings')
 
 
 @app.route("/bestscorers")

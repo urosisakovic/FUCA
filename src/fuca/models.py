@@ -93,7 +93,13 @@ class Team(db.Model):
 
     def jinja_dict(self):
         return {'name'          : self.name,
-                'logo'          : self.logo_image}
+                'logo'          : self.logo_image,
+                'matches'       : self.matches,
+                'wins'          : self.wins,
+                'losses'        : self.losses,
+                'draws'         : self.draws,
+                'goal_diff'     : self.goal_diff,
+                'self.logo_img' : self.logo_image}
 
 
 class Statistics(db.Model):
