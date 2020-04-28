@@ -20,9 +20,14 @@ def results():
     return render_template('results.html', results=results_list, title='Results')
 
 
-@app.route("/player")
-def player():
-    return render_template('player.html', player=dummydata.player, title=dummydata.player['name'])
+# TODO: If not such player exists, forward to some error page.
+@app.route("/player/<int:id>", methods=['GET'])
+def player(id):
+    player = Player.query.get(id)
+    if not player:
+        return "404"
+    player = player.jinja_dict()
+    return render_template('player.html', player=player, title=player['name'])
 
 
 @app.route("/schedule")
