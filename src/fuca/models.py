@@ -88,6 +88,9 @@ class Team(db.Model):
     guest_matches   = db.relationship('Match',  backref='guest_team',   lazy=True,  foreign_keys=Match.guest_team_id)
     players         = db.relationship('Player', backref='team',         lazy=True,  foreign_keys=Player.team_id)
 
+    def points(self):
+        return self.wins*3 + self.draws*1
+
     def __repr__(self):
         return f"Team('{self.name}')"
 
@@ -99,7 +102,8 @@ class Team(db.Model):
                 'losses'        : self.losses,
                 'draws'         : self.draws,
                 'goal_diff'     : self.goal_diff,
-                'self.logo_img' : self.logo_image}
+                'self.logo_img' : self.logo_image,
+                'points'        : self.points() }
 
 
 class Statistics(db.Model):

@@ -68,6 +68,7 @@ def bestplayers():
 def standings():
     teams_db = Team.query.filter().all()
     teams = [team.jinja_dict() for team in teams_db]
+    teams = sorted(teams, key=lambda team: team['points'])
     return render_template('standings.html', teams=teams, title='Standings')
 
 
