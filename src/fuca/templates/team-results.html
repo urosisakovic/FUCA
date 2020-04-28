@@ -7,6 +7,14 @@
     <a href="{{ url_for('teamsquad', id=id)}}">Team Squad</a>
 
     {% for result in results %}
-        <p>{{ result.date }} {{ result.team1_name }} VS {{ result.team2_name }} {{ result.team1_goals }} {{ result.team2_goals }}</p>
+        <p>{{ result.date }} 
+            <a href="{{ url_for('team', id=result.team1_id)}}">
+                {{ result.team1_name }}
+            </a> 
+            VS 
+            <a href="{{ url_for('team', id=result.team2_id)}}">
+            {{ result.team2_name }}
+            </a>
+        </p>
     {% endfor %}
 {% endblock content %}
