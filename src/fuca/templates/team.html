@@ -1,6 +1,12 @@
 {% extends 'layout.html' %}
 
+<!-- TODO: Create team layout which will be inherited by team, team schedule and team results and team squad pages-->
 {% block content %}
+    <a href="{{ url_for('team', id=team.id)}}">General</a> | 
+    <a href="{{ url_for('teamschedule', id=team.id)}}">Team Schedule</a> | 
+    <a href="{{ url_for('teamresults', id=team.id)}}">Team Results</a> |
+    <a href="{{ url_for('teamsquad', id=team.id)}}">Team Squad</a>
+
     <p>Team logo: {{ team.logo }}</p>
     <p>Team name: {{ team.name }}</p>
     <p>Team matches: {{ team.matches }}</p>

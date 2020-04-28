@@ -1,6 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+    <a href="{{ url_for('team', id=id)}}">General</a> | 
+    <a href="{{ url_for('teamschedule', id=id)}}">Team Schedule</a> | 
+    <a href="{{ url_for('teamresults', id=id)}}">Team Results</a> |
+    <a href="{{ url_for('teamsquad', id=id)}}">Team Squad</a>
+    
     {% for player in players %}
         <p>{{ player.image }} {{ player.name }} VS {{ player.number }} </p>
     {% endfor %}

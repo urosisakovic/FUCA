@@ -1,10 +1,11 @@
 {% extends 'layout.html' %}
 
 <!-- TODO: Create standings layout which will be inherited by standings, best scorers and best players pages-->
-
 {% block content %}
 
-    <a href="{{ url_for('standings') }}">Standings</a> | <a href="{{ url_for('bestplayers') }}">Best players</a> | <a href="{{ url_for('bestscorers') }}">Best scorers</a>
+    <a href="{{ url_for('standings') }}">Standings</a> | 
+    <a href="{{ url_for('bestplayers') }}">Best players</a> | 
+    <a href="{{ url_for('bestscorers') }}">Best scorers</a>
 
     {% for team in teams %}
         <a href="{{ url_for('team', id=team.id)}}">

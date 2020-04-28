@@ -107,7 +107,7 @@ def teamresults(id):
     results_db = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
     results_list = [result.jinja_dict() for result in results_db]
-    return render_template('team-results.html', results=results_list, title='Team Results')
+    return render_template('team-results.html', results=results_list, id=id, title='Team Results')
 
 
 #TODO: Add team name in title.
@@ -117,7 +117,7 @@ def teamschedule(id):
     schedule_db = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
     schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
-    return render_template('team-schedule.html', schedule=schedule_list, title='Team Schedule')
+    return render_template('team-schedule.html', schedule=schedule_list, id=id, title='Team Schedule')
 
 
 #TODO: Add team name in title.
@@ -126,4 +126,4 @@ def teamschedule(id):
 def teamsquad(id):
     players_db = Player.query.filter(Player.team_id == id).all()
     players = [player.jinja_dict() for player in players_db]
-    return render_template('team-squad.html', players=players, title='Team Squad')
+    return render_template('team-squad.html', players=players, id=id, title='Team Squad')
