@@ -91,6 +91,10 @@ class Team(db.Model):
     def __repr__(self):
         return f"Team('{self.name}')"
 
+    def jinja_dict(self):
+        return {'name'          : self.name,
+                'logo'          : self.logo_image}
+
 
 class Statistics(db.Model):
     __tablename__ = 'statistics'

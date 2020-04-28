@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% for team in teams %}
+        <p>{{ team.logo }} {{ team.name }} </p>
+    {% endfor %}
+{% endblock content %}
