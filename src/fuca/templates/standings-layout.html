@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <a href="{{ url_for('standings') }}">Standings</a> | 
+    <a href="{{ url_for('bestplayers') }}">Best players</a> | 
+    <a href="{{ url_for('bestscorers') }}">Best scorers</a>
+
+    {% block standings_content %}{% endblock standings_content%}
+{% endblock content %}
