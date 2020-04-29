@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, url_for
 from fuca import app, dummydata
 from fuca.models import News, Team, Player, Match, Statistics
-from fuca.forms import LoginForm
+from fuca.forms import LoginForm, AdminTeamForm, AdminPlayerForm
 from datetime import datetime
 
 
@@ -35,18 +35,6 @@ def schedule():
     schedule_db = Match.query.filter(Match.date_time >= datetime.now()).all()
     schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
     return render_template('schedule.html', schedule=schedule_list, title='Schedule')
-
-
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        if form.email.data == 'uros@uros.rs' and form.password.data == 'uros':
-            flash('Uros has been logged in!', 'success')
-            return redirect(url_for('home'))
-        else:
-            flash('Not Uros. Please be Uros!', 'danger')
-    return render_template('login.html', title='Login', form=form)
 
 
 @app.route("/stats")
@@ -129,20 +117,47 @@ def teamsquad(id):
     return render_template('team-squad.html', players=players, id=id, title='Team Squad')
 
 
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'uros@uros.rs' and form.password.data == 'uros':
+            flash('Uros has been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Not Uros. Please be Uros!', 'danger')
+    return render_template('login.html', form=form, title='Login')
+
+
 # TODO: Change endpoint to admin/teams.
-@app.route("/adminteams")
+@app.route("/adminteams", methods=['GET', 'POST'])
 def adminteams():
-    return render_template('admin-teams.html', title='Admin Teams')
+    form = AdminTeamForm()
+    if form.validate_on_submit():
+        print("Validated")
+    else:
+        print("Not Validated")
+
+    return render_template('admin-teams.html', form=form, title='Admin Teams')
+
 
 # TODO: Change endpoint to admin/players.
-@app.route("/adminplayers")
+@app.route("/adminplayers", methods=['GET', 'POST'])
 def adminplayers():
-    return render_template('admin-players.html', title='Admin Players')
+    form = AdminPlayerForm()
+    if form.validate_on_submit():
+        print("Validated")
+    else:
+        print("Not Validated")
+
+    return render_template('admin-players.html', form=form, title='Admin Players')
+
 
 # TODO: Change endpoint to admin/adminmatches.
 @app.route("/adminmatches")
 def adminmatches():
     return render_template('admin-matches.html', title='Admin Matches')
+
 
 # TODO: Change endpoint to admin/results.
 @app.route("/adminresults")
