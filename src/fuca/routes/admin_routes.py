@@ -14,9 +14,10 @@ from fuca.models import Match, News, Player, Statistics, Team
 def admin_news():
     form = AdminNewsForm()
     if form.validate_on_submit():
-        print("Validated")
-    else:
-        print("Not Validated")
+        newNews = News(title=form.title.data,
+                       content=form.content.data)
+        db.session.add(newNews)
+        db.session.commit()
 
     return render_template('admin/admin-news.html', form=form, title='Admin News')
 
