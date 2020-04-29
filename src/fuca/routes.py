@@ -56,22 +56,12 @@ def teams():
     teams = [team.jinja_dict() for team in teams_db]
     return render_template('teams.html', teams=teams, title='Teams')
 
-
-@app.route("/team/<int:id>")
-def team(id):
-    team = Team.query.get(id)
-    if not team:
-        return "404"
-    team = team.jinja_dict()
-    return render_template('team.html', team=team, title=team['name'])
-
-
 @app.route("/standings")
 def standings():
     teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
     teams = sorted(teams, key=lambda team: team['points'])
-    return render_template('standings.html', teams=teams, title='Standings')
+    return render_template('standings/standings.html', teams=teams, title='Standings')
 
 
 @app.route("/bestplayers")
@@ -80,7 +70,7 @@ def bestplayers():
     players = [player.jinja_dict() for player in players_db]
     players = sorted(players, key=lambda player: player['points'])
     players = reversed(players)
-    return render_template('best-players.html', players=players, title='Best Players')
+    return render_template('standings/best-players.html', players=players, title='Best Players')
 
 
 @app.route("/bestscorers")
@@ -89,7 +79,16 @@ def bestscorers():
     players = [player.jinja_dict() for player in players_db]
     players = sorted(players, key=lambda player: player['goals'])
     players = reversed(players)
-    return render_template('best-scorers.html', players=players, title='Best Scorers')
+    return render_template('standings/best-scorers.html', players=players, title='Best Scorers')
+
+
+@app.route("/team/<int:id>")
+def team(id):
+    team = Team.query.get(id)
+    if not team:
+        return "404"
+    team = team.jinja_dict()
+    return render_template('team/team.html', team=team, id=id, title=team['name'])
 
 
 #TODO: Add team name in title.
@@ -99,7 +98,7 @@ def teamresults(id):
     results_db = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
     results_list = [result.jinja_dict() for result in results_db]
-    return render_template('team-results.html', results=results_list, id=id, title='Team Results')
+    return render_template('team/team-results.html', results=results_list, id=id, title='Team Results')
 
 
 #TODO: Add team name in title.
@@ -109,7 +108,7 @@ def teamschedule(id):
     schedule_db = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
     schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
-    return render_template('team-schedule.html', schedule=schedule_list, id=id, title='Team Schedule')
+    return render_template('team/team-schedule.html', schedule=schedule_list, id=id, title='Team Schedule')
 
 
 #TODO: Add team name in title.
@@ -118,7 +117,7 @@ def teamschedule(id):
 def teamsquad(id):
     players_db = Player.query.filter(Player.team_id == id).all()
     players = [player.jinja_dict() for player in players_db]
-    return render_template('team-squad.html', players=players, id=id, title='Team Squad')
+    return render_template('team/team-squad.html', players=players, id=id, title='Team Squad')
 
 
 @app.route("/login", methods=['GET', 'POST'])

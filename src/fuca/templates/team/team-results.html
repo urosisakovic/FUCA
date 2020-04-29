@@ -1,11 +1,6 @@
-{% extends 'layout.html' %}
+{% extends 'team/team-layout.html' %}
 
-{% block content %}
-    <a href="{{ url_for('team', id=id)}}">General</a> | 
-    <a href="{{ url_for('teamschedule', id=id)}}">Team Schedule</a> | 
-    <a href="{{ url_for('teamresults', id=id)}}">Team Results</a> |
-    <a href="{{ url_for('teamsquad', id=id)}}">Team Squad</a>
-
+{% block team_content %}
     {% for result in results %}
         <p>{{ result.date }} 
             <a href="{{ url_for('team', id=result.team1_id)}}">
@@ -17,4 +12,4 @@
             </a>
         </p>
     {% endfor %}
-{% endblock content %}
+{% endblock team_content %}
