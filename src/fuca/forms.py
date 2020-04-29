@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import BooleanField, PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email
 
@@ -19,7 +20,7 @@ class AdminNewsForm(FlaskForm):
 
 class AdminTeamForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    image = StringField('Image', validators=[DataRequired()])
+    image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Submit Team')
 
 
