@@ -9,9 +9,8 @@ from fuca.forms import (AdminMatchForm, AdminNewsForm, AdminPlayerForm,
 from fuca.models import Match, News, Player, Statistics, Team
 
 
-# TODO: Change endpoint to admin/news.
-@app.route("/adminnews", methods=['GET', 'POST'])
-def adminnews():
+@app.route("/admin/news", methods=['GET', 'POST'])
+def admin_news():
     form = AdminNewsForm()
     if form.validate_on_submit():
         print("Validated")
@@ -21,9 +20,8 @@ def adminnews():
     return render_template('admin/admin-news.html', form=form, title='Admin News')
 
 
-# TODO: Change endpoint to admin/teams.
-@app.route("/adminteams", methods=['GET', 'POST'])
-def adminteams():
+@app.route("/admin/teams", methods=['GET', 'POST'])
+def admin_teams():
     form = AdminTeamForm()
     if form.validate_on_submit():
         print("Validated")
@@ -33,9 +31,8 @@ def adminteams():
     return render_template('admin/admin-teams.html', form=form, title='Admin Teams')
 
 
-# TODO: Change endpoint to admin/players.
-@app.route("/adminplayers", methods=['GET', 'POST'])
-def adminplayers():
+@app.route("/admin/players", methods=['GET', 'POST'])
+def admin_players():
     form = AdminPlayerForm()
     if form.validate_on_submit():
         print("Validated")
@@ -45,9 +42,8 @@ def adminplayers():
     return render_template('admin/admin-players.html', form=form, title='Admin Players')
 
 
-# TODO: Change endpoint to admin/adminmatches.
-@app.route("/adminmatches", methods=['GET', 'POST'])
-def adminmatches():
+@app.route("/admin/matches", methods=['GET', 'POST'])
+def admin_matches():
     form = AdminMatchForm()
     if form.validate_on_submit():
         print("Validated")
@@ -57,9 +53,8 @@ def adminmatches():
     return render_template('admin/admin-matches.html', form=form, title='Admin Matches')
 
 
-# TODO: Change endpoint to admin/results.
-@app.route("/adminresults", methods=['GET', 'POST'])
-def adminresults():
+@app.route("/admin/results", methods=['GET', 'POST'])
+def admin_results():
     form = AdminResultForm()
     if form.validate_on_submit():
         print("Validated")
@@ -69,9 +64,8 @@ def adminresults():
     return render_template('admin/admin-results.html', form=form, title='Admin Results')
 
 
-# TODO: Change endpoint to admin/statistics.
-@app.route("/adminstatistics", methods=['GET', 'POST'])
-def adminstatistics():
+@app.route("/admin/statistics", methods=['GET', 'POST'])
+def admin_statistics():
     form = AdminStatsForm()
     if form.validate_on_submit():
         print("Validated")
