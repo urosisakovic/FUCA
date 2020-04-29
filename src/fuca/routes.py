@@ -127,3 +127,24 @@ def teamsquad(id):
     players_db = Player.query.filter(Player.team_id == id).all()
     players = [player.jinja_dict() for player in players_db]
     return render_template('team-squad.html', players=players, id=id, title='Team Squad')
+
+
+# TODO: Change endpoint to admin/teams.
+@app.route("/adminteams")
+def adminteams():
+    return render_template('admin-teams.html', title='Admin Teams')
+
+# TODO: Change endpoint to admin/players.
+@app.route("/adminplayers")
+def adminplayers():
+    return render_template('admin-players.html', title='Admin Players')
+
+# TODO: Change endpoint to admin/adminmatches.
+@app.route("/adminmatches")
+def adminmatches():
+    return render_template('admin-matches.html', title='Admin Matches')
+
+# TODO: Change endpoint to admin/results.
+@app.route("/adminresults")
+def adminresults():
+    return render_template('admin-results.html', title='Admin Results')
