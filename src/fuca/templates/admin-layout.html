@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <a href="{{ url_for('adminnews') }}">News</a> | 
+    <a href="{{ url_for('adminteams') }}">Teams</a> | 
+    <a href="{{ url_for('adminplayers') }}">Players</a> | 
+    <a href="{{ url_for('adminmatches') }}">Matches</a> |
+    <a href="{{ url_for('adminresults') }}">Results</a> |
+    <a href="{{ url_for('adminstatistics') }}">Statistics</a>
+
+    {% block admin_content %}{% endblock admin_content%}
+{% endblock content %}
