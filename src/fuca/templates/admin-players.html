@@ -2,6 +2,7 @@
 
 <!-- TODO: Create admin layout which will be inherited by all admin pages-->
 {% block content %}
+    <a href="{{ url_for('adminnews') }}">News</a> | 
     <a href="{{ url_for('adminteams') }}">Teams</a> | 
     <a href="{{ url_for('adminplayers') }}">Players</a> | 
     <a href="{{ url_for('adminmatches') }}">Matches</a> |
@@ -24,6 +25,62 @@
                         </div>
                     {% else %}
                         {{ form.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.team.label(class="form-control-label") }}
+                    {% if form.team.errors %}
+                        {{ form.team(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.team.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.team(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.number.label(class="form-control-label") }}
+                    {% if form.number.errors %}
+                        {{ form.number(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.number.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.number(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.birthdate.label(class="form-control-label") }}
+                    {% if form.birthdate.errors %}
+                        {{ form.birthdate(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.birthdate.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.birthdate(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.image.label(class="form-control-label") }}
+                    {% if form.image.errors %}
+                        {{ form.image(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.image.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.image(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 

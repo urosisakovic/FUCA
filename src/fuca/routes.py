@@ -1,8 +1,11 @@
-from flask import flash, redirect, render_template, url_for
-from fuca import app, dummydata
-from fuca.models import News, Team, Player, Match, Statistics
-from fuca.forms import LoginForm, AdminTeamForm, AdminPlayerForm
 from datetime import datetime
+
+from flask import flash, redirect, render_template, url_for
+
+from fuca import app, dummydata
+from fuca.forms import (AdminMatchForm, AdminPlayerForm, AdminStatsForm,
+                        AdminTeamForm, LoginForm, AdminNewsForm)
+from fuca.models import Match, News, Player, Statistics, Team
 
 
 @app.route("/")
@@ -129,6 +132,18 @@ def login():
     return render_template('login.html', form=form, title='Login')
 
 
+# TODO: Change endpoint to admin/news.
+@app.route("/adminnews", methods=['GET', 'POST'])
+def adminnews():
+    form = AdminNewsForm()
+    if form.validate_on_submit():
+        print("Validated")
+    else:
+        print("Not Validated")
+
+    return render_template('admin-news.html', form=form, title='Admin News')
+
+
 # TODO: Change endpoint to admin/teams.
 @app.route("/adminteams", methods=['GET', 'POST'])
 def adminteams():
@@ -154,12 +169,24 @@ def adminplayers():
 
 
 # TODO: Change endpoint to admin/adminmatches.
-@app.route("/adminmatches")
+@app.route("/adminmatches", methods=['GET', 'POST'])
 def adminmatches():
-    return render_template('admin-matches.html', title='Admin Matches')
+    form = AdminMatchForm()
+    if form.validate_on_submit():
+        print("Validated")
+    else:
+        print("Not Validated")
+
+    return render_template('admin-matches.html', form=form, title='Admin Matches')
 
 
 # TODO: Change endpoint to admin/results.
-@app.route("/adminresults")
+@app.route("/adminresults", methods=['GET', 'POST'])
 def adminresults():
-    return render_template('admin-results.html', title='Admin Results')
+    form = AdminStatsForm()
+    if form.validate_on_submit():
+        print("Validated")
+    else:
+        print("Not Validated")
+
+    return render_template('admin-results.html', form=form, title='Admin Results')
