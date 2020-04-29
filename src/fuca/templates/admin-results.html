@@ -6,14 +6,15 @@
     <a href="{{ url_for('adminteams') }}">Teams</a> | 
     <a href="{{ url_for('adminplayers') }}">Players</a> | 
     <a href="{{ url_for('adminmatches') }}">Matches</a> |
-    <a href="{{ url_for('adminresults') }}">Results</a>
+    <a href="{{ url_for('adminresults') }}">Results</a> |
+    <a href="{{ url_for('adminstatistics') }}">Statistics</a>
 
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Team</legend>
+                <legend class="border-bottom mb-4">Add Result</legend>
                 <div class="form-group">
                     {{ form.match.label(class="form-control-label") }}
                     {% if form.match.errors %}
@@ -29,75 +30,159 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.player.label(class="form-control-label") }}
-                    {% if form.player.errors %}
-                        {{ form.player(class="form-control form-control-lg is-invalid") }}
+                    {{ form.host_team_goals.label(class="form-control-label") }}
+                    {% if form.host_team_goals.errors %}
+                        {{ form.host_team_goals(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.player.errors %}
+                            {% for error in form.host_team_goals.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.player(class="form-control form-control-lg") }}
+                        {{ form.host_team_goals(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.goals.label(class="form-control-label") }}
-                    {% if form.goals.errors %}
-                        {{ form.goals(class="form-control form-control-lg is-invalid") }}
+                    {{ form.host_team_yellow.label(class="form-control-label") }}
+                    {% if form.host_team_yellow.errors %}
+                        {{ form.host_team_yellow(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.goals.errors %}
+                            {% for error in form.host_team_yellow.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.goals(class="form-control form-control-lg") }}
+                        {{ form.host_team_yellow(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.assists.label(class="form-control-label") }}
-                    {% if form.assists.errors %}
-                        {{ form.assists(class="form-control form-control-lg is-invalid") }}
+                    {{ form.host_team_red.label(class="form-control-label") }}
+                    {% if form.host_team_red.errors %}
+                        {{ form.host_team_red(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.assists.errors %}
+                            {% for error in form.host_team_red.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.assists(class="form-control form-control-lg") }}
+                        {{ form.host_team_red(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.red.label(class="form-control-label") }}
-                    {% if form.red.errors %}
-                        {{ form.red(class="form-control form-control-lg is-invalid") }}
+                    {{ form.host_team_shots.label(class="form-control-label") }}
+                    {% if form.host_team_shots.errors %}
+                        {{ form.host_team_shots(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.red.errors %}
+                            {% for error in form.host_team_shots.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.red(class="form-control form-control-lg") }}
+                        {{ form.host_team_shots(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.yellow.label(class="form-control-label") }}
-                    {% if form.yellow.errors %}
-                        {{ form.yellow(class="form-control form-control-lg is-invalid") }}
+                    {{ form.host_team_possession.label(class="form-control-label") }}
+                    {% if form.host_team_possession.errors %}
+                        {{ form.host_team_possession(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.yellow.errors %}
+                            {% for error in form.host_team_possession.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.yellow(class="form-control form-control-lg") }}
+                        {{ form.host_team_possession(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-                
+
+                <div class="form-group">
+                    {{ form.guest_team_goals.label(class="form-control-label") }}
+                    {% if form.guest_team_goals.errors %}
+                        {{ form.guest_team_goals(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.guest_team_goals.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.guest_team_goals(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.guest_team_yellow.label(class="form-control-label") }}
+                    {% if form.guest_team_yellow.errors %}
+                        {{ form.guest_team_yellow(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.guest_team_yellow.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.guest_team_yellow(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.guest_team_red.label(class="form-control-label") }}
+                    {% if form.guest_team_red.errors %}
+                        {{ form.guest_team_red(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.guest_team_red.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.guest_team_red(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.guest_team_shots.label(class="form-control-label") }}
+                    {% if form.guest_team_shots.errors %}
+                        {{ form.guest_team_shots(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.guest_team_shots.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.guest_team_shots(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.guest_team_possession.label(class="form-control-label") }}
+                    {% if form.guest_team_possession.errors %}
+                        {{ form.guest_team_possession(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.guest_team_possession.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.guest_team_possession(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.best_player.label(class="form-control-label") }}
+                    {% if form.best_player.errors %}
+                        {{ form.best_player(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.best_player.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.best_player(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}

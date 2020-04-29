@@ -8,94 +8,94 @@
     <a href="{{ url_for('adminmatches') }}">Matches</a> |
     <a href="{{ url_for('adminresults') }}">Results</a> |
     <a href="{{ url_for('adminstatistics') }}">Statistics</a>
-    
+
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Player</legend>
+                <legend class="border-bottom mb-4">Add Statistics</legend>
                 <div class="form-group">
-                    {{ form.name.label(class="form-control-label") }}
-                    {% if form.name.errors %}
-                        {{ form.name(class="form-control form-control-lg is-invalid") }}
+                    {{ form.match.label(class="form-control-label") }}
+                    {% if form.match.errors %}
+                        {{ form.match(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.name.errors %}
+                            {% for error in form.match.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.name(class="form-control form-control-lg") }}
+                        {{ form.match(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.team.label(class="form-control-label") }}
-                    {% if form.team.errors %}
-                        {{ form.team(class="form-control form-control-lg is-invalid") }}
+                    {{ form.player.label(class="form-control-label") }}
+                    {% if form.player.errors %}
+                        {{ form.player(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.team.errors %}
+                            {% for error in form.player.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.team(class="form-control form-control-lg") }}
+                        {{ form.player(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.number.label(class="form-control-label") }}
-                    {% if form.number.errors %}
-                        {{ form.number(class="form-control form-control-lg is-invalid") }}
+                    {{ form.goals.label(class="form-control-label") }}
+                    {% if form.goals.errors %}
+                        {{ form.goals(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.number.errors %}
+                            {% for error in form.goals.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.number(class="form-control form-control-lg") }}
+                        {{ form.goals(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.birthdate.label(class="form-control-label") }}
-                    {% if form.birthdate.errors %}
-                        {{ form.birthdate(class="form-control form-control-lg is-invalid") }}
+                    {{ form.assists.label(class="form-control-label") }}
+                    {% if form.assists.errors %}
+                        {{ form.assists(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.birthdate.errors %}
+                            {% for error in form.assists.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.birthdate(class="form-control form-control-lg") }}
+                        {{ form.assists(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.image.label(class="form-control-label") }}
-                    {% if form.image.errors %}
-                        {{ form.image(class="form-control form-control-lg is-invalid") }}
+                    {{ form.red.label(class="form-control-label") }}
+                    {% if form.red.errors %}
+                        {{ form.red(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.image.errors %}
+                            {% for error in form.red.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.image(class="form-control form-control-lg") }}
+                        {{ form.red(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    {{ form.yellow.label(class="form-control-label") }}
+                    {% if form.yellow.errors %}
+                        {{ form.yellow(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
+                            {% for error in form.yellow.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
+                        {{ form.yellow(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 

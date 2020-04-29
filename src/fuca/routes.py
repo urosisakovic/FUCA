@@ -3,8 +3,9 @@ from datetime import datetime
 from flask import flash, redirect, render_template, url_for
 
 from fuca import app, dummydata
-from fuca.forms import (AdminMatchForm, AdminPlayerForm, AdminStatsForm,
-                        AdminTeamForm, LoginForm, AdminNewsForm)
+from fuca.forms import (AdminMatchForm, AdminNewsForm, AdminPlayerForm,
+                        AdminResultForm, AdminStatsForm, AdminTeamForm,
+                        LoginForm)
 from fuca.models import Match, News, Player, Statistics, Team
 
 
@@ -183,10 +184,22 @@ def adminmatches():
 # TODO: Change endpoint to admin/results.
 @app.route("/adminresults", methods=['GET', 'POST'])
 def adminresults():
-    form = AdminStatsForm()
+    form = AdminResultForm()
     if form.validate_on_submit():
         print("Validated")
     else:
         print("Not Validated")
 
     return render_template('admin-results.html', form=form, title='Admin Results')
+
+
+# TODO: Change endpoint to admin/statistics.
+@app.route("/adminstatistics", methods=['GET', 'POST'])
+def adminstatistics():
+    form = AdminStatsForm()
+    if form.validate_on_submit():
+        print("Validated")
+    else:
+        print("Not Validated")
+
+    return render_template('admin-statistics.html', form=form, title='Admin Statistics')

@@ -6,14 +6,15 @@
     <a href="{{ url_for('adminteams') }}">Teams</a> | 
     <a href="{{ url_for('adminplayers') }}">Players</a> | 
     <a href="{{ url_for('adminmatches') }}">Matches</a> |
-    <a href="{{ url_for('adminresults') }}">Results</a>
+    <a href="{{ url_for('adminresults') }}">Results</a> |
+    <a href="{{ url_for('adminstatistics') }}">Statistics</a>
 
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Player</legend>
+                <legend class="border-bottom mb-4">Add News</legend>
                 <div class="form-group">
                     {{ form.title.label(class="form-control-label") }}
                     {% if form.title.errors %}
