@@ -31,7 +31,10 @@ def player(id):
     if not player:
         return "404"
     player = player.jinja_dict()
-    return render_template('home/player.html', player=player, title=player['name'])
+
+    image_file = url_for('static', filename='images/players/{}'.format(player['image']))
+
+    return render_template('home/player.html', player=player, image_file=image_file, title=player['name'])
 
 
 @app.route("/schedule")

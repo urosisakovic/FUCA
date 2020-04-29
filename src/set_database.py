@@ -54,7 +54,7 @@ def add_players():
     player_names = ['player_name' + str(i) for i in range(PLAYER_CNT)]
     player_numbers = [0 for _ in range(PLAYER_CNT)]
     player_birthdates = [datetime.now() for _ in range(PLAYER_CNT)]
-    player_images = ['image' + str(i) + '.png' for i in range(PLAYER_CNT)]
+    player_images = ['default.jpg' for _ in range(PLAYER_CNT)]
     player_emails = ['player' + str(i) + '@gmail.com' for i in range(PLAYER_CNT)]
     player_passwords = ['password' + str(i) for i in range(PLAYER_CNT)]
     player_team_ids = [i % (PLAYER_CNT / TEAMS_CNT) + 1 for i in range(PLAYER_CNT)]
