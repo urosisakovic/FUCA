@@ -142,7 +142,7 @@ def adminnews():
     else:
         print("Not Validated")
 
-    return render_template('admin-news.html', form=form, title='Admin News')
+    return render_template('admin/admin-news.html', form=form, title='Admin News')
 
 
 # TODO: Change endpoint to admin/teams.
@@ -154,7 +154,7 @@ def adminteams():
     else:
         print("Not Validated")
 
-    return render_template('admin-teams.html', form=form, title='Admin Teams')
+    return render_template('admin/admin-teams.html', form=form, title='Admin Teams')
 
 
 # TODO: Change endpoint to admin/players.
@@ -166,7 +166,7 @@ def adminplayers():
     else:
         print("Not Validated")
 
-    return render_template('admin-players.html', form=form, title='Admin Players')
+    return render_template('admin/admin-players.html', form=form, title='Admin Players')
 
 
 # TODO: Change endpoint to admin/adminmatches.
@@ -178,7 +178,7 @@ def adminmatches():
     else:
         print("Not Validated")
 
-    return render_template('admin-matches.html', form=form, title='Admin Matches')
+    return render_template('admin/admin-matches.html', form=form, title='Admin Matches')
 
 
 # TODO: Change endpoint to admin/results.
@@ -190,7 +190,7 @@ def adminresults():
     else:
         print("Not Validated")
 
-    return render_template('admin-results.html', form=form, title='Admin Results')
+    return render_template('admin/admin-results.html', form=form, title='Admin Results')
 
 
 # TODO: Change endpoint to admin/statistics.
@@ -202,4 +202,4 @@ def adminstatistics():
     else:
         print("Not Validated")
 
-    return render_template('admin-statistics.html', form=form, title='Admin Statistics')
+    return render_template('admin/admin-statistics.html', form=form, title='Admin Statistics')

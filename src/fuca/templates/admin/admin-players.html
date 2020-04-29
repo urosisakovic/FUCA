@@ -1,4 +1,4 @@
-{% extends 'admin-layout.html' %}
+{% extends 'admin/admin-layout.html' %}
 
 {% block admin_content %}
     <div class="content-section">
@@ -6,88 +6,88 @@
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Statistics</legend>
+                <legend class="border-bottom mb-4">Add Player</legend>
                 <div class="form-group">
-                    {{ form.match.label(class="form-control-label") }}
-                    {% if form.match.errors %}
-                        {{ form.match(class="form-control form-control-lg is-invalid") }}
+                    {{ form.name.label(class="form-control-label") }}
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.match.errors %}
+                            {% for error in form.name.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.match(class="form-control form-control-lg") }}
+                        {{ form.name(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.player.label(class="form-control-label") }}
-                    {% if form.player.errors %}
-                        {{ form.player(class="form-control form-control-lg is-invalid") }}
+                    {{ form.team.label(class="form-control-label") }}
+                    {% if form.team.errors %}
+                        {{ form.team(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.player.errors %}
+                            {% for error in form.team.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.player(class="form-control form-control-lg") }}
+                        {{ form.team(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.goals.label(class="form-control-label") }}
-                    {% if form.goals.errors %}
-                        {{ form.goals(class="form-control form-control-lg is-invalid") }}
+                    {{ form.number.label(class="form-control-label") }}
+                    {% if form.number.errors %}
+                        {{ form.number(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.goals.errors %}
+                            {% for error in form.number.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.goals(class="form-control form-control-lg") }}
+                        {{ form.number(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.assists.label(class="form-control-label") }}
-                    {% if form.assists.errors %}
-                        {{ form.assists(class="form-control form-control-lg is-invalid") }}
+                    {{ form.birthdate.label(class="form-control-label") }}
+                    {% if form.birthdate.errors %}
+                        {{ form.birthdate(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.assists.errors %}
+                            {% for error in form.birthdate.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.assists(class="form-control form-control-lg") }}
+                        {{ form.birthdate(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.red.label(class="form-control-label") }}
-                    {% if form.red.errors %}
-                        {{ form.red(class="form-control form-control-lg is-invalid") }}
+                    {{ form.image.label(class="form-control-label") }}
+                    {% if form.image.errors %}
+                        {{ form.image(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.red.errors %}
+                            {% for error in form.image.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.red(class="form-control form-control-lg") }}
+                        {{ form.image(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    {{ form.yellow.label(class="form-control-label") }}
-                    {% if form.yellow.errors %}
-                        {{ form.yellow(class="form-control form-control-lg is-invalid") }}
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.yellow.errors %}
+                            {% for error in form.email.errors %}
                                 <span> {{ error }} </span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.yellow(class="form-control form-control-lg") }}
+                        {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 
