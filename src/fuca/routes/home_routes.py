@@ -3,9 +3,7 @@ from datetime import datetime
 from flask import flash, redirect, render_template, url_for
 
 from fuca import app, dummydata
-from fuca.forms import (AdminMatchForm, AdminNewsForm, AdminPlayerForm,
-                        AdminResultForm, AdminStatsForm, AdminTeamForm,
-                        LoginForm)
+from fuca.forms import LoginForm
 from fuca.models import Match, News, Player, Statistics, Team
 
 
