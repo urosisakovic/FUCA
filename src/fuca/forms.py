@@ -33,11 +33,9 @@ class AdminPlayerForm(FlaskForm):
     birth_day = SelectField('Day',
                             choices=[(idx, val) for idx, val in enumerate(range(1, 32))],
                             validators=[DataRequired()])
-
     birth_month = SelectField('Month',
                             choices=[(idx, val) for idx, val in enumerate(range(1, 13))],
                             validators=[DataRequired()])
-
     birth_year = SelectField('Year',
                             choices=[(idx, val) for idx, val in enumerate(range(1920, 2020))],
                             validators=[DataRequired()])
@@ -59,8 +57,16 @@ class AdminMatchForm(FlaskForm):
 
     host_team_dd = SelectField('Host Team', choices=team_choices, validators=[DataRequired()])
     guest_team_dd = SelectField('Guest Team', choices=team_choices, validators=[DataRequired()])
-    date_time = StringField('Date-Time', validators=[DataRequired()])
-    
+
+    birth_day = SelectField('Day',
+                            choices=[(idx, val) for idx, val in enumerate(range(1, 32))],
+                            validators=[DataRequired()])
+    birth_month = SelectField('Month',
+                            choices=[(idx, val) for idx, val in enumerate(range(1, 13))],
+                            validators=[DataRequired()])
+    birth_year = SelectField('Year',
+                            choices=[(idx, val) for idx, val in enumerate(range(1920, 2020))],
+                            validators=[DataRequired()])    
     submit = SubmitField('Submit Match')
 
 
