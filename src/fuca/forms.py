@@ -65,22 +65,14 @@ class AdminPlayerForm(FlaskForm):
                             validators=[DataRequired()])
     
     image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
-
-    teams_db = Team.query.all()
-    teams = [team.jinja_dict() for team in teams_db]
-    team_choices = [(id, team['name']) for team in teams]
-    team_dd = SelectField('Team', choices=team_choices, validators=[DataRequired()])
+    team_dd = SelectField('Team', choices=[])
     
     submit = SubmitField('Submit Player')
 
 
 class AdminMatchForm(FlaskForm):
-    teams_db = Team.query.all()
-    teams = [team.jinja_dict() for team in teams_db]
-    team_choices = [(id, team['name']) for team in teams]
-
-    host_team_dd = SelectField('Host Team', choices=team_choices, validators=[DataRequired()])
-    guest_team_dd = SelectField('Guest Team', choices=team_choices, validators=[DataRequired()])
+    host_team_dd = SelectField('Host Team', choices=[])
+    guest_team_dd = SelectField('Guest Team', choices=[])
 
     birth_day = SelectField('Day',
                             choices=[(idx, val) for idx, val in enumerate(range(1, 32))],
@@ -95,10 +87,7 @@ class AdminMatchForm(FlaskForm):
 
 
 class AdminResultForm(FlaskForm):
-    matches_db = Match.query.all()
-    matches = [match.jinja_dict() for match in matches_db]
-    match_choices = [(id, match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
-    match_dd = SelectField('Match', choices=match_choices, validators=[DataRequired()])
+    match_dd = SelectField('Match', choices=[])
 
     host_team_goals = StringField('Host Team Goals', validators=[DataRequired()])
     host_team_yellow = StringField('Host Team Yellow', validators=[DataRequired()])

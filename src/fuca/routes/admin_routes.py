@@ -140,6 +140,12 @@ def admin_teams_delete():
 @app.route("/admin/players", methods=['GET', 'POST'])
 def admin_players():
     form = AdminPlayerForm()
+
+    teams_db = Team.query.all()
+    teams = [team.jinja_dict() for team in teams_db]
+    team_choices = [(id, team['name']) for team in teams]
+    form.team_dd.choices = team_choices
+
     if form.validate_on_submit():
         print("Validated")
     else:
@@ -151,6 +157,14 @@ def admin_players():
 @app.route("/admin/matches", methods=['GET', 'POST'])
 def admin_matches():
     form = AdminMatchForm()
+
+    teams_db = Team.query.all()
+    teams = [team.jinja_dict() for team in teams_db]
+    team_choices = [(id, team['name']) for team in teams]
+
+    form.host_team_dd.choices = team_choices
+    form.guest_team_dd.choices = team_choices
+
     if form.validate_on_submit():
         print("Validated")
     else:
@@ -162,6 +176,12 @@ def admin_matches():
 @app.route("/admin/results", methods=['GET', 'POST'])
 def admin_results():
     form = AdminResultForm()
+
+    matches_db = Match.query.all()
+    matches = [match.jinja_dict() for match in matches_db]
+    match_choices = [(match['id'], match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
+    form.match_dd.choices = match_choices
+
     if form.validate_on_submit():
         print("Validated")
     else:
