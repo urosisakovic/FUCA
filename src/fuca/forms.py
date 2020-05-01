@@ -16,7 +16,7 @@ class LoginForm(FlaskForm):
 class AdminAddNewsForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()])
-    submit = SubmitField('Submit News')
+    submit = SubmitField('Add News')
 
 
 class AdminUpdateNewsForm(FlaskForm):
@@ -31,10 +31,22 @@ class AdminDeleteNewsForm(FlaskForm):
     submit = SubmitField('Delete News')
 
 
-class AdminTeamForm(FlaskForm):
+class AdminAddTeamForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
-    submit = SubmitField('Submit Team')
+    submit = SubmitField('Add Team')
+
+
+class AdminUpdateTeamForm(FlaskForm):
+    teams_dd = SelectField('Teams', choices=[])
+    name = StringField('Name', validators=[DataRequired()])
+    image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    submit = SubmitField('Update Team')
+
+
+class AdminDeleteTeamForm(FlaskForm):
+    teams_dd = SelectField('Teams', choices=[])
+    submit = SubmitField('Delete Team')
 
 
 class AdminPlayerForm(FlaskForm):

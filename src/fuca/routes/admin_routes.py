@@ -1,12 +1,13 @@
 import os
 from datetime import datetime
 
-from flask import flash, redirect, render_template, url_for, request
+from flask import flash, redirect, render_template, request, url_for
 
 from fuca import app, db
-from fuca.forms import (AdminMatchForm, AdminAddNewsForm, AdminPlayerForm,
-                        AdminResultForm, AdminStatsForm, AdminTeamForm,
-                        LoginForm, AdminDeleteNewsForm, AdminUpdateNewsForm)
+from fuca.forms import (AdminAddNewsForm, AdminDeleteNewsForm, AdminMatchForm,
+                        AdminPlayerForm, AdminResultForm, AdminStatsForm,
+                        AdminAddTeamForm, AdminDeleteTeamForm,
+                        AdminUpdateTeamForm, AdminUpdateNewsForm, LoginForm)
 from fuca.models import Match, News, Player, Statistics, Team
 
 
@@ -86,7 +87,12 @@ def save_image(form_image, image_name, team_player):
 #TODO: Check for unique team name.
 @app.route("/admin/teams", methods=['GET', 'POST'])
 def admin_teams():
-    form = AdminTeamForm()
+    return render_template('admin/admin-teams-layout.html', title='Admin Teams')
+
+
+@app.route("/admin/teams/add", methods=['GET', 'POST'])
+def admin_teams_add():
+    form = AdminAddTeamForm()
     if form.validate_on_submit():
         newTeam = Team(name=form.name.data)
         db.session.add(newTeam)
@@ -98,7 +104,37 @@ def admin_teams():
         newTeam.logo_image = image_file
         db.session.commit()
 
-    return render_template('admin/admin-teams.html', form=form, title='Admin Teams')
+    return render_template('admin/admin-teams-add.html', form=form, title='Admin Add Teams')
+
+
+@app.route("/admin/teams/update", methods=['GET', 'POST'])
+def admin_teams_update():
+    update_form = AdminUpdateTeamForm()
+
+    teams_db = Team.query.all()
+    teams = [team.jinja_dict() for team in teams_db]
+    team_choices = [(team['id'], team['name']) for team in teams]
+    update_form.teams_dd.choices = team_choices
+
+    return render_template('admin/admin-teams-update.html', form=update_form, title='Admin Update Teams')
+
+
+@app.route("/admin/teams/delete", methods=['GET', 'POST'])
+def admin_teams_delete():
+    delete_form = AdminDeleteTeamForm()
+
+    teams_db = Team.query.all()
+    teams = [team.jinja_dict() for team in teams_db]
+    team_choices = [(team['id'], team['name']) for team in teams]
+    delete_form.teams_dd.choices = team_choices
+
+    if request.method == 'POST':
+        Team.query.filter_by(id=delete_form.teams_dd.data).delete()
+        db.session.commit()
+
+        return redirect(url_for('admin_teams_delete'))
+
+    return render_template('admin/admin-teams-delete.html', form=delete_form, title='Admin Delete Teams')
 
 
 @app.route("/admin/players", methods=['GET', 'POST'])
