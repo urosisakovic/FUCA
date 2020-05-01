@@ -6,7 +6,6 @@ from wtforms.validators import DataRequired, Email
 from fuca.models import Team
 
 
-
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[Email(), DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -17,7 +16,6 @@ class LoginForm(FlaskForm):
 class AdminNewsForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()])
-    date = StringField('Date', validators=[DataRequired()])
     submit = SubmitField('Submit News')
 
 
@@ -41,10 +39,16 @@ class AdminPlayerForm(FlaskForm):
     
     submit = SubmitField('Submit Player')
 
+
 class AdminMatchForm(FlaskForm):
+    teams_db = Team.query.all()
+    teams = [team.jinja_dict() for team in teams_db]
+    team_choices = [(id, team['name']) for team in teams]
+
+    host_team_dd = SelectField('Host Team', choices=team_choices, validators=[DataRequired()])
+    guest_team_dd = SelectField('Guest Team', choices=team_choices, validators=[DataRequired()])
     date_time = StringField('Date-Time', validators=[DataRequired()])
-    host_team = StringField('Host Team', validators=[DataRequired()])
-    guest_team = StringField('Guest Team', validators=[DataRequired()])
+    
     submit = SubmitField('Submit Match')
 
 

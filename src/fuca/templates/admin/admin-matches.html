@@ -22,31 +22,17 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.host_team.label(class="form-control-label") }}
-                    {% if form.host_team.errors %}
-                        {{ form.host_team(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.host_team.errors %}
-                                <span> {{ error }} </span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.host_team(class="form-control form-control-lg") }}
-                    {% endif %}
+                    {{ form.host_team_dd.label(class="form-control-label") }}
+                    <p>
+                        {{form.host_team_dd()}}
+                    </p>
                 </div>
 
                 <div class="form-group">
-                    {{ form.guest_team.label(class="form-control-label") }}
-                    {% if form.guest_team.errors %}
-                        {{ form.guest_team(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.guest_team.errors %}
-                                <span> {{ error }} </span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.guest_team(class="form-control form-control-lg") }}
-                    {% endif %}
+                    {{ form.guest_team_dd.label(class="form-control-label") }}
+                    <p>
+                        {{form.guest_team_dd()}}
+                    </p>
                 </div>
                 
             </fieldset>
