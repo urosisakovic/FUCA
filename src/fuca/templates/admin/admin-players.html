@@ -36,34 +36,6 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.birthdate.label(class="form-control-label") }}
-                    {% if form.birthdate.errors %}
-                        {{ form.birthdate(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.birthdate.errors %}
-                                <span> {{ error }} </span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.birthdate(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.image.label(class="form-control-label") }}
-                    {% if form.image.errors %}
-                        {{ form.image(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.image.errors %}
-                                <span> {{ error }} </span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.image(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg is-invalid") }}
@@ -74,6 +46,40 @@
                         </div>
                     {% else %}
                         {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <div class="form-group">
+                        {{ form.birth_day.label(class="form-control-label") }}
+                        <p>
+                            {{form.birth_day()}}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.birth_month.label(class="form-control-label") }}
+                        <p>
+                            {{form.birth_month()}}
+                        </p>
+                    </div>
+
+
+                    <div class="form-group">
+                        {{ form.birth_year.label(class="form-control-label") }}
+                        <p>
+                            {{form.birth_year()}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.image.label() }}
+                    {{ form.image(class="form-control-file") }}
+                    {% if form.image.errors %}
+                        {% for error in form.image.errors %}
+                            <span class="text-danger"> {{ error }} </span><br>
+                        {% endfor %}
                     {% endif %}
                 </div>
 

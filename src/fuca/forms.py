@@ -28,10 +28,22 @@ class AdminTeamForm(FlaskForm):
 class AdminPlayerForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Number', validators=[DataRequired()])
-    birthdate = StringField('Birthdate', validators=[DataRequired()])
-    image = StringField('Image', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
+
+    birth_day = SelectField('Day',
+                            choices=[(idx, val) for idx, val in enumerate(range(1, 32))],
+                            validators=[DataRequired()])
+
+    birth_month = SelectField('Month',
+                            choices=[(idx, val) for idx, val in enumerate(range(1, 13))],
+                            validators=[DataRequired()])
+
+    birth_year = SelectField('Year',
+                            choices=[(idx, val) for idx, val in enumerate(range(1920, 2020))],
+                            validators=[DataRequired()])
     
+    image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+
     teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
     team_choices = [(id, team['name']) for team in teams]
