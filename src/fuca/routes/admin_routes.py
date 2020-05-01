@@ -94,15 +94,17 @@ def admin_teams():
 def admin_teams_add():
     form = AdminAddTeamForm()
     if form.validate_on_submit():
-        newTeam = Team(name=form.name.data)
-        db.session.add(newTeam)
+        new_team = Team(name=form.name.data)
+        db.session.add(new_team)
         db.session.commit()
 
         if form.image.data:
-            image_file = save_image(form.image.data, str(newTeam.id), "teams")
+            image_file = save_image(form.image.data, str(new_team.id), "teams")
+            new_team.logo_image = image_file
 
-        newTeam.logo_image = image_file
         db.session.commit()
+
+        return redirect(url_for('admin_teams_add'))
 
     return render_template('admin/admin-teams-add.html', form=form, title='Admin Add Teams')
 
@@ -115,6 +117,15 @@ def admin_teams_update():
     teams = [team.jinja_dict() for team in teams_db]
     team_choices = [(team['id'], team['name']) for team in teams]
     update_form.teams_dd.choices = team_choices
+
+    if request.method == 'POST':
+        update_team = Team.query.filter_by(id=update_form.teams_dd.data).all()[0]
+        update_team.name = update_form.name.data
+        if update_form.image.data:
+            image_file = save_image(update_form.image.data, str(update_team.id), "teams")
+            update_team.logo_image = image_file
+        db.session.commit()
+        return redirect(url_for('admin_teams_update'))
 
     return render_template('admin/admin-teams-update.html', form=update_form, title='Admin Update Teams')
 
