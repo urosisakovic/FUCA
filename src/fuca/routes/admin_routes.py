@@ -12,30 +12,50 @@ from fuca.models import Match, News, Player, Statistics, Team
 
 @app.route("/admin/news", methods=['GET', 'POST'])
 def admin_news():
-    # add news form
+    return render_template('admin/admin-news-layout.html',
+                           title='Admin News')
+
+
+@app.route("/admin/news/add", methods=['GET', 'POST'])
+def admin_news_add():
     add_form = AdminAddNewsForm()
     if add_form.validate_on_submit():
+        print("add news")
         newNews = News(title=add_form.title.data,
                        content=add_form.content.data)
         db.session.add(newNews)
         db.session.commit()
+    else:
+        print("NOT validated add news")
 
-    # delete news form
-    delete_form = AdminDeleteNewsForm()
-    if delete_form.validate_on_submit():
-        print(type(delete_form.news_dd.data))
-        print(delete_form.news_dd.data)
+    return render_template('admin/admin-news-add.html',
+                           form=add_form,
+                           title='Admin Add News')
 
-    # update news form
+@app.route("/admin/news/update", methods=['GET', 'POST'])
+def admin_news_update():
     update_form = AdminUpdateNewsForm()
     if update_form.validate_on_submit():
-        pass
+        print("update news")
+    else:
+        print("NOT validated update news")
 
-    return render_template('admin/admin-news.html',
-                           add_form=add_form,
-                           delete_form=delete_form,
-                           update_form=update_form,
-                           title='Admin News')
+    return render_template('admin/admin-news-update.html',
+                           form=update_form,
+                           title='Admin Update News')
+
+@app.route("/admin/news/delete", methods=['GET', 'POST'])
+def admin_news_delete():
+    delete_form = AdminDeleteNewsForm()
+    if delete_form.validate_on_submit():
+        print("validate delete news")
+    else:
+        print("NOT validated delete news")
+
+    return render_template('admin/admin-news-delete.html',
+                           form=delete_form,
+                           title='Admin Delete News')
+
 
 
 #TODO: Set image filename. 
