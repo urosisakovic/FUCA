@@ -25,8 +25,8 @@ def admin_news_add():
                        content=add_form.content.data)
         db.session.add(newNews)
         db.session.commit()
-    else:
-        print("NOT validated add news")
+
+        return redirect(url_for('admin_news_add'))
 
     return render_template('admin/admin-news-add.html',
                            form=add_form,
@@ -47,6 +47,8 @@ def admin_news_update():
         update_news.date = datetime.utcnow()
         db.session.commit()
 
+        return redirect(url_for('admin_news_update'))
+
     return render_template('admin/admin-news-update.html',
                            form=update_form,
                            title='Admin Update News')
@@ -63,6 +65,8 @@ def admin_news_delete():
     if request.method == 'POST':
         News.query.filter_by(id=delete_form.news_dd.data).delete()
         db.session.commit()
+
+        return redirect(url_for('admin_news_delete'))
 
     return render_template('admin/admin-news-delete.html',
                            form=delete_form,
