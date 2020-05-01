@@ -35,9 +35,17 @@ def admin_news_add():
 @app.route("/admin/news/update", methods=['GET', 'POST'])
 def admin_news_update():
     update_form = AdminUpdateNewsForm()
+    news_db = News.query.all()
+    news_list = [news.jinja_dict() for news in news_db]
+    news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
+    update_form.news_dd.choices = news_choices
     
     if request.method == 'POST':
-        print('validated update news')
+        update_news = News.query.filter_by(id=update_form.news_dd.data).all()[0]
+        update_news.title = update_form.title.data
+        update_news.content = update_form.content.data
+        update_news.date = datetime.utcnow()
+        db.session.commit()
 
     return render_template('admin/admin-news-update.html',
                            form=update_form,
@@ -49,11 +57,12 @@ def admin_news_delete():
 
     news_db = News.query.all()
     news_list = [news.jinja_dict() for news in news_db]
-    news_choices = [(idx+1, news['title'] + ' ' + news['date']) for idx, news in enumerate(news_list)]
+    news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
     delete_form.news_dd.choices = news_choices
 
     if request.method == 'POST':
-        print("validate delete news")
+        News.query.filter_by(id=delete_form.news_dd.data).delete()
+        db.session.commit()
 
     return render_template('admin/admin-news-delete.html',
                            form=delete_form,

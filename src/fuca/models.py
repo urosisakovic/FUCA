@@ -13,9 +13,10 @@ class News(db.Model):
         return f"News('{self.title}', '{self.date}')"
 
     def jinja_dict(self):
-        return {'title'    : self.title,
+        return {'title'         : self.title,
                 'content'       : self.content,
-                'date'          : str(self.date)}
+                'date'          : str(self.date),
+                'id'            : self.id}
 
 
 
