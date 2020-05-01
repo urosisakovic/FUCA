@@ -1,7 +1,10 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
-from wtforms import BooleanField, PasswordField, StringField, SubmitField
+from flask_wtf.file import FileAllowed, FileField
+from wtforms import (BooleanField, PasswordField, SelectField, StringField,
+                     SubmitField)
 from wtforms.validators import DataRequired, Email
+from fuca.models import Team
+
 
 
 class LoginForm(FlaskForm):
@@ -27,12 +30,16 @@ class AdminTeamForm(FlaskForm):
 class AdminPlayerForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Number', validators=[DataRequired()])
-    team = StringField('Team', validators=[DataRequired()])
     birthdate = StringField('Birthdate', validators=[DataRequired()])
     image = StringField('Image', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
+    
+    teams_db = Team.query.all()
+    teams = [team.jinja_dict() for team in teams_db]
+    team_choices = [(id, team['name']) for team in teams]
+    team_dd = SelectField('Team', choices=team_choices, validators=[DataRequired()])
+    
     submit = SubmitField('Submit Player')
-
 
 class AdminMatchForm(FlaskForm):
     date_time = StringField('Date-Time', validators=[DataRequired()])
@@ -69,4 +76,3 @@ class AdminStatsForm(FlaskForm):
     red = StringField('Red', validators=[DataRequired()])
     yellow = StringField('Yellow', validators=[DataRequired()])
     submit = SubmitField('Submit Statistics')
-    

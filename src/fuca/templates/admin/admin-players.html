@@ -22,20 +22,6 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.team.label(class="form-control-label") }}
-                    {% if form.team.errors %}
-                        {{ form.team(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.team.errors %}
-                                <span> {{ error }} </span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.team(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
                     {{ form.number.label(class="form-control-label") }}
                     {% if form.number.errors %}
                         {{ form.number(class="form-control form-control-lg is-invalid") }}
@@ -89,6 +75,13 @@
                     {% else %}
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.team_dd.label(class="form-control-label") }}
+                    <p>
+                        {{form.team_dd()}}
+                    </p>
                 </div>
                 
             </fieldset>
