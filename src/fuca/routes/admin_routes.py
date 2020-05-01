@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from flask import flash, redirect, render_template, url_for
+from flask import flash, redirect, render_template, url_for, request
 
 from fuca import app, db
 from fuca.forms import (AdminMatchForm, AdminAddNewsForm, AdminPlayerForm,
@@ -35,10 +35,9 @@ def admin_news_add():
 @app.route("/admin/news/update", methods=['GET', 'POST'])
 def admin_news_update():
     update_form = AdminUpdateNewsForm()
-    if update_form.validate_on_submit():
-        print("update news")
-    else:
-        print("NOT validated update news")
+    
+    if request.method == 'POST':
+        print('validated update news')
 
     return render_template('admin/admin-news-update.html',
                            form=update_form,
@@ -47,10 +46,14 @@ def admin_news_update():
 @app.route("/admin/news/delete", methods=['GET', 'POST'])
 def admin_news_delete():
     delete_form = AdminDeleteNewsForm()
-    if delete_form.validate_on_submit():
+
+    news_db = News.query.all()
+    news_list = [news.jinja_dict() for news in news_db]
+    news_choices = [(idx+1, news['title'] + ' ' + news['date']) for idx, news in enumerate(news_list)]
+    delete_form.news_dd.choices = news_choices
+
+    if request.method == 'POST':
         print("validate delete news")
-    else:
-        print("NOT validated delete news")
 
     return render_template('admin/admin-news-delete.html',
                            form=delete_form,
