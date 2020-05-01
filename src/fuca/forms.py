@@ -3,7 +3,7 @@ from flask_wtf.file import FileAllowed, FileField
 from wtforms import (BooleanField, PasswordField, SelectField, StringField,
                      SubmitField)
 from wtforms.validators import DataRequired, Email
-from fuca.models import Team
+from fuca.models import Team, Match
 
 
 class LoginForm(FlaskForm):
@@ -71,19 +71,20 @@ class AdminMatchForm(FlaskForm):
 
 
 class AdminResultForm(FlaskForm):
-    match = StringField('Match', validators=[DataRequired()])
+    matches_db = Match.query.all()
+    matches = [match.jinja_dict() for match in matches_db]
+    match_choices = [(id, match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
+    match_dd = SelectField('Match', choices=match_choices, validators=[DataRequired()])
 
     host_team_goals = StringField('Host Team Goals', validators=[DataRequired()])
     host_team_yellow = StringField('Host Team Yellow', validators=[DataRequired()])
     host_team_red = StringField('Host Team Red', validators=[DataRequired()])
     host_team_shots = StringField('Host Team Shots', validators=[DataRequired()])
-    host_team_possession = StringField('Host Team Possession', validators=[DataRequired()])
 
     guest_team_goals = StringField('Guest Team Goals', validators=[DataRequired()])
     guest_team_yellow = StringField('Guest Team Yellow', validators=[DataRequired()])
     guest_team_red = StringField('Guest Team Red', validators=[DataRequired()])
     guest_team_shots = StringField('Guest Team Shots', validators=[DataRequired()])
-    guest_team_possession = StringField('Guest Team Possession', validators=[DataRequired()])
 
     best_player = StringField('Best Player', validators=[DataRequired()])
 

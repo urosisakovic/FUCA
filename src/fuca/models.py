@@ -83,19 +83,17 @@ class Player(db.Model):
 class Match(db.Model):
     __tablename__ = 'match'
     id                      = db.Column(db.Integer, primary_key=True)
-    date_time               = db.Column(db.DateTime)
+    date_time               = db.Column(db.DateTime, nullable=False)
     
     host_team_goals         = db.Column(db.Integer, default=0)
     host_team_yellow        = db.Column(db.Integer, default=0)
     host_team_red           = db.Column(db.Integer, default=0)
     host_team_shots         = db.Column(db.Integer, default=0)
-    host_team_possession    = db.Column(db.Integer, default=0)
 
     guest_team_goals        = db.Column(db.Integer, default=0)
     guest_team_yellow       = db.Column(db.Integer, default=0)
     guest_team_red          = db.Column(db.Integer, default=0)
     guest_team_shots        = db.Column(db.Integer, default=0)
-    guest_team_possession   = db.Column(db.Integer, default=0)
 
     # foreign keys
     host_team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
