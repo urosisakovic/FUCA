@@ -3,7 +3,7 @@
         {
             "id": "0",
             "name": "Igor Milenkovic",
-            "birthdate": "01-30-1990",
+            "birthdate": "01-30-1998",
             "number": "7",
             "image": "default_player.jpg",
             "email": "igor.milenkovic@gmail.com",
@@ -11,12 +11,264 @@
         },
         {
             "id": "1",
-            "name": "Jovan Jovan",
-            "birthdate": "02-08-1999",
+            "name": "Lazar Jancevski",
+            "birthdate": "03-12-1996",
+            "number": "8",
+            "image": "default_player.jpg",
+            "email": "lazar.jancevski@gmail.com",
+            "team_id": "0"
+        },
+        {
+            "id": "2",
+            "name": "Dimitrije Jovicic",
+            "birthdate": "02-16-1995",
+            "number": "9",
+            "image": "default_player.jpg",
+            "email": "dimitrije.jovicic@gmail.com",
+            "team_id": "0"
+        },
+        {
+            "id": "3",
+            "name": "Denis Acimovic",
+            "birthdate": "12-21-1998",
+            "number": "1",
+            "image": "default_player.jpg",
+            "email": "denis.acimovic@gmail.com",
+            "team_id": "0"
+        },
+        {
+            "id": "4",
+            "name": "Aleksandar Tomic",
+            "birthdate": "12-10-1999",
+            "number": "10",
+            "image": "default_player.jpg",
+            "email": "aleksandar.tomic@gmail.com",
+            "team_id": "0"
+        },
+        {
+            "id": "5",
+            "name": "Aleksandar Acimovic",
+            "birthdate": "03-06-1997",
             "number": "11",
             "image": "default_player.jpg",
-            "email": "jovan.jovanovic@gmail.com",
+            "email": "aleksandar.acimovic@gmail.com",
             "team_id": "1"
+        },
+        {
+            "id": "6",
+            "name": "Jovan Stokic",
+            "birthdate": "02-12-1998",
+            "number": "7",
+            "image": "default_player.jpg",
+            "email": "jovan.stokic@gmail.com",
+            "team_id": "1"
+        },
+        {
+            "id": "7",
+            "name": "Petar Petrovic",
+            "birthdate": "04-12-1996",
+            "number": "8",
+            "image": "default_player.jpg",
+            "email": "petar.petrovic@gmail.com",
+            "team_id": "1"
+        },
+        {
+            "id": "8",
+            "name": "Dimitrije Jovanovic",
+            "birthdate": "05-16-1996",
+            "number": "9",
+            "image": "default_player.jpg",
+            "email": "dimitrije.jovanovic@gmail.com",
+            "team_id": "1"
+        },
+        {
+            "id": "9",
+            "name": "Nikola Savkovic",
+            "birthdate": "12-29-1998",
+            "number": "1",
+            "image": "default_player.jpg",
+            "email": "nikola.savkovic@gmail.com",
+            "team_id": "1"
+        },
+        {
+            "id": "10",
+            "name": "Dejan Mihajlovic",
+            "birthdate": "02-10-1997",
+            "number": "7",
+            "image": "default_player.jpg",
+            "email": "dejan.mihajlovic@gmail.com",
+            "team_id": "2"
+        },
+        {
+            "id": "11",
+            "name": "Nemanja Babic",
+            "birthdate": "05-08-1999",
+            "number": "8",
+            "image": "default_player.jpg",
+            "email": "nemanja.babic@gmail.com",
+            "team_id": "2"
+        },
+        {
+            "id": "12",
+            "name": "Bojan Paunovic",
+            "birthdate": "11-29-1998",
+            "number": "1",
+            "image": "default_player.jpg",
+            "email": "bojan.paunovic@gmail.com",
+            "team_id": "2"
+        },
+        {
+            "id": "13",
+            "name": "Luka Cirkovic",
+            "birthdate": "02-10-1996",
+            "number": "10",
+            "image": "default_player.jpg",
+            "email": "luka.cirkovic@gmail.com",
+            "team_id": "2"
+        },
+        {
+            "id": "14",
+            "name": "Zdravko Maric",
+            "birthdate": "08-08-1999",
+            "number": "11",
+            "image": "default_player.jpg",
+            "email": "zdravko.maric@gmail.com",
+            "team_id": "2"
+        },
+        {
+            "id": "15",
+            "name": "Danilo Antic",
+            "birthdate": "02-10-1997",
+            "number": "7",
+            "image": "default_player.jpg",
+            "email": "danilo.antic@gmail.com",
+            "team_id": "3"
+        },
+        {
+            "id": "16",
+            "name": "Mirko Kerkez",
+            "birthdate": "05-08-1999",
+            "number": "8",
+            "image": "default_player.jpg",
+            "email": "mirko.kerkez@gmail.com",
+            "team_id": "3"
+        },
+        {
+            "id": "17",
+            "name": "Stefan Vuckovic",
+            "birthdate": "11-29-1998",
+            "number": "1",
+            "image": "default_player.jpg",
+            "email": "stefan.vuckovic@gmail.com",
+            "team_id": "3"
+        },
+        {
+            "id": "18",
+            "name": "Nikola Spasojevic",
+            "birthdate": "02-10-1996",
+            "number": "10",
+            "image": "default_player.jpg",
+            "email": "nikola.spasojevic@gmail.com",
+            "team_id": "3"
+        },
+        {
+            "id": "19",
+            "name": "Uros Milenkovic",
+            "birthdate": "08-08-1999",
+            "number": "11",
+            "image": "default_player.jpg",
+            "email": "uros.milenkovic@gmail.com",
+            "team_id": "3"
+        },
+        {
+            "id": "20",
+            "name": "Milos Zivanovic",
+            "birthdate": "02-10-1997",
+            "number": "7",
+            "image": "default_player.jpg",
+            "email": "milos.zivanovic@gmail.com",
+            "team_id": "4"
+        },
+        {
+            "id": "21",
+            "name": "Marko Trninic",
+            "birthdate": "05-08-1999",
+            "number": "8",
+            "image": "default_player.jpg",
+            "email": "marko.trninic@gmail.com",
+            "team_id": "4"
+        },
+        {
+            "id": "22",
+            "name": "Nebojsa Stojkovic",
+            "birthdate": "11-29-1998",
+            "number": "1",
+            "image": "default_player.jpg",
+            "email": "nebojsa.stojkovic@gmail.com",
+            "team_id": "4"
+        },
+        {
+            "id": "23",
+            "name": "Marko Sekulic",
+            "birthdate": "02-10-1996",
+            "number": "10",
+            "image": "default_player.jpg",
+            "email": "marko.sekulic@gmail.com",
+            "team_id": "4"
+        },
+        {
+            "id": "24",
+            "name": "Miljan Stosic",
+            "birthdate": "08-08-1999",
+            "number": "11",
+            "image": "default_player.jpg",
+            "email": "miljan.stosic@gmail.com",
+            "team_id": "4"
+        },
+        {
+            "id": "25",
+            "name": "Srdjan Jelisic",
+            "birthdate": "02-10-1997",
+            "number": "7",
+            "image": "default_player.jpg",
+            "email": "srdjan.jelisic@gmail.com",
+            "team_id": "5"
+        },
+        {
+            "id": "26",
+            "name": "Dusan Jovovic",
+            "birthdate": "05-08-1999",
+            "number": "8",
+            "image": "default_player.jpg",
+            "email": "dusan.jovovic@gmail.com",
+            "team_id": "5"
+        },
+        {
+            "id": "27",
+            "name": "Mladen Jovanovic",
+            "birthdate": "11-29-1998",
+            "number": "1",
+            "image": "default_player.jpg",
+            "email": "mladen.jovanovic@gmail.com",
+            "team_id": "5"
+        },
+        {
+            "id": "28",
+            "name": "Stefan Peric",
+            "birthdate": "02-10-1996",
+            "number": "10",
+            "image": "default_player.jpg",
+            "email": "stefan.peric@gmail.com",
+            "team_id": "5"
+        },
+        {
+            "id": "29",
+            "name": "Nikola Peric",
+            "birthdate": "08-08-1999",
+            "number": "11",
+            "image": "default_player.jpg",
+            "email": "nikola.peric@gmail.com",
+            "team_id": "5"
         }
     ]
 }
