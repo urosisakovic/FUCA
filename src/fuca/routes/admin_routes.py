@@ -6,23 +6,36 @@ from flask import flash, redirect, render_template, url_for
 from fuca import app, db
 from fuca.forms import (AdminMatchForm, AdminAddNewsForm, AdminPlayerForm,
                         AdminResultForm, AdminStatsForm, AdminTeamForm,
-                        LoginForm, AdminDeleteNewsForm)
+                        LoginForm, AdminDeleteNewsForm, AdminUpdateNewsForm)
 from fuca.models import Match, News, Player, Statistics, Team
 
 
 @app.route("/admin/news", methods=['GET', 'POST'])
 def admin_news():
+    # add news form
     add_form = AdminAddNewsForm()
-    delete_form = AdminDeleteNewsForm()
     if add_form.validate_on_submit():
         newNews = News(title=add_form.title.data,
                        content=add_form.content.data)
         db.session.add(newNews)
         db.session.commit()
 
+    # delete news form
+    delete_form = AdminDeleteNewsForm()
+    if delete_form.validate_on_submit():
+        print(type(delete_form.news_dd.data))
+        print(delete_form.news_dd.data)
 
+    # update news form
+    update_form = AdminUpdateNewsForm()
+    if update_form.validate_on_submit():
+        pass
 
-    return render_template('admin/admin-news.html', add_form=add_form, delete_form=delete_form, title='Admin News')
+    return render_template('admin/admin-news.html',
+                           add_form=add_form,
+                           delete_form=delete_form,
+                           update_form=update_form,
+                           title='Admin News')
 
 
 #TODO: Set image filename. 
