@@ -20,7 +20,16 @@ def admin_players_add():
     form.populate_dd()
 
     if request.method == 'POST':
-        data_utils.add_player()
+        data_utils.add_player(name=form.name.data,
+                              number=form.number.data,
+                              email=form.email.data,
+                              birthdate=datetime(form.birth_year.data,
+                                                    form.birth_month.data, 
+                                                    form.birth_day.data, 
+                                                    0, 0, 0),
+                              team_id=form.team_dd.data,
+                              image=form.image.data)
+        return redirect(url_for('admin_players_add'))
 
     return render_template('admin/players/add.html', form=form, title='Admin Add Players')
 

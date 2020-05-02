@@ -30,8 +30,18 @@ def save_image(form_image, image_name, team_player):
     return image_fn
 
 
-def add_player(title, content):
-    pass
+def add_player(name, number, email, birthdate, team_id, image):
+    new_player = Player(name=name,
+                    number=number,
+                    email=email,
+                    birthdate=birthdate,
+                    team_id=team_id)
+    db.session.add(new_player)
+    db.session.commit()
+    if image:
+        image_file = save_image(image, str(new_player.id), "players")
+        new_player.logo_image = image_file
+    db.session.commit()
 
 
 def update_player(id, name, number, email, birthdate, team_id, image):
