@@ -26,58 +26,53 @@ def admin_news():
 
 @app.route("/admin/news/add", methods=['GET', 'POST'])
 def admin_news_add():
-    add_form = AdminAddNewsForm()
-    if add_form.validate_on_submit():
+    form = AdminAddNewsForm()
+    form.populate_dd()
+
+    if form.validate_on_submit():
         print("add news")
-        newNews = News(title=add_form.title.data,
-                       content=add_form.content.data)
+        newNews = News(title=form.title.data,
+                       content=form.content.data)
         db.session.add(newNews)
         db.session.commit()
 
         return redirect(url_for('admin_news_add'))
 
     return render_template('admin/news/add.html',
-                           form=add_form,
+                           form=form,
                            title='Admin Add News')
 
 @app.route("/admin/news/update", methods=['GET', 'POST'])
 def admin_news_update():
-    update_form = AdminUpdateNewsForm()
-    news_db = News.query.all()
-    news_list = [news.jinja_dict() for news in news_db]
-    news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
-    update_form.news_dd.choices = news_choices
+    form = AdminUpdateNewsForm()
+    form.populate_dd()
     
     if request.method == 'POST':
-        update_news = News.query.filter_by(id=update_form.news_dd.data).all()[0]
-        update_news.title = update_form.title.data
-        update_news.content = update_form.content.data
+        update_news = News.query.filter_by(id=form.news_dd.data).all()[0]
+        update_news.title = form.title.data
+        update_news.content = form.content.data
         update_news.date = datetime.utcnow()
         db.session.commit()
 
         return redirect(url_for('admin_news_update'))
 
     return render_template('admin/news/update.html',
-                           form=update_form,
+                           form=form,
                            title='Admin Update News')
 
 @app.route("/admin/news/delete", methods=['GET', 'POST'])
 def admin_news_delete():
-    delete_form = AdminDeleteNewsForm()
-
-    news_db = News.query.all()
-    news_list = [news.jinja_dict() for news in news_db]
-    news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
-    delete_form.news_dd.choices = news_choices
+    form = AdminDeleteNewsForm()
+    form.populate_dd()
 
     if request.method == 'POST':
-        News.query.filter_by(id=delete_form.news_dd.data).delete()
+        News.query.filter_by(id=form.news_dd.data).delete()
         db.session.commit()
 
         return redirect(url_for('admin_news_delete'))
 
     return render_template('admin/news/delete.html',
-                           form=delete_form,
+                           form=form,
                            title='Admin Delete News')
 
 
@@ -100,6 +95,8 @@ def admin_teams():
 @app.route("/admin/teams/add", methods=['GET', 'POST'])
 def admin_teams_add():
     form = AdminAddTeamForm()
+    form.populate_dd()
+    
     if form.validate_on_submit():
         new_team = Team(name=form.name.data)
         db.session.add(new_team)
@@ -118,41 +115,33 @@ def admin_teams_add():
 
 @app.route("/admin/teams/update", methods=['GET', 'POST'])
 def admin_teams_update():
-    update_form = AdminUpdateTeamForm()
-
-    teams_db = Team.query.all()
-    teams = [team.jinja_dict() for team in teams_db]
-    team_choices = [(team['id'], team['name']) for team in teams]
-    update_form.teams_dd.choices = team_choices
+    form = AdminUpdateTeamForm()
+    form.populate_dd()
 
     if request.method == 'POST':
-        update_team = Team.query.filter_by(id=update_form.teams_dd.data).all()[0]
-        update_team.name = update_form.name.data
-        if update_form.image.data:
-            image_file = save_image(update_form.image.data, str(update_team.id), "teams")
+        update_team = Team.query.filter_by(id=form.teams_dd.data).all()[0]
+        update_team.name = form.name.data
+        if form.image.data:
+            image_file = save_image(form.image.data, str(update_team.id), "teams")
             update_team.logo_image = image_file
         db.session.commit()
         return redirect(url_for('admin_teams_update'))
 
-    return render_template('admin/teams/update.html', form=update_form, title='Admin Update Teams')
+    return render_template('admin/teams/update.html', form=form, title='Admin Update Teams')
 
 
 @app.route("/admin/teams/delete", methods=['GET', 'POST'])
 def admin_teams_delete():
-    delete_form = AdminDeleteTeamForm()
-
-    teams_db = Team.query.all()
-    teams = [team.jinja_dict() for team in teams_db]
-    team_choices = [(team['id'], team['name']) for team in teams]
-    delete_form.teams_dd.choices = team_choices
+    form = AdminDeleteTeamForm()
+    form.populate_dd()
 
     if request.method == 'POST':
-        Team.query.filter_by(id=delete_form.teams_dd.data).delete()
+        Team.query.filter_by(id=form.teams_dd.data).delete()
         db.session.commit()
 
         return redirect(url_for('admin_teams_delete'))
 
-    return render_template('admin/teams/delete.html', form=delete_form, title='Admin Delete Teams')
+    return render_template('admin/teams/delete.html', form=form, title='Admin Delete Teams')
 
 
 @app.route("/admin/players", methods=['GET', 'POST'])
@@ -162,67 +151,57 @@ def admin_players():
 
 @app.route("/admin/players/add", methods=['GET', 'POST'])
 def admin_players_add():
-    add_form = AdminAddPlayerForm()
-
-    teams_db = Team.query.all()
-    teams = [team.jinja_dict() for team in teams_db]
-    team_choices = [(team['id'], team['name']) for team in teams]
-    add_form.team_dd.choices = team_choices
+    form = AdminAddPlayerForm()
+    form.populate_dd()
 
     if request.method == 'POST':
         pass
 
-    return render_template('admin/players/add.html', form=add_form, title='Admin Add Players')
+    return render_template('admin/players/add.html', form=form, title='Admin Add Players')
 
 
 @app.route("/admin/players/update", methods=['GET', 'POST'])
 def admin_players_update():
-    update_form = AdminUpdatePlayerForm()
-
-    players_db = Player.query.all()
-    players = [player.jinja_dict() for player in players_db]
-    player_choices = [(player['team_id'], player['name']) for player in players]
-    update_form.player_dd.choices = player_choices
-
-    teams_db = Team.query.all()
-    teams = [team.jinja_dict() for team in teams_db]
-    team_choices = [(id, team['name']) for team in teams]
-    update_form.team_dd.choices = team_choices
+    form = AdminUpdatePlayerForm()
+    form.populate_dd()
 
     if request.method == 'POST':
-        update_player = Player.query.filter_by(id=update_form.player_dd.data).all()[0]
-        update_player.name = update_form.name.data
-        update_player.number = update_form.number.data
-        update_player.email = update_form.email.data
+        update_player = Player.query.filter_by(id=form.player_dd.data).all()[0]
+        update_player.name = form.name.data
+        update_player.number = form.number.data
+        update_player.email = form.email.data
+        update_player.birthdate = datetime(form.birth_year.data,
+                                           form.birth_month.data, 
+                                           form.birth_day.data, 
+                                           0, 0, 0)
+        update_player.team_id = form.team_dd.data
 
-        update_player.birthdate = datetime(int(update_form.birth_year.data), int(update_form.birth_month.data), int(update_form.birth_day.data), 0, 0, 0)
-        update_player.team_id = update_form.team_dd.data
-
-        if update_form.image.data:
-            image_file = save_image(update_form.image.data, str(update_player.id), "players")
+        if form.image.data:
+            image_file = save_image(form.image.data, str(update_player.id), "players")
             update_player.logo_image = image_file
         db.session.commit()
         return redirect(url_for('admin_players_update'))
 
-    return render_template('admin/players/update.html', form=update_form, title='Admin Update Players')
+    return render_template('admin/players/update.html', form=form, title='Admin Update Players')
 
 
 @app.route("/admin/players/delete", methods=['GET', 'POST'])
 def admin_players_delete():
-    delete_form = AdminDeletePlayerForm()
+    form = AdminDeletePlayerForm()
+    form.populate_dd()
 
     players_db = Player.query.all()
     players = [player.jinja_dict() for player in players_db]
     player_choices = [(player['team_id'], player['name']) for player in players]
-    delete_form.player_dd.choices = player_choices
+    form.player_dd.choices = player_choices
 
     if request.method == 'POST':
-        Player.query.filter_by(id=delete_form.player_dd.data).delete()
+        Player.query.filter_by(id=form.player_dd.data).delete()
         db.session.commit()
 
         return redirect(url_for('admin_players_delete'))
 
-    return render_template('admin/players/delete.html', form=delete_form, title='Admin Delete Players')
+    return render_template('admin/players/delete.html', form=form, title='Admin Delete Players')
 
 
 @app.route("/admin/matches", methods=['GET', 'POST'])

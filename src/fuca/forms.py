@@ -3,7 +3,7 @@ from flask_wtf.file import FileAllowed, FileField
 from wtforms import (BooleanField, PasswordField, SelectField, StringField,
                      SubmitField)
 from wtforms.validators import DataRequired, Email
-from fuca.models import Team, Match, News
+from fuca.models import Team, Match, News, Player
 
 
 class LoginForm(FlaskForm):
@@ -18,6 +18,9 @@ class AdminAddNewsForm(FlaskForm):
     content = StringField('Content', validators=[DataRequired()])
     submit = SubmitField('Add News')
 
+    def populate_dd(self):
+        pass
+
 
 class AdminUpdateNewsForm(FlaskForm):
     news_dd = SelectField('News', choices=[])
@@ -25,16 +28,31 @@ class AdminUpdateNewsForm(FlaskForm):
     content = StringField('Content', validators=[DataRequired()])
     submit = SubmitField('Update News')
 
+    def populate_dd(self):
+        news_db = News.query.all()
+        news_list = [news.jinja_dict() for news in news_db]
+        news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
+        self.news_dd.choices = news_choices
+
 
 class AdminDeleteNewsForm(FlaskForm):
     news_dd = SelectField('News', choices=[])
     submit = SubmitField('Delete News')
+
+    def populate_dd(self):
+        news_db = News.query.all()
+        news_list = [news.jinja_dict() for news in news_db]
+        news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
+        self.news_dd.choices = news_choices
 
 
 class AdminAddTeamForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Add Team')
+
+    def populate_dd(self):
+        pass
 
 
 class AdminUpdateTeamForm(FlaskForm):
@@ -43,10 +61,22 @@ class AdminUpdateTeamForm(FlaskForm):
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Update Team')
 
+    def populate_dd(self):
+        teams_db = Team.query.all()
+        teams = [team.jinja_dict() for team in teams_db]
+        team_choices = [(team['id'], team['name']) for team in teams]
+        self.teams_dd.choices = team_choices
+
 
 class AdminDeleteTeamForm(FlaskForm):
     teams_dd = SelectField('Teams', choices=[])
     submit = SubmitField('Delete Team')
+
+    def populate_dd(self):
+        teams_db = Team.query.all()
+        teams = [team.jinja_dict() for team in teams_db]
+        team_choices = [(team['id'], team['name']) for team in teams]
+        self.teams_dd.choices = team_choices
 
 
 class AdminAddPlayerForm(FlaskForm):
@@ -54,20 +84,24 @@ class AdminAddPlayerForm(FlaskForm):
     number = StringField('Number', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
 
-    birth_day = SelectField('Day',
-                            choices=[(val, val) for idx, val in enumerate(range(1, 32))],
-                            validators=[DataRequired()])
-    birth_month = SelectField('Month',
-                            choices=[(val, val) for idx, val in enumerate(range(1, 13))],
-                            validators=[DataRequired()])
-    birth_year = SelectField('Year',
-                            choices=[(val, val) for idx, val in enumerate(range(1920, 2020))],
-                            validators=[DataRequired()])
+    birth_day = SelectField('Day',choices=[])
+    birth_month = SelectField('Month',choices=[])
+    birth_year = SelectField('Year', choices=[])
     
     image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     team_dd = SelectField('Team', choices=[])
     
     submit = SubmitField('Submit Player')
+
+    def populate_dd(self):
+        self.birth_day.choices = [(val, val) for val in range(1, 32)]
+        self.birth_month.choices = [(val, val) for val in range(1, 13)]
+        self.birth_year.choices = [(val, val) for val in range(1920, 2020)]
+
+        teams_db = Team.query.all()
+        teams = [team.jinja_dict() for team in teams_db]
+        team_choices = [(team['id'], team['name']) for team in teams]
+        self.team_dd.choices = team_choices
 
 
 class AdminUpdatePlayerForm(FlaskForm):
@@ -77,25 +111,40 @@ class AdminUpdatePlayerForm(FlaskForm):
     number = StringField('Number', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
 
-    birth_day = SelectField('Day',
-                            choices=[(val, val) for idx, val in enumerate(range(1, 32))],
-                            validators=[DataRequired()])
-    birth_month = SelectField('Month',
-                            choices=[(val, val) for idx, val in enumerate(range(1, 13))],
-                            validators=[DataRequired()])
-    birth_year = SelectField('Year',
-                            choices=[(val, val) for idx, val in enumerate(range(1920, 2020))],
-                            validators=[DataRequired()])
+    birth_day = SelectField('Day',choices=[])
+    birth_month = SelectField('Month',choices=[])
+    birth_year = SelectField('Year', choices=[])
     
     image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     team_dd = SelectField('Team', choices=[])
     
     submit = SubmitField('Submit Player')
 
+    def populate_dd(self):
+        self.birth_day.choices = [(val, val) for val in range(1, 32)]
+        self.birth_month.choices = [(val, val) for val in range(1, 13)]
+        self.birth_year.choices = [(val, val) for val in range(1920, 2020)]
+
+        teams_db = Team.query.all()
+        teams = [team.jinja_dict() for team in teams_db]
+        team_choices = [(team['id'], team['name']) for team in teams]
+        self.team_dd.choices = team_choice
+
+        players_db = Player.query.all()
+        players = [player.jinja_dict() for player in players_db]
+        player_choices = [(player['team_id'], player['name']) for player in players]
+        self.player_dd.choices = player_choices
+
 
 class AdminDeletePlayerForm(FlaskForm):
     player_dd = SelectField('Player', choices=[])
     submit = SubmitField('Delete Player')
+
+    def populate_dd(self):
+        players_db = Player.query.all()
+        players = [player.jinja_dict() for player in players_db]
+        player_choices = [(player['team_id'], player['name']) for player in players]
+        self.player_dd.choices = player_choices
 
 
 class AdminMatchForm(FlaskForm):
