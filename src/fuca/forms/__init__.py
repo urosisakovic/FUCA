@@ -7,7 +7,7 @@ from fuca.forms.player_forms import (AdminAddPlayerForm, AdminDeletePlayerForm,
                                      AdminUpdatePlayerForm)
 from fuca.forms.result_forms import (AdminAddResultForm, AdminDeleteResultForm,
                                      AdminUpdateResultForm)
-from fuca.forms.stats_forms import (AdminAddStatsForm, AdminDeleteStatsForm,
-                                    AdminUpdateStatsForm)
+from fuca.forms.stats_forms import (AdminAddStatisticsForm, AdminDeleteStatisticsForm,
+                                    AdminUpdateStatisticsForm)
 from fuca.forms.team_forms import (AdminAddTeamForm, AdminDeleteTeamForm,
                                    AdminUpdateTeamForm)

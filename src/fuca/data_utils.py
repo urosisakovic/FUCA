@@ -94,3 +94,15 @@ def update_result():
 
 def delete_result():
     pass
+
+
+def add_statistics():
+    pass
+
+
+def update_statistics():
+    pass
+
+
+def delete_statistics():
+    pass
