@@ -128,7 +128,7 @@ class AdminUpdatePlayerForm(FlaskForm):
         teams_db = Team.query.all()
         teams = [team.jinja_dict() for team in teams_db]
         team_choices = [(team['id'], team['name']) for team in teams]
-        self.team_dd.choices = team_choice
+        self.team_dd.choices = team_choices
 
         players_db = Player.query.all()
         players = [player.jinja_dict() for player in players_db]
