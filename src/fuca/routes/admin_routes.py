@@ -4,10 +4,11 @@ from datetime import datetime
 from flask import flash, redirect, render_template, request, url_for
 
 from fuca import app, db
-from fuca.forms import (AdminAddNewsForm, AdminDeleteNewsForm, AdminMatchForm,
-                        AdminPlayerForm, AdminResultForm, AdminStatsForm,
-                        AdminAddTeamForm, AdminDeleteTeamForm,
-                        AdminUpdateTeamForm, AdminUpdateNewsForm, LoginForm)
+from fuca.forms import (AdminAddNewsForm, AdminAddPlayerForm, AdminAddTeamForm,
+                        AdminDeleteNewsForm, AdminDeletePlayerForm,
+                        AdminDeleteTeamForm, AdminMatchForm, AdminResultForm,
+                        AdminStatsForm, AdminUpdateNewsForm,
+                        AdminUpdatePlayerForm, AdminUpdateTeamForm, LoginForm)
 from fuca.models import Match, News, Player, Statistics, Team
 
 
@@ -156,19 +157,78 @@ def admin_teams_delete():
 
 @app.route("/admin/players", methods=['GET', 'POST'])
 def admin_players():
-    form = AdminPlayerForm()
+    return render_template('admin/admin-players-layout.html', title='Admin Players')
+
+
+@app.route("/admin/players/add", methods=['GET', 'POST'])
+def admin_players_add():
+    add_form = AdminAddPlayerForm()
+
+    teams_db = Team.query.all()
+    teams = [team.jinja_dict() for team in teams_db]
+    team_choices = [(team['id'], team['name']) for team in teams]
+    add_form.team_dd.choices = team_choices
+
+    if request.method == 'POST':
+        pass
+
+    return render_template('admin/admin-players-add.html', form=add_form, title='Admin Add Players')
+
+
+@app.route("/admin/players/update", methods=['GET', 'POST'])
+def admin_players_update():
+    update_form = AdminUpdatePlayerForm()
+
+    players_db = Player.query.all()
+    players = [player.jinja_dict() for player in players_db]
+    player_choices = [(player['team_id'], player['name']) for player in players]
+    update_form.player_dd.choices = player_choices
 
     teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
     team_choices = [(id, team['name']) for team in teams]
-    form.team_dd.choices = team_choices
+    update_form.team_dd.choices = team_choices
 
-    if form.validate_on_submit():
-        print("Validated")
-    else:
-        print("Not Validated")
+    if request.method == 'POST':
+        update_player = Player.query.filter_by(id=update_form.player_dd.data).all()[0]
+        update_player.name = update_form.name.data
+        update_player.number = update_form.number.data
+        update_player.email = update_form.email.data
 
-    return render_template('admin/admin-players.html', form=form, title='Admin Players')
+        print('-----------------------------------------------------------------------')
+        print(update_form.birth_year.data)
+        print(update_form.birth_month.data)
+        print(update_form.birth_day.data)
+        print('-----------------------------------------------------------------------')
+
+        update_player.birthdate = datetime(int(update_form.birth_year.data), int(update_form.birth_month.data), int(update_form.birth_day.data), 0, 0, 0)
+        update_player.team_id = update_form.team_dd.data
+
+        if update_form.image.data:
+            image_file = save_image(update_form.image.data, str(update_player.id), "players")
+            update_player.logo_image = image_file
+        db.session.commit()
+        return redirect(url_for('admin_players_update'))
+
+    return render_template('admin/admin-players-update.html', form=update_form, title='Admin Update Players')
+
+
+@app.route("/admin/players/delete", methods=['GET', 'POST'])
+def admin_players_delete():
+    delete_form = AdminDeletePlayerForm()
+
+    players_db = Player.query.all()
+    players = [player.jinja_dict() for player in players_db]
+    player_choices = [(player['team_id'], player['name']) for player in players]
+    delete_form.player_dd.choices = player_choices
+
+    if request.method == 'POST':
+        Player.query.filter_by(id=delete_form.player_dd.data).delete()
+        db.session.commit()
+
+        return redirect(url_for('admin_players_delete'))
+
+    return render_template('admin/admin-players-delete.html', form=delete_form, title='Admin Delete Players')
 
 
 @app.route("/admin/matches", methods=['GET', 'POST'])

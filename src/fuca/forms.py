@@ -49,19 +49,19 @@ class AdminDeleteTeamForm(FlaskForm):
     submit = SubmitField('Delete Team')
 
 
-class AdminPlayerForm(FlaskForm):
+class AdminAddPlayerForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Number', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
 
     birth_day = SelectField('Day',
-                            choices=[(idx, val) for idx, val in enumerate(range(1, 32))],
+                            choices=[(val, val) for idx, val in enumerate(range(1, 32))],
                             validators=[DataRequired()])
     birth_month = SelectField('Month',
-                            choices=[(idx, val) for idx, val in enumerate(range(1, 13))],
+                            choices=[(val, val) for idx, val in enumerate(range(1, 13))],
                             validators=[DataRequired()])
     birth_year = SelectField('Year',
-                            choices=[(idx, val) for idx, val in enumerate(range(1920, 2020))],
+                            choices=[(val, val) for idx, val in enumerate(range(1920, 2020))],
                             validators=[DataRequired()])
     
     image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
@@ -70,18 +70,46 @@ class AdminPlayerForm(FlaskForm):
     submit = SubmitField('Submit Player')
 
 
+class AdminUpdatePlayerForm(FlaskForm):
+    player_dd = SelectField('Player', choices=[])
+
+    name = StringField('Name', validators=[DataRequired()])
+    number = StringField('Number', validators=[DataRequired()])
+    email = StringField('Email', validators=[Email(), DataRequired()])
+
+    birth_day = SelectField('Day',
+                            choices=[(val, val) for idx, val in enumerate(range(1, 32))],
+                            validators=[DataRequired()])
+    birth_month = SelectField('Month',
+                            choices=[(val, val) for idx, val in enumerate(range(1, 13))],
+                            validators=[DataRequired()])
+    birth_year = SelectField('Year',
+                            choices=[(val, val) for idx, val in enumerate(range(1920, 2020))],
+                            validators=[DataRequired()])
+    
+    image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    team_dd = SelectField('Team', choices=[])
+    
+    submit = SubmitField('Submit Player')
+
+
+class AdminDeletePlayerForm(FlaskForm):
+    player_dd = SelectField('Player', choices=[])
+    submit = SubmitField('Delete Player')
+
+
 class AdminMatchForm(FlaskForm):
     host_team_dd = SelectField('Host Team', choices=[])
     guest_team_dd = SelectField('Guest Team', choices=[])
 
     birth_day = SelectField('Day',
-                            choices=[(idx, val) for idx, val in enumerate(range(1, 32))],
+                            choices=[(val, val) for idx, val in enumerate(range(1, 32))],
                             validators=[DataRequired()])
     birth_month = SelectField('Month',
-                            choices=[(idx, val) for idx, val in enumerate(range(1, 13))],
+                            choices=[(val, val) for idx, val in enumerate(range(1, 13))],
                             validators=[DataRequired()])
     birth_year = SelectField('Year',
-                            choices=[(idx, val) for idx, val in enumerate(range(1920, 2020))],
+                            choices=[(val, val) for idx, val in enumerate(range(1920, 2020))],
                             validators=[DataRequired()])    
     submit = SubmitField('Submit Match')
 
