@@ -1,0 +1,22 @@
+{% extends 'admin/results/layout.html' %}
+
+{% block admin_result_content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+    
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Result</legend>
+                <div class="form-group">
+                    {{ form.match_dd.label(class="form-control-label") }}
+                    <p>
+                        {{form.match_dd()}}
+                    </p>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock admin_result_content %}

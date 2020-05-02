@@ -82,3 +82,15 @@ def update_match():
 
 def delete_match():
     pass
+
+
+def add_result():
+    pass
+
+
+def update_result():
+    pass
+
+
+def delete_result():
+    pass

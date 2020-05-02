@@ -1,6 +1,6 @@
-{% extends 'admin/layout.html' %}
+{% extends 'admin/results/layout.html' %}
 
-{% block admin_content %}
+{% block admin_result_content %}
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -146,4 +146,4 @@
             </div>
         </form>
     </div>
-{% endblock admin_content %}
+{% endblock admin_result_content %}
