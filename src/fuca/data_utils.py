@@ -8,12 +8,14 @@ def add_news(title, content):
     db.session.add(newNews)
     db.session.commit()
 
+
 def update_news(id, new_title, new_content):
     update_news = News.query.filter_by(id=id).first()
     update_news.title = form.title.data
     update_news.content = form.content.data
     update_news.date = datetime.utcnow()
     db.session.commit()
+
 
 def delete_news(id):
     News.query.filter_by(id=id).delete()
@@ -27,8 +29,10 @@ def save_image(form_image, image_name, team_player):
     form_image.save(image_path)
     return image_fn
 
+
 def add_player(title, content):
     pass
+
 
 def update_player(id, name, number, email, birthdate, team_id, image):
     update_player = Player.query.filter_by(id=id).first()
@@ -42,10 +46,10 @@ def update_player(id, name, number, email, birthdate, team_id, image):
         update_player.logo_image = image_file
     db.session.commit()
 
+
 def delete_player(id):
     Player.query.filter_by(id=id).delete()
     db.session.commit()
-
 
 
 def add_team(name, image):
@@ -71,17 +75,25 @@ def delete_team(id):
     db.session.commit()
 
 
+def add_match(date_time, host_team_id, guest_team_id):
+    new_match = Match(date_time=date_time,
+                      host_team_id=host_team_id,
+                      guest_team_id=guest_team_id)
+    db.session.add(new_match)
+    db.session.commit()
 
-def add_match():
-    pass
+
+def update_match(id, date_time, host_team_id, guest_team_id):
+    update_match = Match.query.filter_by(id=id).first()
+    update_match.host_team_id = host_team_id
+    update_match.guest_team_id = guest_team_id
+    update_match.date_time = date_time
+    db.session.commit()
 
 
-def update_match():
-    pass
-
-
-def delete_match():
-    pass
+def delete_match(id):
+    Match.query.filter_by(id=id).delete()
+    db.session.commit()
 
 
 def add_result():

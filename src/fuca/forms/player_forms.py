@@ -23,7 +23,7 @@ class AdminAddPlayerForm(FlaskForm):
     def populate_dd(self):
         self.birth_day.choices = [(val, val) for val in range(1, 32)]
         self.birth_month.choices = [(val, val) for val in range(1, 13)]
-        self.birth_year.choices = [(val, val) for val in range(1920, 2020)]
+        self.birth_year.choices = [(val, val) for val in range(1920, 2021)]
 
         teams_db = Team.query.all()
         teams = [team.jinja_dict() for team in teams_db]
@@ -50,7 +50,7 @@ class AdminUpdatePlayerForm(FlaskForm):
     def populate_dd(self):
         self.birth_day.choices = [(val, val) for val in range(1, 32)]
         self.birth_month.choices = [(val, val) for val in range(1, 13)]
-        self.birth_year.choices = [(val, val) for val in range(1920, 2020)]
+        self.birth_year.choices = [(val, val) for val in range(1920, 2021)]
 
         teams_db = Team.query.all()
         teams = [team.jinja_dict() for team in teams_db]
