@@ -58,7 +58,7 @@ def update_player(id, name, number, email, birthdate, team_id, image):
     if image:
         image_file = save_image(image, str(update_player.id), "players")
         update_player.logo_image = image_file
-    db.session.commit()
+        db.session.commit()
 
 
 def delete_player(id):
@@ -82,7 +82,7 @@ def update_team(id, name, image):
     if image:
         image_file = save_image(image, str(update_team.id), "teams")
         update_team.logo_image = image_file
-    db.session.commit()
+        db.session.commit()
 
 
 def delete_team(id):
