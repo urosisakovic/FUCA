@@ -108,7 +108,6 @@ def add_statistics():
             if player.team in [match.host_team, match.guest_team]:
                 stats = Statistics(goals=randint(0, 5),
                                    assists=randint(0, 5),
-                                   experience=randint(0, 100),
                                    yellow=randint(0, 2),
                                    red=randint(0, 2),
                                    player=player,

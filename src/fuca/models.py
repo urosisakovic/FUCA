@@ -156,7 +156,6 @@ class Statistics(db.Model):
     id          = db.Column(db.Integer, primary_key=True)
     goals       = db.Column(db.Integer, nullable=False)
     assists     = db.Column(db.Integer, nullable=False)
-    experience  = db.Column(db.Integer, nullable=False)
     yellow      = db.Column(db.Integer, nullable=False)
     red         = db.Column(db.Integer, nullable=False)
     # foreign keys

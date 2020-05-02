@@ -156,13 +156,38 @@ def delete_result(id):
     add_result(id, 0, 0, 0, 0, 0, 0, 0, 0)
 
 
-def add_statistics():
-    pass
+def add_statistics(player_id,
+                   match_id,
+                   goals,
+                   assists,
+                   yellow,
+                   red):
+    new_statistics = Statistics(player_id=player_id,
+                                match_id=match_id,
+                                goals=goals,
+                                assists=assists,
+                                yellow=yellow,
+                                red=red)
+    db.session.add(new_statistics)
+    db.session.commit()
 
 
-def update_statistics():
-    pass
+def update_statistics(player_id,
+                      match_id,
+                      goals,
+                      assists,
+                      yellow,
+                      red):
+    update_statistics = Statistics.query.filter_by(match_id=match_id).filter_by(player_id=player_id)
+    update_statistics.player_id = player_id
+    update_statistics.match_id = match_id
+    update_statistics.goals = goals
+    update_statistics.assists = assists
+    update_statistics.yellow = yellow
+    update_statistics.red = red
+    db.session.commit()
 
 
-def delete_statistics():
-    pass
+def delete_statistics(match_id, player_id):
+    Statistics.query.filter_by(match_id=match_id).filter_by(player_id=player_id).delete()
+    db.session.commit()
