@@ -137,7 +137,7 @@ class Team(db.Model):
         return self.wins*3 + self.draws*1
 
     def __repr__(self):
-        return f"Team('{self.name}')"
+        return f"Team('{self.id}, {self.name}')"
 
     def jinja_dict(self):
         return {'name'          : self.name,
