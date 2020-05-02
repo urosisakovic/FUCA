@@ -1,23 +1,23 @@
-{% extends 'admin/admin-teams-layout.html' %}
+{% extends 'admin/news-layout.html' %}
 
-{% block admin_teams_content %}
+{% block admin_news_content %}
     <div class="content-section">
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST" action="">
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Delete Team</legend>
+                <legend class="border-bottom mb-4">Delete News</legend>
+                
                 <div class="form-group">
-                    {{ form.teams_dd.label(class="form-control-label") }}
+                    {{ form.news_dd.label(class="form-control-label") }}
                     <p>
-                        {{form.teams_dd()}}
+                        {{form.news_dd()}}
                     </p>
                 </div>
-                
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
     </div>
-{% endblock admin_teams_content %}
+{% endblock admin_news_content %}

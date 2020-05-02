@@ -14,13 +14,13 @@ from fuca.models import Match, News, Player, Statistics, Team
 
 @app.route("/admin")
 def admin():
-    return render_template('admin/admin-layout.html',
+    return render_template('admin/layout.html',
                            title='Admin')
 
 
 @app.route("/admin/news", methods=['GET', 'POST'])
 def admin_news():
-    return render_template('admin/admin-news-layout.html',
+    return render_template('admin/news-layout.html',
                            title='Admin News')
 
 
@@ -36,7 +36,7 @@ def admin_news_add():
 
         return redirect(url_for('admin_news_add'))
 
-    return render_template('admin/admin-news-add.html',
+    return render_template('admin/news-add.html',
                            form=add_form,
                            title='Admin Add News')
 
@@ -57,7 +57,7 @@ def admin_news_update():
 
         return redirect(url_for('admin_news_update'))
 
-    return render_template('admin/admin-news-update.html',
+    return render_template('admin/news-update.html',
                            form=update_form,
                            title='Admin Update News')
 
@@ -76,7 +76,7 @@ def admin_news_delete():
 
         return redirect(url_for('admin_news_delete'))
 
-    return render_template('admin/admin-news-delete.html',
+    return render_template('admin/news-delete.html',
                            form=delete_form,
                            title='Admin Delete News')
 
@@ -94,7 +94,7 @@ def save_image(form_image, image_name, team_player):
 #TODO: Check for unique team name.
 @app.route("/admin/teams", methods=['GET', 'POST'])
 def admin_teams():
-    return render_template('admin/admin-teams-layout.html', title='Admin Teams')
+    return render_template('admin/teams-layout.html', title='Admin Teams')
 
 
 @app.route("/admin/teams/add", methods=['GET', 'POST'])
@@ -113,7 +113,7 @@ def admin_teams_add():
 
         return redirect(url_for('admin_teams_add'))
 
-    return render_template('admin/admin-teams-add.html', form=form, title='Admin Add Teams')
+    return render_template('admin/teams-add.html', form=form, title='Admin Add Teams')
 
 
 @app.route("/admin/teams/update", methods=['GET', 'POST'])
@@ -134,7 +134,7 @@ def admin_teams_update():
         db.session.commit()
         return redirect(url_for('admin_teams_update'))
 
-    return render_template('admin/admin-teams-update.html', form=update_form, title='Admin Update Teams')
+    return render_template('admin/teams-update.html', form=update_form, title='Admin Update Teams')
 
 
 @app.route("/admin/teams/delete", methods=['GET', 'POST'])
@@ -152,12 +152,12 @@ def admin_teams_delete():
 
         return redirect(url_for('admin_teams_delete'))
 
-    return render_template('admin/admin-teams-delete.html', form=delete_form, title='Admin Delete Teams')
+    return render_template('admin/teams-delete.html', form=delete_form, title='Admin Delete Teams')
 
 
 @app.route("/admin/players", methods=['GET', 'POST'])
 def admin_players():
-    return render_template('admin/admin-players-layout.html', title='Admin Players')
+    return render_template('admin/players-layout.html', title='Admin Players')
 
 
 @app.route("/admin/players/add", methods=['GET', 'POST'])
@@ -172,7 +172,7 @@ def admin_players_add():
     if request.method == 'POST':
         pass
 
-    return render_template('admin/admin-players-add.html', form=add_form, title='Admin Add Players')
+    return render_template('admin/players-add.html', form=add_form, title='Admin Add Players')
 
 
 @app.route("/admin/players/update", methods=['GET', 'POST'])
@@ -195,12 +195,6 @@ def admin_players_update():
         update_player.number = update_form.number.data
         update_player.email = update_form.email.data
 
-        print('-----------------------------------------------------------------------')
-        print(update_form.birth_year.data)
-        print(update_form.birth_month.data)
-        print(update_form.birth_day.data)
-        print('-----------------------------------------------------------------------')
-
         update_player.birthdate = datetime(int(update_form.birth_year.data), int(update_form.birth_month.data), int(update_form.birth_day.data), 0, 0, 0)
         update_player.team_id = update_form.team_dd.data
 
@@ -210,7 +204,7 @@ def admin_players_update():
         db.session.commit()
         return redirect(url_for('admin_players_update'))
 
-    return render_template('admin/admin-players-update.html', form=update_form, title='Admin Update Players')
+    return render_template('admin/players-update.html', form=update_form, title='Admin Update Players')
 
 
 @app.route("/admin/players/delete", methods=['GET', 'POST'])
@@ -228,7 +222,7 @@ def admin_players_delete():
 
         return redirect(url_for('admin_players_delete'))
 
-    return render_template('admin/admin-players-delete.html', form=delete_form, title='Admin Delete Players')
+    return render_template('admin/players-delete.html', form=delete_form, title='Admin Delete Players')
 
 
 @app.route("/admin/matches", methods=['GET', 'POST'])
@@ -247,7 +241,7 @@ def admin_matches():
     else:
         print("Not Validated")
 
-    return render_template('admin/admin-matches.html', form=form, title='Admin Matches')
+    return render_template('admin/matches.html', form=form, title='Admin Matches')
 
 
 @app.route("/admin/results", methods=['GET', 'POST'])
@@ -264,7 +258,7 @@ def admin_results():
     else:
         print("Not Validated")
 
-    return render_template('admin/admin-results.html', form=form, title='Admin Results')
+    return render_template('admin/results.html', form=form, title='Admin Results')
 
 
 @app.route("/admin/statistics", methods=['GET', 'POST'])
@@ -275,4 +269,4 @@ def admin_statistics():
     else:
         print("Not Validated")
 
-    return render_template('admin/admin-statistics.html', form=form, title='Admin Statistics')
+    return render_template('admin/statistics.html', form=form, title='Admin Statistics')

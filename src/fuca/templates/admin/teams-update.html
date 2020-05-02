@@ -1,4 +1,4 @@
-{% extends 'admin/admin-teams-layout.html' %}
+{% extends 'admin/teams-layout.html' %}
 
 {% block admin_teams_content %}
     <div class="content-section">
@@ -6,7 +6,14 @@
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Team</legend>
+                <legend class="border-bottom mb-4">Update Team</legend>
+                <div class="form-group">
+                    {{ form.teams_dd.label(class="form-control-label") }}
+                    <p>
+                        {{form.teams_dd()}}
+                    </p>
+                </div>
+
                 <div class="form-group">
                     {{ form.name.label(class="form-control-label") }}
                     {% if form.name.errors %}

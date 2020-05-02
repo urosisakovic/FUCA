@@ -1,23 +1,24 @@
-{% extends 'admin/admin-news-layout.html' %}
+{% extends 'admin/players-layout.html' %}
 
-{% block admin_news_content %}
+{% block admin_players_content %}
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Delete News</legend>
+                <legend class="border-bottom mb-4">Delete Player</legend>
                 
                 <div class="form-group">
-                    {{ form.news_dd.label(class="form-control-label") }}
+                    {{ form.player_dd.label(class="form-control-label") }}
                     <p>
-                        {{form.news_dd()}}
+                        {{form.player_dd()}}
                     </p>
                 </div>
+                
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
     </div>
-{% endblock admin_news_content %}
+{% endblock admin_players_content %}
