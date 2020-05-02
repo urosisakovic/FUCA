@@ -20,7 +20,7 @@ def admin():
 
 @app.route("/admin/news", methods=['GET', 'POST'])
 def admin_news():
-    return render_template('admin/news-layout.html',
+    return render_template('admin/news/layout.html',
                            title='Admin News')
 
 
@@ -36,7 +36,7 @@ def admin_news_add():
 
         return redirect(url_for('admin_news_add'))
 
-    return render_template('admin/news-add.html',
+    return render_template('admin/news/add.html',
                            form=add_form,
                            title='Admin Add News')
 
@@ -57,7 +57,7 @@ def admin_news_update():
 
         return redirect(url_for('admin_news_update'))
 
-    return render_template('admin/news-update.html',
+    return render_template('admin/news/update.html',
                            form=update_form,
                            title='Admin Update News')
 
@@ -76,7 +76,7 @@ def admin_news_delete():
 
         return redirect(url_for('admin_news_delete'))
 
-    return render_template('admin/news-delete.html',
+    return render_template('admin/news/delete.html',
                            form=delete_form,
                            title='Admin Delete News')
 
@@ -94,7 +94,7 @@ def save_image(form_image, image_name, team_player):
 #TODO: Check for unique team name.
 @app.route("/admin/teams", methods=['GET', 'POST'])
 def admin_teams():
-    return render_template('admin/teams-layout.html', title='Admin Teams')
+    return render_template('admin/teams/layout.html', title='Admin Teams')
 
 
 @app.route("/admin/teams/add", methods=['GET', 'POST'])
@@ -113,7 +113,7 @@ def admin_teams_add():
 
         return redirect(url_for('admin_teams_add'))
 
-    return render_template('admin/teams-add.html', form=form, title='Admin Add Teams')
+    return render_template('admin/teams/add.html', form=form, title='Admin Add Teams')
 
 
 @app.route("/admin/teams/update", methods=['GET', 'POST'])
@@ -134,7 +134,7 @@ def admin_teams_update():
         db.session.commit()
         return redirect(url_for('admin_teams_update'))
 
-    return render_template('admin/teams-update.html', form=update_form, title='Admin Update Teams')
+    return render_template('admin/teams/update.html', form=update_form, title='Admin Update Teams')
 
 
 @app.route("/admin/teams/delete", methods=['GET', 'POST'])
@@ -152,12 +152,12 @@ def admin_teams_delete():
 
         return redirect(url_for('admin_teams_delete'))
 
-    return render_template('admin/teams-delete.html', form=delete_form, title='Admin Delete Teams')
+    return render_template('admin/teams/delete.html', form=delete_form, title='Admin Delete Teams')
 
 
 @app.route("/admin/players", methods=['GET', 'POST'])
 def admin_players():
-    return render_template('admin/players-layout.html', title='Admin Players')
+    return render_template('admin/players/layout.html', title='Admin Players')
 
 
 @app.route("/admin/players/add", methods=['GET', 'POST'])
@@ -172,7 +172,7 @@ def admin_players_add():
     if request.method == 'POST':
         pass
 
-    return render_template('admin/players-add.html', form=add_form, title='Admin Add Players')
+    return render_template('admin/players/add.html', form=add_form, title='Admin Add Players')
 
 
 @app.route("/admin/players/update", methods=['GET', 'POST'])
@@ -204,7 +204,7 @@ def admin_players_update():
         db.session.commit()
         return redirect(url_for('admin_players_update'))
 
-    return render_template('admin/players-update.html', form=update_form, title='Admin Update Players')
+    return render_template('admin/players/update.html', form=update_form, title='Admin Update Players')
 
 
 @app.route("/admin/players/delete", methods=['GET', 'POST'])
@@ -222,7 +222,7 @@ def admin_players_delete():
 
         return redirect(url_for('admin_players_delete'))
 
-    return render_template('admin/players-delete.html', form=delete_form, title='Admin Delete Players')
+    return render_template('admin/players/delete.html', form=delete_form, title='Admin Delete Players')
 
 
 @app.route("/admin/matches", methods=['GET', 'POST'])

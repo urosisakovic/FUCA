@@ -1,16 +1,17 @@
-{% extends 'admin/teams-layout.html' %}
+{% extends 'admin/players/layout.html' %}
 
-{% block admin_teams_content %}
+{% block admin_players_content %}
     <div class="content-section">
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST" action="">
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Delete Team</legend>
+                <legend class="border-bottom mb-4">Delete Player</legend>
+                
                 <div class="form-group">
-                    {{ form.teams_dd.label(class="form-control-label") }}
+                    {{ form.player_dd.label(class="form-control-label") }}
                     <p>
-                        {{form.teams_dd()}}
+                        {{form.player_dd()}}
                     </p>
                 </div>
                 
@@ -20,4 +21,4 @@
             </div>
         </form>
     </div>
-{% endblock admin_teams_content %}
+{% endblock admin_players_content %}
