@@ -69,3 +69,16 @@ def update_team(id, name, image):
 def delete_team(id):
     Team.query.filter_by(id=id).delete()
     db.session.commit()
+
+
+
+def add_match():
+    pass
+
+
+def update_match():
+    pass
+
+
+def delete_match():
+    pass

@@ -1,6 +1,6 @@
-{% extends 'admin/layout.html' %}
+{% extends 'admin/matches/layout.html' %}
 
-{% block admin_content %}
+{% block admin_match_content %}
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -22,19 +22,19 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.birth_day.label(class="form-control-label") }}
+                    {{ form.day.label(class="form-control-label") }}
                     <p>
-                        {{form.birth_day()}}
+                        {{form.day()}}
                     </p>
                     
-                    {{ form.birth_month.label(class="form-control-label") }}
+                    {{ form.month.label(class="form-control-label") }}
                     <p>
-                        {{form.birth_month()}}
+                        {{form.month()}}
                     </p>
 
-                    {{ form.birth_year.label(class="form-control-label") }}
+                    {{ form.year.label(class="form-control-label") }}
                     <p>
-                        {{form.birth_year()}}
+                        {{form.year()}}
                     </p>
                 </div>                
             </fieldset>
@@ -43,4 +43,4 @@
             </div>
         </form>
     </div>
-{% endblock admin_content %}
+{% endblock admin_match_content %}
