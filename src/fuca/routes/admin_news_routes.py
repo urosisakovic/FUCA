@@ -1,15 +1,11 @@
-import os
 from datetime import datetime
 
-from flask import flash, redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for
 
 from fuca import app, db
-from fuca.forms import (AdminAddNewsForm, AdminAddPlayerForm, AdminAddTeamForm,
-                        AdminDeleteNewsForm, AdminDeletePlayerForm,
-                        AdminDeleteTeamForm, AdminMatchForm, AdminResultForm,
-                        AdminStatsForm, AdminUpdateNewsForm,
-                        AdminUpdatePlayerForm, AdminUpdateTeamForm, LoginForm)
-from fuca.models import Match, News, Player, Statistics, Team
+from fuca.forms import (AdminAddNewsForm, AdminDeleteNewsForm,
+                        AdminUpdateNewsForm)
+from fuca.models import News
 
 
 @app.route("/admin/news", methods=['GET', 'POST'])

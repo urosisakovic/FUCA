@@ -4,12 +4,9 @@ from datetime import datetime
 from flask import flash, redirect, render_template, request, url_for
 
 from fuca import app, db
-from fuca.forms import (AdminAddNewsForm, AdminAddPlayerForm, AdminAddTeamForm,
-                        AdminDeleteNewsForm, AdminDeletePlayerForm,
-                        AdminDeleteTeamForm, AdminMatchForm, AdminResultForm,
-                        AdminStatsForm, AdminUpdateNewsForm,
-                        AdminUpdatePlayerForm, AdminUpdateTeamForm, LoginForm)
-from fuca.models import Match, News, Player, Statistics, Team
+from fuca.forms import (AdminAddTeamForm, AdminDeleteTeamForm,
+                        AdminUpdateTeamForm)
+from fuca.models import Team
 
 
 def save_image(form_image, image_name, team_player):
