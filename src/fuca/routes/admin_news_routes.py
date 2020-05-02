@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import redirect, render_template, request, url_for
 
-from fuca import app, db
+from fuca import app, data_utils
 from fuca.forms import (AdminAddNewsForm, AdminDeleteNewsForm,
                         AdminUpdateNewsForm)
 from fuca.models import News
@@ -20,11 +20,8 @@ def admin_news_add():
     form.populate_dd()
 
     if form.validate_on_submit():
-        print("add news")
-        newNews = News(title=form.title.data,
-                       content=form.content.data)
-        db.session.add(newNews)
-        db.session.commit()
+        data_utils.add_news(title=form.title.data,
+                            content=form.content.data)
 
         return redirect(url_for('admin_news_add'))
 
@@ -39,12 +36,9 @@ def admin_news_update():
     form.populate_dd()
     
     if request.method == 'POST':
-        update_news = News.query.filter_by(id=form.news_dd.data).all()[0]
-        update_news.title = form.title.data
-        update_news.content = form.content.data
-        update_news.date = datetime.utcnow()
-        db.session.commit()
-
+        data_utils.update_news(id=form.news_dd.data, 
+                               new_title=form.title.data,
+                               new_content=form.content.data)
         return redirect(url_for('admin_news_update'))
 
     return render_template('admin/news/update.html',
@@ -58,9 +52,7 @@ def admin_news_delete():
     form.populate_dd()
 
     if request.method == 'POST':
-        News.query.filter_by(id=form.news_dd.data).delete()
-        db.session.commit()
-
+        data_utils.delete_news(id=form.news_dd.data)
         return redirect(url_for('admin_news_delete'))
 
     return render_template('admin/news/delete.html',

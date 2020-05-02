@@ -3,18 +3,10 @@ from datetime import datetime
 
 from flask import redirect, render_template, request, url_for
 
-from fuca import app, db
+from fuca import app, data_utils
 from fuca.forms import (AdminAddPlayerForm, AdminDeletePlayerForm,
                         AdminUpdatePlayerForm)
 from fuca.models import Player
-
-
-def save_image(form_image, image_name, team_player):
-    _, f_ext = os.path.splitext(form_image.filename)
-    image_fn = image_name + f_ext
-    image_path = os.path.join(app.root_path, 'static/images/{}/{}'.format(team_player, image_fn))
-    form_image.save(image_path)
-    return image_fn
 
 
 @app.route("/admin/players", methods=['GET', 'POST'])
@@ -28,7 +20,7 @@ def admin_players_add():
     form.populate_dd()
 
     if request.method == 'POST':
-        pass
+        data_utils.add_player()
 
     return render_template('admin/players/add.html', form=form, title='Admin Add Players')
 
@@ -39,20 +31,16 @@ def admin_players_update():
     form.populate_dd()
 
     if request.method == 'POST':
-        update_player = Player.query.filter_by(id=form.player_dd.data).all()[0]
-        update_player.name = form.name.data
-        update_player.number = form.number.data
-        update_player.email = form.email.data
-        update_player.birthdate = datetime(form.birth_year.data,
-                                           form.birth_month.data, 
-                                           form.birth_day.data, 
-                                           0, 0, 0)
-        update_player.team_id = form.team_dd.data
-
-        if form.image.data:
-            image_file = save_image(form.image.data, str(update_player.id), "players")
-            update_player.logo_image = image_file
-        db.session.commit()
+        data_utils.update_player(id=form.player_dd.data,
+                                 name=form.name.data,
+                                 number=form.number.data,
+                                 email=form.email.data,
+                                 birthdate=datetime(form.birth_year.data,
+                                                    form.birth_month.data, 
+                                                    form.birth_day.data, 
+                                                    0, 0, 0),
+                                 team_id=form.team_dd.data,
+                                 image=form.image.data)
         return redirect(url_for('admin_players_update'))
 
     return render_template('admin/players/update.html', form=form, title='Admin Update Players')
@@ -63,15 +51,8 @@ def admin_players_delete():
     form = AdminDeletePlayerForm()
     form.populate_dd()
 
-    players_db = Player.query.all()
-    players = [player.jinja_dict() for player in players_db]
-    player_choices = [(player['team_id'], player['name']) for player in players]
-    form.player_dd.choices = player_choices
-
     if request.method == 'POST':
-        Player.query.filter_by(id=form.player_dd.data).delete()
-        db.session.commit()
-
+        data_utils.delete_player(id=form.player_dd.data)
         return redirect(url_for('admin_players_delete'))
 
     return render_template('admin/players/delete.html', form=form, title='Admin Delete Players')
