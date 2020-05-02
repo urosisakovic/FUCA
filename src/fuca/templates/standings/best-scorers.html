@@ -1,15 +1,27 @@
 {% extends 'standings/standings-layout.html' %}
 
 {% block standings_content %}
-    {% for player in players %}
-        <p>
-            <a href="{{ url_for('player', id=player.id)}}">Player name: {{ player.name }}</a><br>
-            Player number: {{ player.number }}<br>
-            Player points: {{ player.points }}<br>
-            Player goals: {{ player.goals }}<br>
-            Player assists: {{ player.assists }}<br>
-            Player yellow: {{ player.yellow }}<br>
-            Player red: {{ player.red }}<br>
-        </p>
-    {% endfor %}
+    <table>
+        <thead>
+            <th>Player</th>
+            <th>Number</th>
+            <th>Points</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>Yellow</th>
+            <th>Red</th>
+        </thead>
+
+        {% for player in players %}
+            <tr>
+                <td><a href="{{ url_for('player', id=player.id)}}"> {{ player.name }}</a><br></td>
+                <td>{{ player.number }}</td>
+                <td>{{ player.points }}</td>
+                <td>{{ player.goals }}</td>
+                <td>{{ player.assists }}</td>
+                <td>{{ player.yellow }}</td>
+                <td>{{ player.red }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock standings_content %}

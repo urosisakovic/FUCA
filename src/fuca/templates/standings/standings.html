@@ -2,11 +2,32 @@
 
 
 {% block standings_content %}
-    {% for team in teams %}
-        <a href="{{ url_for('team', id=team.id)}}">
-            <p>
-                {{ team.logo }} {{ team.name }} {{ team.wins }} {{ team.losses }} {{ team.draws }} {{ team.matches }} {{ team.goal_diff }}
-            </p>
-        </a>
-    {% endfor %}
+    <table>
+        <thead>
+            <th>Team</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Draws</th>
+            <th>Matches</th>
+            <th>Goal difference</th>
+        </thead>
+
+        {% for team in teams %}
+        <tr>
+            <td>
+                <a href="{{ url_for('team', id=team.id)}}">
+                    <img src="{{ team.logo }}">
+                    {{ team.name }}
+                </a>
+            </td>
+            <td>{{ team.wins }}</td>
+            <td>{{ team.losses }}</td>
+            <td>{{ team.draws }}</td>
+            <td>{{ team.matches }}</td>
+            <td>{{ team.goal_diff }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    
 {% endblock standings_content %}
