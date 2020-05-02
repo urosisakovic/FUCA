@@ -19,7 +19,6 @@ class News(db.Model):
                 'id'            : self.id}
 
 
-
 class Player(db.Model):
     __tablename__ = 'player'
     id          = db.Column(db.Integer,     primary_key=True)
@@ -28,7 +27,7 @@ class Player(db.Model):
     number      = db.Column(db.Integer,     nullable=False)
     image       = db.Column(db.String(20),  nullable=False, default='default.jpg')
     email       = db.Column(db.String(120), unique=True,    nullable=False)
-    password    = db.Column(db.String(60),  nullable=False)
+    password    = db.Column(db.String(60))
     # foreign keys
     team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships

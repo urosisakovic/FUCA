@@ -1,5 +1,6 @@
+import os
 from datetime import datetime
-from fuca import db
+from fuca import db, app
 from fuca.models import *
 
 def add_news(title, content):
@@ -32,16 +33,19 @@ def save_image(form_image, image_name, team_player):
 
 def add_player(name, number, email, birthdate, team_id, image):
     new_player = Player(name=name,
-                    number=number,
-                    email=email,
-                    birthdate=birthdate,
-                    team_id=team_id)
+                        number=number,
+                        email=email,
+                        birthdate=birthdate,
+                        team_id=team_id)
     db.session.add(new_player)
     db.session.commit()
     if image:
+        print('Valid image uploaded')
         image_file = save_image(image, str(new_player.id), "players")
-        new_player.logo_image = image_file
-    db.session.commit()
+        new_player.image = image_file
+        db.session.commit()
+    else:
+        print('Valid image not uploaded')
 
 
 def update_player(id, name, number, email, birthdate, team_id, image):
@@ -64,10 +68,11 @@ def delete_player(id):
 
 def add_team(name, image):
     new_team = Team(name=name)
+    db.session.add(new_team)
+    db.session.commit()
     if image:
         image_file = save_image(image, str(new_team.id), "teams")
         new_team.logo_image = image_file
-    db.session.add(new_team)
     db.session.commit()
 
 

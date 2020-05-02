@@ -15,7 +15,7 @@ class AdminAddPlayerForm(FlaskForm):
     birth_month = SelectField('Month',choices=[])
     birth_year = SelectField('Year', choices=[])
     
-    image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    image = FileField('Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     team_dd = SelectField('Team', choices=[])
     
     submit = SubmitField('Submit Player')

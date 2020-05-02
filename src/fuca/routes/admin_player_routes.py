@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 
 from flask import redirect, render_template, request, url_for
@@ -23,10 +22,10 @@ def admin_players_add():
         data_utils.add_player(name=form.name.data,
                               number=form.number.data,
                               email=form.email.data,
-                              birthdate=datetime(form.birth_year.data,
-                                                    form.birth_month.data, 
-                                                    form.birth_day.data, 
-                                                    0, 0, 0),
+                              birthdate=datetime(int(form.birth_year.data),
+                                                 int(form.birth_month.data),
+                                                 int(form.birth_day.data),
+                                                 0, 0, 0),
                               team_id=form.team_dd.data,
                               image=form.image.data)
         return redirect(url_for('admin_players_add'))
@@ -44,9 +43,9 @@ def admin_players_update():
                                  name=form.name.data,
                                  number=form.number.data,
                                  email=form.email.data,
-                                 birthdate=datetime(form.birth_year.data,
-                                                    form.birth_month.data, 
-                                                    form.birth_day.data, 
+                                 birthdate=datetime(int(form.birth_year.data),
+                                                    int(form.birth_month.data),
+                                                    int(form.birth_day.data),
                                                     0, 0, 0),
                                  team_id=form.team_dd.data,
                                  image=form.image.data)
