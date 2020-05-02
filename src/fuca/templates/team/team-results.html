@@ -1,15 +1,22 @@
 {% extends 'team/team-layout.html' %}
 
 {% block team_content %}
+    <table>
+
+    <thead>
+        <th>Date</th>
+        <th>Host Team</th>
+        <th>Guest Team</th>
+        <th>Result</th>
+    </thead>
+
     {% for result in results %}
-        <p>{{ result.date }} 
-            <a href="{{ url_for('team', id=result.team1_id)}}">
-                {{ result.team1_name }}
-            </a> 
-            VS 
-            <a href="{{ url_for('team', id=result.team2_id)}}">
-            {{ result.team2_name }}
-            </a>
-        </p>
+        <tr>
+            <td>{{ result.date }}</td>
+            <td><a href="{{ url_for('team', id=result.team1_id)}}">{{ result.team1_name }}</a></td>
+            <td><a href="{{ url_for('team', id=result.team2_id)}}">{{ result.team2_name }}</a></td>
+            <td>{{ result.team1_goals }} : {{ result.team2_goals }}</td>
+        </tr>
     {% endfor %}
+    </table>
 {% endblock team_content %}
