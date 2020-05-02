@@ -40,13 +40,10 @@ def add_player(name, number, email, birthdate, team_id, image):
     db.session.add(new_player)
     db.session.commit()
     if image:
-        print('Valid image uploaded')
         image_file = save_image(image, str(new_player.id), "players")
         new_player.image = image_file
         db.session.commit()
-    else:
-        print('Valid image not uploaded')
-
+    
 
 def update_player(id, name, number, email, birthdate, team_id, image):
     update_player = Player.query.filter_by(id=id).first()
@@ -111,16 +108,52 @@ def delete_match(id):
     db.session.commit()
 
 
-def add_result():
-    pass
+def add_result(id, 
+               host_team_goals,
+               host_team_yellow,
+               host_team_red,
+               host_team_shots, 
+               guest_team_goals, 
+               guest_team_yellow, 
+               guest_team_red, 
+               guest_team_shots):
+    match = Match.query.filter_by(id=id).first()
+    
+    match.host_team_goals = host_team_goals
+    match.host_team_red = host_team_red
+    match.host_team_yellow = host_team_yellow
+    match.host_team_shots = host_team_shots
+
+    match.guest_team_goals = guest_team_goals
+    match.guest_team_red = guest_team_read
+    match.guest_team_yellow = guest_team_yellow
+    match.guest_team_shots = guest_team_shots
+
+    db.session.commit()
 
 
-def update_result():
-    pass
+def update_result(id, 
+                  host_team_goals,
+                  host_team_yellow,
+                  host_team_red,
+                  host_team_shots, 
+                  guest_team_goals, 
+                  guest_team_yellow, 
+                  guest_team_red, 
+                  guest_team_shots):
+    add_result(id, 
+               host_team_goals,
+               host_team_yellow,
+               host_team_red,
+               host_team_shots, 
+               guest_team_goals, 
+               guest_team_yellow, 
+               guest_team_red, 
+               guest_team_shots)
 
 
-def delete_result():
-    pass
+def delete_result(id):
+    add_result(id, 0, 0, 0, 0, 0, 0, 0, 0)
 
 
 def add_statistics():

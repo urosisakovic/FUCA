@@ -17,7 +17,16 @@ def admin_results_add():
     form.populate_dd()
 
     if request.method == 'POST':
-        data_utils.add_result()
+        data_utils.add_result(id=form.match_dd.data, 
+                              host_team_goals=form.host_team_goals.data,
+                              host_team_yellow=form.host_team_yellow.data,
+                              host_team_red=form.host_team_red.data,
+                              host_team_shots=form.host_team_shots.data, 
+                              guest_team_goals=form.guest_team_goals.data,
+                              guest_team_yellow=form.guest_team_yellow.data,
+                              guest_team_red=form.guest_team_red.data,
+                              guest_team_shots=form.guest_team_shots.data)
+        return redirect(url_for('admin_result_add'))
 
     return render_template('admin/results/add.html', form=form, title='Admin Add Results')
 
@@ -28,7 +37,16 @@ def admin_results_update():
     form.populate_dd()
 
     if request.method == 'POST':
-        data_utils.update_result()
+        data_utils.update_result(id=form.match_dd.data, 
+                                 host_team_goals=form.host_team_goals.data,
+                                 host_team_yellow=form.host_team_yellow.data,
+                                 host_team_red=form.host_team_red.data,
+                                 host_team_shots=form.host_team_shots.data, 
+                                 guest_team_goals=form.guest_team_goals.data,
+                                 guest_team_yellow=form.guest_team_yellow.data,
+                                 guest_team_red=form.guest_team_red.data,
+                                 guest_team_shots=form.guest_team_shots.data)
+        return redirect(url_for('admin_result_update'))
 
     return render_template('admin/results/update.html', form=form, title='Admin Update Results')
 
@@ -39,6 +57,7 @@ def admin_results_delete():
     form.populate_dd()
 
     if request.method == 'POST':
-        data_utils.delete_result()
+        data_utils.delete_result(id=form.match_dd.data)
+        return redirect(url_for('admin_result_delete'))
 
     return render_template('admin/results/delete.html', form=form, title='Admin Delete Results')
