@@ -1,13 +1,12 @@
 from flask import redirect, render_template, request, url_for
 
-from fuca import app, db
-from fuca.forms import AdminResultForm
+from fuca import app, db, forms
 from fuca.models import Match
 
 
 @app.route("/admin/results", methods=['GET', 'POST'])
 def admin_results():
-    form = AdminResultForm()
+    form = AdminAddResultForm()
 
     matches_db = Match.query.all()
     matches = [match.jinja_dict() for match in matches_db]
