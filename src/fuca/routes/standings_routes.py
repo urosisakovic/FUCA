@@ -9,7 +9,8 @@ from fuca.models import Match, News, Player, Statistics, Team
 def standings():
     teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
-    teams = sorted(teams, key=lambda team: team['points'])
+    teams = sorted(teams, key=lambda team: team['points'])[::-1]
+
     for team in teams:
         team['logo'] = url_for('static', filename='images/teams/{}'.format(team['logo']))
 
@@ -20,8 +21,7 @@ def standings():
 def bestplayers():
     players_db = Player.query.all()
     players = [player.jinja_dict() for player in players_db]
-    players = sorted(players, key=lambda player: player['points'])
-    players = reversed(players)
+    players = sorted(players, key=lambda player: player['points'])[::-1]
     return render_template('standings/best-players.html', players=players, title='Best Players')
 
 
