@@ -11,6 +11,12 @@ from fuca.forms import (AdminAddNewsForm, AdminDeleteNewsForm, AdminMatchForm,
 from fuca.models import Match, News, Player, Statistics, Team
 
 
+@app.route("/admin")
+def admin():
+    return render_template('admin/admin-layout.html',
+                           title='Admin')
+
+
 @app.route("/admin/news", methods=['GET', 'POST'])
 def admin_news():
     return render_template('admin/admin-news-layout.html',
