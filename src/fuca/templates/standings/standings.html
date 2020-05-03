@@ -2,7 +2,7 @@
 
 
 {% block standings_content %}
-    <table>
+    <table class="table table-dark table-striped table-hover">
         <thead>
             <th>Team</th>
             <th>Wins</th>
@@ -14,7 +14,7 @@
 
         {% for team in teams %}
         <tr>
-            <td>
+            <td style="white-space:nowrap">
                 <a href="{{ url_for('team', id=team.id)}}">
                     <img src="{{ team.logo }}">
                     {{ team.name }}
