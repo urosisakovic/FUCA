@@ -23,7 +23,7 @@ class AdminAddMatchForm(FlaskForm):
 
         self.day.choices = [(val, val) for val in range(1, 32)]
         self.month.choices = [(val, val) for val in range(1, 13)]
-        self.year.choices = [(val, val) for val in range(1920, 2021)]
+        self.year.choices = [(val, val) for val in range(2020, 1940, -1)]
 
 
 class AdminUpdateMatchForm(FlaskForm):
@@ -51,7 +51,7 @@ class AdminUpdateMatchForm(FlaskForm):
 
         self.day.choices = [(val, val) for val in range(1, 32)]
         self.month.choices = [(val, val) for val in range(1, 13)]
-        self.year.choices = [(val, val) for val in range(1920, 2021)]
+        self.year.choices = [(val, val) for val in range(2020, 1940, -1)]
 
 
 class AdminDeleteMatchForm(FlaskForm):

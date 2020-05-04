@@ -50,7 +50,7 @@ def update_player(id, name, number, email, birthdate, team_id, image):
     update_player.number = number
     update_player.email = email
     update_player.birthdate = birthdate
-    update_player.team_id = form.team_dd.data
+    update_player.team_id = team_id
     if image:
         image_file = save_image(image, str(update_player.id), "players")
         update_player.logo_image = image_file
@@ -60,7 +60,6 @@ def update_player(id, name, number, email, birthdate, team_id, image):
 def delete_player(id):
     Player.query.filter_by(id=id).delete()
     db.session.commit()
-
 
 def add_team(name, image):
     new_team = Team(name=name)

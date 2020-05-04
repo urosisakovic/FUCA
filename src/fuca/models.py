@@ -75,7 +75,8 @@ class Player(db.Model):
                 'red'           : self.red(),
                 'yellow'        : self.yellow(),
                 'points'        : self.points(),
-                'id'            : self.id}
+                'id'            : self.id,
+                'team_id'       : self.team_id}
 
     def __repr__(self):
         return f"Player('{self.name}', '{self.email}', '{self.image}')"

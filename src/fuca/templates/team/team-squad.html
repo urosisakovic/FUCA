@@ -4,7 +4,7 @@
     {% for player in players %}
         <p>
             <a href="{{ url_for('player', id=player.id)}}">
-                <img src="{{ player.image }}"> {{ player.name }} {{ player.number }}
+                <img src="{{ player.image }}" width="100"> {{ player.name }} {{ player.number }}
             </a>
         </p>
     {% endfor %}

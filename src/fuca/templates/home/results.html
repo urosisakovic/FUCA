@@ -14,14 +14,14 @@
                 <td>{{ result.date }}</td>
                 <td style="white-space:nowrap">
                     <a href="{{ url_for('team', id=result.team1_id)}}">
-                        <img src="{{ result.team1_logo }}">
+                        <img src="{{ result.team1_logo }}" width="100">
                         {{ result.team1_name }}
                     </a>
                 </td>
 
                 <td style="white-space:nowrap">
                     <a href="{{ url_for('team', id=result.team2_id)}}">
-                        <img src="{{ result.team2_logo }}">
+                        <img src="{{ result.team2_logo }}" width="100">
                         {{ result.team2_name }}
                     </a>
                 </td>
