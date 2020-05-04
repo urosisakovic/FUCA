@@ -12,6 +12,7 @@ from fuca.models import Match, News, Player, Statistics, Team
 def home():
     news_db = News.query.all()
     news_list = [news.jinja_dict() for news in news_db]
+    news_list = sorted(news_list, key=lambda news: news['raw_date'])[::-1]
     return render_template('home/home.html', newslist=news_list)
 
 

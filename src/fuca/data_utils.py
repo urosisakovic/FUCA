@@ -6,15 +6,14 @@ from fuca.models import *
 def add_news(title, content):
     new_news = News(title=title,
                     content=content)
-    db.session.add(newNews)
+    db.session.add(new_news)
     db.session.commit()
 
 
 def update_news(id, new_title, new_content):
     update_news = News.query.filter_by(id=id).first()
-    update_news.title = form.title.data
-    update_news.content = form.content.data
-    update_news.date = datetime.utcnow()
+    update_news.title = new_title
+    update_news.content = new_content
     db.session.commit()
 
 

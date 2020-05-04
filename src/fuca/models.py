@@ -16,6 +16,7 @@ class News(db.Model):
         return {'title'         : self.title,
                 'content'       : self.content,
                 'date'          : self.date.strftime('%B %d, %Y'),
+                'raw_date'      : self.date,
                 'id'            : self.id}
 
 
