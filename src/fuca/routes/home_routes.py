@@ -19,7 +19,20 @@ def home():
 def results():
     results_db = Match.query.filter(Match.date_time < datetime.now()).all()
     results_list = [result.jinja_dict() for result in results_db]
+    for result in results_list:
+        result['team1_logo'] = url_for('static', filename='images/teams/{}'.format(result['host_team'].logo_image))
+        result['team2_logo'] = url_for('static', filename='images/teams/{}'.format(result['guest_team'].logo_image))
     return render_template('home/results.html', results=results_list, title='Results')
+
+
+@app.route("/schedule")
+def schedule():
+    schedule_db = Match.query.filter(Match.date_time >= datetime.now()).all()
+    schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
+    for schedule in schedule_list:
+        schedule['team1_logo'] = url_for('static', filename='images/teams/{}'.format(schedule['host_team'].logo_image))
+        schedule['team2_logo'] = url_for('static', filename='images/teams/{}'.format(schedule['guest_team'].logo_image))
+    return render_template('home/schedule.html', schedule=schedule_list, title='Schedule')
 
 
 # TODO: If not such player exists, forward to some error page.
@@ -33,13 +46,6 @@ def player(id):
     image_file = url_for('static', filename='images/players/{}'.format(player['image']))
 
     return render_template('home/player.html', player=player, image_file=image_file, title=player['name'])
-
-
-@app.route("/schedule")
-def schedule():
-    schedule_db = Match.query.filter(Match.date_time >= datetime.now()).all()
-    schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
-    return render_template('home/schedule.html', schedule=schedule_list, title='Schedule')
 
 
 @app.route("/stats")

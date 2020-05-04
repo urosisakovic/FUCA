@@ -1,27 +1,39 @@
 {% extends 'standings/standings-layout.html' %}
 
 {% block standings_content %}
-    <table class="table table-dark table-striped table-hover">
-        <thead>
-            <th>Player</th>
-            <th>Number</th>
-            <th>Points</th>
-            <th>Goals</th>
-            <th>Assists</th>
-            <th>Yellow</th>
-            <th>Red</th>
-        </thead>
+<table class="table table-dark table-striped table-hover">
+    <thead>
+        <th>Player</th>
+        <th>Team</th>
+        <th>Number</th>
+        <th>Points</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Yellow</th>
+        <th>Red</th>
+    </thead>
 
-        {% for player in players %}
-            <tr>
-                <td><a href="{{ url_for('player', id=player.id)}}"> {{ player.name }}</a><br></td>
-                <td>{{ player.number }}</td>
-                <td>{{ player.points }}</td>
-                <td>{{ player.goals }}</td>
-                <td>{{ player.assists }}</td>
-                <td>{{ player.yellow }}</td>
-                <td>{{ player.red }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    {% for player in players %}
+        <tr>
+            <td style="white-space:nowrap">
+                <a href="{{ url_for('player', id=player.id)}}">
+                    <img src="{{ player.image }}">
+                    {{ player.name }}
+                </a>
+            </td>
+            <td style="white-space:nowrap">
+                <a href="{{ url_for('team', id=player.team_id)}}">
+                    <img src="{{ player.team_logo }}">
+                    {{ player.team_name }}
+                </a>
+            </td>
+            <td>{{ player.number }}</td>
+            <td>{{ player.points }}</td>
+            <td>{{ player.goals }}</td>
+            <td>{{ player.assists }}</td>
+            <td>{{ player.yellow }}</td>
+            <td>{{ player.red }}</td>
+        </tr>
+    {% endfor %}
+</table>
 {% endblock standings_content %}

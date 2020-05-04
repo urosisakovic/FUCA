@@ -15,7 +15,7 @@ class News(db.Model):
     def jinja_dict(self):
         return {'title'         : self.title,
                 'content'       : self.content,
-                'date'          : str(self.date),
+                'date'          : self.date.strftime('%B %d, %Y'),
                 'id'            : self.id}
 
 
@@ -67,7 +67,7 @@ class Player(db.Model):
                 'birthdate'     : self.birthdate,
                 'image'         : self.image,
                 'email'         : self.email,
-                'team_id'       : self.team_id,
+                'team'          : self.team,
                 'number'        : self.number,
                 'goals'         : self.goals(),
                 'assists'       : self.assists(),
@@ -106,14 +106,16 @@ class Match(db.Model):
         return f"Match(host team id: {self.host_team_id}, guest team id: {self.guest_team_id})"
 
     def jinja_dict(self):
-        return {'date'          : self.date_time,
+        return {'date'          : self.date_time.strftime('%B %d, %Y; %H:%M'),
                 'team1_name'    : self.host_team.name,
                 'team1_goals'   : self.host_team_goals,
                 'team1_id'      : self.host_team_id,
                 'team2_name'    : self.guest_team.name,
                 'team2_goals'   : self.guest_team_goals,
                 'team2_id'      : self.guest_team_id,
-                'id'            : self.id}
+                'id'            : self.id,
+                'host_team'     : self.host_team,
+                'guest_team'    : self.guest_team}
                 
 
 class Team(db.Model):
