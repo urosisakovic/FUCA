@@ -13,8 +13,19 @@
     {% for result in results %}
         <tr>
             <td>{{ result.date }}</td>
-            <td><a href="{{ url_for('team', id=result.team1_id)}}">{{ result.team1_name }}</a></td>
-            <td><a href="{{ url_for('team', id=result.team2_id)}}">{{ result.team2_name }}</a></td>
+            <td style="white-space:nowrap">
+                <a href="{{ url_for('team', id=result.team1_id)}}">
+                    <img src="{{ result.team1_logo }}">
+                    {{ result.team1_name }}
+                </a>
+            </td>
+
+            <td style="white-space:nowrap">
+                <a href="{{ url_for('team', id=result.team2_id)}}">
+                    <img src="{{ result.team2_logo }}">
+                    {{ result.team2_name }}
+                </a>
+            </td>
             <td>{{ result.team1_goals }} : {{ result.team2_goals }}</td>
         </tr>
     {% endfor %}

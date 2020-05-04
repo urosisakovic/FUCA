@@ -11,8 +11,19 @@
         {% for match in schedule %}
             <tr>
                 <td>{{ match.date }}</td>
-                <td><a href="{{ url_for('team', id=match.team1_id)}}">{{ match.team1_name }}</a> </td>
-                <td><a href="{{ url_for('team', id=match.team2_id)}}">{{ match.team2_name }}</a></td>
+                <td style="white-space:nowrap">
+                    <a href="{{ url_for('team', id=match.team1_id)}}">
+                        <img src="{{ match.team1_logo }}">
+                        {{ match.team1_name }}
+                    </a>
+                </td>
+
+                <td style="white-space:nowrap">
+                    <a href="{{ url_for('team', id=match.team2_id)}}">
+                        <img src="{{ match.team2_logo }}">
+                        {{ match.team2_name }}
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
