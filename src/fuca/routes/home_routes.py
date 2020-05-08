@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import flash, redirect, render_template, url_for
 
 from fuca import app, dummydata
-from fuca.forms import LoginForm
+from fuca.forms import LoginForm, RegisterForm
 from fuca.models import Match, News, Player, Statistics, Team
 
 
@@ -77,3 +77,9 @@ def login():
         else:
             flash('Not Uros. Please be Uros!', 'danger')
     return render_template('home/login.html', form=form, title='Login')
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    return render_template('home/register.html', form=form, title='Login')

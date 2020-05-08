@@ -1,4 +1,4 @@
-from fuca.forms.login_forms import LoginForm
+from fuca.forms.user_forms import LoginForm, RegisterForm
 from fuca.forms.match_forms import (AdminAddMatchForm, AdminDeleteMatchForm,
                                     AdminUpdateMatchForm)
 from fuca.forms.news_forms import (AdminAddNewsForm, AdminDeleteNewsForm,
