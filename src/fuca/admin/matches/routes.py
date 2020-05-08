@@ -11,7 +11,7 @@ from flask import Blueprint
 
 matches = Blueprint('matches', __name__)
 
-@matches.route("/admin/matches", methods=['GET', 'POST'])
+@matches.route("", methods=['GET', 'POST'])
 @login_required
 def admin_matches():
     if not current_user.is_admin:
@@ -20,7 +20,7 @@ def admin_matches():
     return render_template('admin/matches/layout.html', title='Admin Matches')
 
 
-@matches.route("/admin/matches/add", methods=['GET', 'POST'])
+@matches.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_matches_add():
     if not current_user.is_admin:
@@ -41,7 +41,7 @@ def admin_matches_add():
     return render_template('admin/matches/add.html', form=form, title='Admin Add Matches')
 
 
-@matches.route("/admin/matches/update", methods=['GET', 'POST'])
+@matches.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_matches_update():
     if not current_user.is_admin:
@@ -63,7 +63,7 @@ def admin_matches_update():
     return render_template('admin/matches/update.html', form=form, title='Admin Update Matches')
 
 
-@matches.route("/admin/matches/delete", methods=['GET', 'POST'])
+@matches.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_matches_delete():
     if not current_user.is_admin:

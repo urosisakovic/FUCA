@@ -9,13 +9,13 @@ from flask import Blueprint
 
 results = Blueprint('results', __name__)
 
-@results.route("/admin/results", methods=['GET', 'POST'])
+@results.route("adm", methods=['GET', 'POST'])
 @login_required
 def admin_results():
     return render_template('admin/results/layout.html', title='Admin Results')
 
 
-@results.route("/admin/results/add", methods=['GET', 'POST'])
+@results.route("adm/add", methods=['GET', 'POST'])
 @login_required
 def admin_results_add():
     form = AdminAddResultForm()
@@ -36,7 +36,7 @@ def admin_results_add():
     return render_template('admin/results/add.html', form=form, title='Admin Add Results')
 
 
-@results.route("/admin/results/update", methods=['GET', 'POST'])
+@results.route("adm/update", methods=['GET', 'POST'])
 @login_required
 def admin_results_update():
     form = AdminUpdateResultForm()
@@ -57,7 +57,7 @@ def admin_results_update():
     return render_template('admin/results/update.html', form=form, title='Admin Update Results')
 
 
-@results.route("/admin/results/delete", methods=['GET', 'POST'])
+@results.route("adm/delete", methods=['GET', 'POST'])
 @login_required
 def admin_results_delete():
     form = AdminDeleteResultForm()

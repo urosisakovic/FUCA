@@ -46,7 +46,7 @@ def register():
 def logout():
     logout_user()
     flash('Successfully logged out!', 'success')
-    return redirect(url_for('users.home'))
+    return redirect(url_for('main.home'))
 
 
 @users.route("/account")

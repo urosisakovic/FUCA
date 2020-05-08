@@ -9,7 +9,7 @@ from flask import Blueprint
 
 statistics = Blueprint('statistics', __name__)
 
-@statistics.route("/admin/statistics", methods=['GET', 'POST'])
+@statistics.route("", methods=['GET', 'POST'])
 @login_required
 def admin_statistics():
     if not current_user.is_admin:
@@ -18,7 +18,7 @@ def admin_statistics():
     return render_template('admin/statistics/layout.html', title='Admin Statistics')
 
 
-@statistics.route("/admin/statistics/add", methods=['GET', 'POST'])
+@statistics.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_statistics_add():
     if not current_user.is_admin:
@@ -34,7 +34,7 @@ def admin_statistics_add():
     return render_template('admin/statistics/add.html', form=form, title='Admin Add Statistics')
 
 
-@statistics.route("/admin/statistics/update", methods=['GET', 'POST'])
+@statistics.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_statistics_update():
     if not current_user.is_admin:
@@ -55,7 +55,7 @@ def admin_statistics_update():
     return render_template('admin/statistics/update.html', form=form, title='Admin Update Statistics')
 
 
-@statistics.route("/admin/statistics/remove", methods=['GET', 'POST'])
+@statistics.route("/remove", methods=['GET', 'POST'])
 @login_required
 def admin_statistics_delete():
     if not current_user.is_admin:

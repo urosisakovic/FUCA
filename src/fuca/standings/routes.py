@@ -7,7 +7,7 @@ from fuca.models import Match, News, Player, Statistics, Team
 
 scores = Blueprint('standings', __name__)
 
-@scores.route("/standings")
+@scores.route("/")
 def standings():
     teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]

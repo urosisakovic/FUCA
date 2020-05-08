@@ -21,7 +21,7 @@ def team(id):
 
 #TODO: Add team name in title.
 #TODO: Adress invalid id.
-@teams.route("/teamresults/<int:id>")
+@teams.route("/results/<int:id>")
 def teamresults(id):
     results_db = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
@@ -34,7 +34,7 @@ def teamresults(id):
 
 #TODO: Add team name in title.
 #TODO: Adress invalid id.
-@teams.route("/teamschedule/<int:id>")
+@teams.route("/schedule/<int:id>")
 def teamschedule(id):
     schedule_db = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
@@ -47,7 +47,7 @@ def teamschedule(id):
 
 #TODO: Add team name in title.
 #TODO: Address invalid id.
-@teams.route("/teamsquad/<int:id>")
+@teams.route("/squad/<int:id>")
 def teamsquad(id):
     players_db = Player.query.filter(Player.team_id == id).all()
     players = [player.jinja_dict() for player in players_db]

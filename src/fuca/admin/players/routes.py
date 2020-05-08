@@ -11,7 +11,7 @@ from flask import Blueprint
 
 players = Blueprint('players', __name__)
 
-@players.route("/admin/players", methods=['GET', 'POST'])
+@players.route("", methods=['GET', 'POST'])
 @login_required
 def admin_players():
     if not current_user.is_admin:
@@ -20,7 +20,7 @@ def admin_players():
     return render_template('admin/players/layout.html', title='Admin Players')
 
 
-@players.route("/admin/players/add", methods=['GET', 'POST'])
+@players.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_players_add():
     if not current_user.is_admin:
@@ -44,7 +44,7 @@ def admin_players_add():
     return render_template('admin/players/add.html', form=form, title='Admin Add Players')
 
 
-@players.route("/admin/players/update", methods=['GET', 'POST'])
+@players.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_players_update():
     if not current_user.is_admin:
@@ -69,7 +69,7 @@ def admin_players_update():
     return render_template('admin/players/update.html', form=form, title='Admin Update Players')
 
 
-@players.route("/admin/players/delete", methods=['GET', 'POST'])
+@players.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_players_delete():
     if not current_user.is_admin:

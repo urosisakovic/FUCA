@@ -10,7 +10,7 @@ from fuca.models import News
 
 news = Blueprint('news', __name__)
 
-@news.route("/admin/news", methods=['GET', 'POST'])
+@news.route("/", methods=['GET', 'POST'])
 @login_required
 def admin_news():
     if not current_user.is_admin:
@@ -20,7 +20,7 @@ def admin_news():
                            title='Admin News')
 
 
-@news.route("/admin/news/add", methods=['GET', 'POST'])
+@news.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_news_add():
     if not current_user.is_admin:
@@ -40,7 +40,7 @@ def admin_news_add():
                            title='Admin Add News')
 
 
-@news.route("/admin/news/update", methods=['GET', 'POST'])
+@news.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_news_update():
     if not current_user.is_admin:
@@ -60,7 +60,7 @@ def admin_news_update():
                            title='Admin Update News')
 
 
-@news.route("/admin/news/delete", methods=['GET', 'POST'])
+@news.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_news_delete():
     if not current_user.is_admin:

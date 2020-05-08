@@ -6,7 +6,7 @@ from flask import Blueprint
 
 adminhome = Blueprint('adminhome', __name__)
 
-@adminhome.route("/admin")
+@adminhome.route("/")
 @login_required
 def admin():
     if not current_user.is_admin:

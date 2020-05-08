@@ -12,7 +12,7 @@ from flask import Blueprint
 
 adminteams = Blueprint('adminteams', __name__)
 
-@adminteams.route("/admin/teams", methods=['GET', 'POST'])
+@adminteams.route("/", methods=['GET', 'POST'])
 @login_required
 def admin_teams():
     if not current_user.is_admin:
@@ -21,7 +21,7 @@ def admin_teams():
     return render_template('admin/teams/layout.html', title='Admin Teams')
 
 
-@adminteams.route("/admin/teams/add", methods=['GET', 'POST'])
+@adminteams.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_teams_add():
     if not current_user.is_admin:
@@ -38,7 +38,7 @@ def admin_teams_add():
     return render_template('admin/teams/add.html', form=form, title='Admin Add Teams')
 
 
-@adminteams.route("/admin/teams/update", methods=['GET', 'POST'])
+@adminteams.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_teams_update():
     if not current_user.is_admin:
@@ -56,7 +56,7 @@ def admin_teams_update():
     return render_template('admin/teams/update.html', form=form, title='Admin Update Teams')
 
 
-@adminteams.route("/admin/teams/delete", methods=['GET', 'POST'])
+@adminteams.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_teams_delete():
     if not current_user.is_admin:

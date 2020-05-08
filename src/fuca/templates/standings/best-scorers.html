@@ -16,13 +16,13 @@
     {% for player in players %}
         <tr>
             <td style="white-space:nowrap">
-                <a href="{{ url_for('player', id=player.id)}}">
+                <a href="{{ url_for('main.player', id=player.id)}}">
                     <img src="{{ player.image }}" width="100">
                     {{ player.name }}
                 </a>
             </td>
             <td style="white-space:nowrap">
-                <a href="{{ url_for('team', id=player.team_id)}}">
+                <a href="{{ url_for('teams.team', id=player.team_id)}}">
                     <img src="{{ player.team_logo }}" width="100">
                     {{ player.team_name }}
                 </a>
