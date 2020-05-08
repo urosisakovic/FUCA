@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Blueprint, flash, redirect, render_template, url_for
 
-from fuca import app, dummydata
+from fuca import dummydata
 from fuca.models import Match, News, Player, Statistics, Team
 
 scores = Blueprint('standings', __name__)

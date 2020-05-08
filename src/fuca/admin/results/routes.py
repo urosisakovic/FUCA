@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required
-from fuca import app, data_utils
+from fuca import data_utils
 from fuca.admin.results.forms import (AdminAddResultForm, AdminDeleteResultForm,
                         AdminUpdateResultForm)
 from fuca.models import Match

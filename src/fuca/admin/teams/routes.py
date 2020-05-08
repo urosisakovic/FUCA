@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import flash, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required
-from fuca import app, data_utils
+from fuca import data_utils
 from fuca.admin.teams.forms import (AdminAddTeamForm, AdminDeleteTeamForm,
                                     AdminUpdateTeamForm)
 from fuca.models import Team

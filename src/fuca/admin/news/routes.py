@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required
-from fuca import app, data_utils
+from fuca import data_utils
 from fuca.admin.news.forms import (AdminAddNewsForm, AdminDeleteNewsForm,
                                     AdminUpdateNewsForm)
 from fuca.models import News

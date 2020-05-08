@@ -1,7 +1,8 @@
 import os
 from datetime import datetime
-from fuca import db, app, bcrypt
+from fuca import db, bcrypt
 from fuca.models import *
+from flask import current_app
 
 def add_news(title, content):
     new_news = News(title=title,
@@ -25,7 +26,7 @@ def delete_news(id):
 def save_image(form_image, image_name, team_player):
     _, f_ext = os.path.splitext(form_image.filename)
     image_fn = image_name + f_ext
-    image_path = os.path.join(app.root_path, 'static/images/{}/{}'.format(team_player, image_fn))
+    image_path = os.path.join(current_app.root_path, 'static/images/{}/{}'.format(team_player, image_fn))
     form_image.save(image_path)
     return image_fn
 
