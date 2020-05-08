@@ -34,8 +34,9 @@ class Player(db.Model, UserMixin):
     number      = db.Column(db.Integer,     nullable=False)
     image       = db.Column(db.String(20),  nullable=False, default='default.jpg')
     email       = db.Column(db.String(120), unique=True,    nullable=False)
-    password    = db.Column(db.String(60))
+    password    = db.Column(db.String(200))
     registered  = db.Column(db.Boolean, default=False)
+    is_admin    = db.Column(db.Boolean, default=False)
     # foreign keys
     team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships

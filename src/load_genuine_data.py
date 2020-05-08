@@ -2,7 +2,7 @@ import json
 import os
 from datetime import datetime
 
-from fuca import db
+from fuca import db, bcrypt
 from fuca.models import Match, News, Player, Statistics, Team
 
 
@@ -19,6 +19,21 @@ def init_empty_db():
         os.remove('fuca/site.db')
 
     db.create_all()
+
+
+def add_admin():
+    admin = Player(name='admin',
+                   email='admin@admin.admin',
+                   password=bcrypt.generate_password_hash('admin').decode('utf-8'),
+                   registered=True,
+                   is_admin=True,
+                   birthdate=datetime.now(),
+                   number=-1,
+                   team_id=-1)
+    db.session.add(admin)
+    db.session.commit()
+
+    print('Added admin.')
 
 
 def add_news():
@@ -121,6 +136,7 @@ def add_statistics():
 
 def main():
     init_empty_db()
+    add_admin()
     add_news()
     add_teams()
     add_players()

@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from random import randint
-from fuca import db
+from fuca import db, bcrypt
 from fuca.models import Match, News, Player, Statistics, Team
 
 # configu
@@ -49,6 +49,19 @@ def add_teams():
 
     print_array(Team.query.all())
 
+
+def add_admin():
+    admin = Player(name='admin',
+                   email='admin@admin.admin',
+                   password=bcrypt.generate_password_hash('admin').decode('utf-8'),
+                   registered=True,
+                   is_admin=True,
+                   birthdate=datetime.now(),
+                   number=-1,
+                   team_id=-1)
+    db.session.add(admin)
+    db.session.commit()
+    
 
 def add_players():
     player_names = ['player_name' + str(i) for i in range(PLAYER_CNT)]
@@ -121,6 +134,7 @@ def add_statistics():
 def main():
     init_empty_db()
     add_news()
+    add_admin()
     add_teams()
     add_players()
     add_matches()
