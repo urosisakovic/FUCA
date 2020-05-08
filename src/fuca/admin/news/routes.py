@@ -4,8 +4,8 @@ from flask import Blueprint, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required
 from fuca import app, data_utils
-from fuca.forms import (AdminAddNewsForm, AdminDeleteNewsForm,
-                        AdminUpdateNewsForm)
+from fuca.admin.news.forms import (AdminAddNewsForm, AdminDeleteNewsForm,
+                                    AdminUpdateNewsForm)
 from fuca.models import News
 
 news = Blueprint('news', __name__)
@@ -33,7 +33,7 @@ def admin_news_add():
         data_utils.add_news(title=form.title.data,
                             content=form.content.data)
 
-        return redirect(url_for('admin.news.admin_news_add'))
+        return redirect(url_for('news.admin_news_add'))
 
     return render_template('admin/news/add.html',
                            form=form,
@@ -53,7 +53,7 @@ def admin_news_update():
         data_utils.update_news(id=form.news_dd.data, 
                                new_title=form.title.data,
                                new_content=form.content.data)
-        return redirect(url_for('admin.news.admin_news_update'))
+        return redirect(url_for('news.admin_news_update'))
 
     return render_template('admin/news/update.html',
                            form=form,
@@ -71,7 +71,7 @@ def admin_news_delete():
 
     if request.method == 'POST':
         data_utils.delete_news(id=form.news_dd.data)
-        return redirect(url_for('admin.news.admin_news_delete'))
+        return redirect(url_for('news.admin_news_delete'))
 
     return render_template('admin/news/delete.html',
                            form=form,

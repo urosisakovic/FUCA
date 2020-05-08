@@ -4,8 +4,8 @@ from flask import redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required
 from fuca import app, data_utils
-from fuca.forms import (AdminAddMatchForm, AdminDeleteMatchForm,
-                        AdminUpdateMatchForm)
+from fuca.admin.matches.forms import (AdminAddMatchForm, AdminDeleteMatchForm,
+                                      AdminUpdateMatchForm)
 from fuca.models import Match, Team
 from flask import Blueprint
 
@@ -36,7 +36,7 @@ def admin_matches_add():
                                                 0, 0, 0),
                              host_team_id=form.host_team_dd.data,
                              guest_team_id=form.guest_team_dd.data)
-        return redirect(url_for('admin.matches.admin_matches_add'))
+        return redirect(url_for('matches.admin_matches_add'))
 
     return render_template('admin/matches/add.html', form=form, title='Admin Add Matches')
 
@@ -58,7 +58,7 @@ def admin_matches_update():
                                                    0, 0, 0),
                                 host_team_id=form.host_team_dd.data,
                                 guest_team_id=form.guest_team_dd.data)
-        return redirect(url_for('admin.matches.admin_matches_update'))
+        return redirect(url_for('matches.admin_matches_update'))
 
     return render_template('admin/matches/update.html', form=form, title='Admin Update Matches')
 
@@ -74,6 +74,6 @@ def admin_matches_delete():
 
     if request.method == 'POST':
         data_utils.delete_match(id=form.match_dd.data)
-        return redirect(url_for('admin.matches.admin_matches_delete'))
+        return redirect(url_for('matches.admin_matches_delete'))
 
     return render_template('admin/matches/delete.html', form=form, title='Admin Delete Matches')

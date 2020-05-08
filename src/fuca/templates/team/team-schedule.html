@@ -12,14 +12,14 @@
             <tr>
                 <td>{{ match.date }}</td>
                 <td style="white-space:nowrap">
-                    <a href="{{ url_for('team', id=match.team1_id)}}">
+                    <a href="{{ url_for('teams.team', id=match.team1_id)}}">
                         <img src="{{ match.team1_logo }}" width="100">
                         {{ match.team1_name }}
                     </a>
                 </td>
 
                 <td style="white-space:nowrap">
-                    <a href="{{ url_for('team', id=match.team2_id)}}">
+                    <a href="{{ url_for('teams.team', id=match.team2_id)}}">
                         <img src="{{ match.team2_logo }}" width="100">
                         {{ match.team2_name }}
                     </a>

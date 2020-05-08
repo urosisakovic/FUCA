@@ -53,3 +53,7 @@ app.register_blueprint(results)
 # register statistics blueprint
 from fuca.admin.statistics.routes import statistics
 app.register_blueprint(statistics)
+
+# register statistics blueprint
+from fuca.admin.routes import adminhome
+app.register_blueprint(adminhome)

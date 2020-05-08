@@ -5,8 +5,8 @@ from flask import flash, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required
 from fuca import app, data_utils
-from fuca.forms import (AdminAddTeamForm, AdminDeleteTeamForm,
-                        AdminUpdateTeamForm)
+from fuca.admin.teams.forms import (AdminAddTeamForm, AdminDeleteTeamForm,
+                                    AdminUpdateTeamForm)
 from fuca.models import Team
 from flask import Blueprint
 
@@ -33,7 +33,7 @@ def admin_teams_add():
     if request.method == 'POST':
         data_utils.add_team(name=form.name.data,
                             image=form.image.data)
-        return redirect(url_for('admin.teams.admin_teams_add'))
+        return redirect(url_for('teams.admin_teams_add'))
 
     return render_template('admin/teams/add.html', form=form, title='Admin Add Teams')
 
@@ -51,7 +51,7 @@ def admin_teams_update():
         data_utils.update_team(id=form.teams_dd.data,
                                 name=form.name.data,
                                 image=form.image.data)
-        return redirect(url_for('admin.teams.admin_teams_update'))
+        return redirect(url_for('teams.admin_teams_update'))
 
     return render_template('admin/teams/update.html', form=form, title='Admin Update Teams')
 
@@ -67,6 +67,6 @@ def admin_teams_delete():
 
     if request.method == 'POST':
         data_utils.delete_team(id=form.teams_dd.data)
-        return redirect(url_for('admin.teams.admin_teams_delete'))
+        return redirect(url_for('teams.admin_teams_delete'))
 
     return render_template('admin/teams/delete.html', form=form, title='Admin Delete Teams')

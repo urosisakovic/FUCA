@@ -1,10 +1,10 @@
 {% extends 'home/layout.html' %}
 
 {% block content %}
-    <a href="{{ url_for('team', id=id)}}">General</a> | 
-    <a href="{{ url_for('teamschedule', id=id)}}">Team Schedule</a> | 
-    <a href="{{ url_for('teamresults', id=id)}}">Team Results</a> |
-    <a href="{{ url_for('teamsquad', id=id)}}">Team Squad</a>
+    <a href="{{ url_for('teams.team', id=id)}}">General</a> | 
+    <a href="{{ url_for('teams.teamschedule', id=id)}}">Team Schedule</a> | 
+    <a href="{{ url_for('teams.teamresults', id=id)}}">Team Results</a> |
+    <a href="{{ url_for('teams.teamsquad', id=id)}}">Team Squad</a>
 
     {% block team_content %}{% endblock team_content %}
 

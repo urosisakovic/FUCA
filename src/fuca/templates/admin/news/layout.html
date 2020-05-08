@@ -2,9 +2,9 @@
 
 {% block admin_content %}
     <p>
-        <a href="{{ url_for('admin.news.admin_news_add') }}">Add News</a> | 
-        <a href="{{ url_for('admin.news.admin_news_update') }}">Update News</a> | 
-        <a href="{{ url_for('admin.news.admin_news_delete') }}">Delete News</a>
+        <a href="{{ url_for('news.admin_news_add') }}">Add News</a> | 
+        <a href="{{ url_for('news.admin_news_update') }}">Update News</a> | 
+        <a href="{{ url_for('news.admin_news_delete') }}">Delete News</a>
     </p>
 
     {% block admin_news_content %}{% endblock admin_news_content%}
