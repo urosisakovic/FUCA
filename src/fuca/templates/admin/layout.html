@@ -1,12 +1,12 @@
 {% extends 'home/layout.html' %}
 
 {% block content %}
-    <a href="{{ url_for('admin_news') }}">News</a> | 
-    <a href="{{ url_for('admin_teams') }}">Teams</a> | 
-    <a href="{{ url_for('admin_players') }}">Players</a> | 
-    <a href="{{ url_for('admin_matches') }}">Matches</a> |
-    <a href="{{ url_for('admin_results') }}">Results</a> |
-    <a href="{{ url_for('admin_statistics') }}">Statistics</a>
+    <a href="{{ url_for('admin.news.admin_news') }}">News</a> | 
+    <a href="{{ url_for('admin.teams.admin_teams') }}">Teams</a> | 
+    <a href="{{ url_for('admin.players.admin_players') }}">Players</a> | 
+    <a href="{{ url_for('admin.matches.admin_matches') }}">Matches</a> |
+    <a href="{{ url_for('admin.results.admin_results') }}">Results</a> |
+    <a href="{{ url_for('admin.statistics.admin_statistics') }}">Statistics</a>
 
     {% block admin_content %}{% endblock admin_content%}
 {% endblock content %}

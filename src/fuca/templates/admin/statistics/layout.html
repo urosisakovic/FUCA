@@ -2,9 +2,9 @@
 
 {% block admin_content %}
     <p>
-        <a href="{{ url_for('admin_statistics_add') }}">Add Statistics</a> | 
-        <a href="{{ url_for('admin_statistics_update') }}">Update Statistics</a> | 
-        <a href="{{ url_for('admin_statistics_delete') }}">Delete Statistics</a>
+        <a href="{{ url_for('admin.statistics.admin_statistics_add') }}">Add Statistics</a> | 
+        <a href="{{ url_for('admin.statistics.admin_statistics_update') }}">Update Statistics</a> | 
+        <a href="{{ url_for('admin.statistics.admin_statistics_delete') }}">Delete Statistics</a>
     </p>
 
     {% block admin_stats_content %}{% endblock admin_stats_content%}

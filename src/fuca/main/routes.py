@@ -1,22 +1,23 @@
 from datetime import datetime
 
-from flask import flash, redirect, render_template, url_for, request
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 
-from fuca import app, dummydata, data_utils
+from flask_login import current_user, login_required, login_user, logout_user
+from fuca import app, data_utils, dummydata
 from fuca.forms import LoginForm, RegisterForm
 from fuca.models import Match, News, Player, Statistics, Team
-from flask_login import login_user, current_user, logout_user, login_required
 
+main = Blueprint('main', __name__)
 
-@app.route("/")
-@app.route("/home")
+@main.route("/")
+@main.route("/home")
 def home():
     page = request.args.get('page', 1, type=int)
     news_db = News.query.order_by(News.date.desc()).paginate(page=page, per_page=5)
     return render_template('home/home.html', newslist=news_db)
 
 
-@app.route("/results")
+@main.route("/results")
 def results():
     results_db = Match.query.filter(Match.date_time < datetime.now()).all()
     results_list = [result.jinja_dict() for result in results_db]
@@ -26,7 +27,7 @@ def results():
     return render_template('home/results.html', results=results_list, title='Results')
 
 
-@app.route("/schedule")
+@main.route("/schedule")
 def schedule():
     schedule_db = Match.query.filter(Match.date_time >= datetime.now()).all()
     schedule_list = [schedule.jinja_dict() for schedule in schedule_db]
@@ -36,8 +37,7 @@ def schedule():
     return render_template('home/schedule.html', schedule=schedule_list, title='Schedule')
 
 
-# TODO: If not such player exists, forward to some error page.
-@app.route("/player/<int:id>")
+@main.route("/player/<int:id>")
 def player(id):
     player = Player.query.get(id)
     if not player:
@@ -49,7 +49,7 @@ def player(id):
     return render_template('home/player.html', player=player, image_file=image_file, title=player['name'])
 
 
-@app.route("/stats")
+@main.route("/stats")
 def stats():
     return render_template('home/stats.html',
                            title='Stats',
@@ -58,57 +58,10 @@ def stats():
                            scorers=dummydata.stats_scorers)
 
 
-@app.route("/teams")
+@main.route("/teams")
 def teams():
     teams_db = Team.query.all()
     teams = [team.jinja_dict() for team in teams_db]
     for team in teams:
         team['logo'] = url_for('static', filename='images/teams/{}'.format(team['logo']))
     return render_template('home/teams.html', teams=teams, title='Teams')
-
-
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-
-    form = LoginForm()
-    if form.validate_on_submit():
-        valid, player = data_utils.exists_player(email=form.email.data,
-                                                 password=form.password.data)
-            
-        if valid:
-            login_user(player, remember=form.remember_me.data)
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
-        else:
-            flash('Login unsuccessful! Please check email and password.', 'danger')
-                        
-    return render_template('home/login.html', form=form, title='Login')
-
-
-#TODO: Add email verification.
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-
-    form = RegisterForm()
-    if form.validate_on_submit():
-        player = data_utils.register_player(form.email.data, form.password.data)
-        flash('Account for {} has been created! You are now able to log in.'.format(player.name), 'success')
-        return redirect(url_for('login'))
-    return render_template('home/register.html', form=form, title='Register')
-
-
-@app.route("/logout")
-def logout():
-    logout_user()
-    flash('Successfully logged out!', 'success')
-    return redirect(url_for('home'))
-
-
-@app.route("/account")
-@login_required
-def account():
-    return render_template('home/account.html', title='My Account')

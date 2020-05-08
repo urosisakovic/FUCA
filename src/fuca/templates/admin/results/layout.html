@@ -2,9 +2,9 @@
 
 {% block admin_content %}
     <p>
-        <a href="{{ url_for('admin_results_add') }}">Add Result</a> | 
-        <a href="{{ url_for('admin_results_update') }}">Update Result</a> | 
-        <a href="{{ url_for('admin_results_delete') }}">Delete Result</a>
+        <a href="{{ url_for('admin.results.admin_results_add') }}">Add Result</a> | 
+        <a href="{{ url_for('admin.results.admin_results_update') }}">Update Result</a> | 
+        <a href="{{ url_for('admin.results.admin_results_delete') }}">Delete Result</a>
     </p>
 
     {% block admin_result_content %}{% endblock admin_result_content%}

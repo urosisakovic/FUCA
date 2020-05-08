@@ -3,7 +3,7 @@
 {% block team_content %}
     {% for player in players %}
         <p>
-            <a href="{{ url_for('player', id=player.id)}}">
+            <a href="{{ url_for('main.player', id=player.id)}}">
                 <img src="{{ player.image }}" width="100"> {{ player.name }} {{ player.number }}
             </a>
         </p>

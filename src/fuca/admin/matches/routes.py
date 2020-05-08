@@ -7,9 +7,11 @@ from fuca import app, data_utils
 from fuca.forms import (AdminAddMatchForm, AdminDeleteMatchForm,
                         AdminUpdateMatchForm)
 from fuca.models import Match, Team
+from flask import Blueprint
 
+matches = Blueprint('matches', __name__)
 
-@app.route("/admin/matches", methods=['GET', 'POST'])
+@matches.route("/admin/matches", methods=['GET', 'POST'])
 @login_required
 def admin_matches():
     if not current_user.is_admin:
@@ -18,7 +20,7 @@ def admin_matches():
     return render_template('admin/matches/layout.html', title='Admin Matches')
 
 
-@app.route("/admin/matches/add", methods=['GET', 'POST'])
+@matches.route("/admin/matches/add", methods=['GET', 'POST'])
 @login_required
 def admin_matches_add():
     if not current_user.is_admin:
@@ -34,12 +36,12 @@ def admin_matches_add():
                                                 0, 0, 0),
                              host_team_id=form.host_team_dd.data,
                              guest_team_id=form.guest_team_dd.data)
-        return redirect(url_for('admin_matches_add'))
+        return redirect(url_for('admin.matches.admin_matches_add'))
 
     return render_template('admin/matches/add.html', form=form, title='Admin Add Matches')
 
 
-@app.route("/admin/matches/update", methods=['GET', 'POST'])
+@matches.route("/admin/matches/update", methods=['GET', 'POST'])
 @login_required
 def admin_matches_update():
     if not current_user.is_admin:
@@ -56,12 +58,12 @@ def admin_matches_update():
                                                    0, 0, 0),
                                 host_team_id=form.host_team_dd.data,
                                 guest_team_id=form.guest_team_dd.data)
-        return redirect(url_for('admin_matches_update'))
+        return redirect(url_for('admin.matches.admin_matches_update'))
 
     return render_template('admin/matches/update.html', form=form, title='Admin Update Matches')
 
 
-@app.route("/admin/matches/delete", methods=['GET', 'POST'])
+@matches.route("/admin/matches/delete", methods=['GET', 'POST'])
 @login_required
 def admin_matches_delete():
     if not current_user.is_admin:
@@ -72,6 +74,6 @@ def admin_matches_delete():
 
     if request.method == 'POST':
         data_utils.delete_match(id=form.match_dd.data)
-        return redirect(url_for('admin_matches_delete'))
+        return redirect(url_for('admin.matches.admin_matches_delete'))
 
     return render_template('admin/matches/delete.html', form=form, title='Admin Delete Matches')

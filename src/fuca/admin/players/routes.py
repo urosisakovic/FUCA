@@ -7,9 +7,11 @@ from fuca import app, data_utils
 from fuca.forms import (AdminAddPlayerForm, AdminDeletePlayerForm,
                         AdminUpdatePlayerForm)
 from fuca.models import Player
+from flask import Blueprint
 
+players = Blueprint('players', __name__)
 
-@app.route("/admin/players", methods=['GET', 'POST'])
+@players.route("/admin/players", methods=['GET', 'POST'])
 @login_required
 def admin_players():
     if not current_user.is_admin:
@@ -18,7 +20,7 @@ def admin_players():
     return render_template('admin/players/layout.html', title='Admin Players')
 
 
-@app.route("/admin/players/add", methods=['GET', 'POST'])
+@players.route("/admin/players/add", methods=['GET', 'POST'])
 @login_required
 def admin_players_add():
     if not current_user.is_admin:
@@ -37,12 +39,12 @@ def admin_players_add():
                                                  0, 0, 0),
                               team_id=form.team_dd.data,
                               image=form.image.data)
-        return redirect(url_for('admin_players_add'))
+        return redirect(url_for('admin.players.admin_players_add'))
 
     return render_template('admin/players/add.html', form=form, title='Admin Add Players')
 
 
-@app.route("/admin/players/update", methods=['GET', 'POST'])
+@players.route("/admin/players/update", methods=['GET', 'POST'])
 @login_required
 def admin_players_update():
     if not current_user.is_admin:
@@ -62,12 +64,12 @@ def admin_players_update():
                                                     0, 0, 0),
                                  team_id=form.team_dd.data,
                                  image=form.image.data)
-        return redirect(url_for('admin_players_update'))
+        return redirect(url_for('admin.players.admin_players_update'))
 
     return render_template('admin/players/update.html', form=form, title='Admin Update Players')
 
 
-@app.route("/admin/players/delete", methods=['GET', 'POST'])
+@players.route("/admin/players/delete", methods=['GET', 'POST'])
 @login_required
 def admin_players_delete():
     if not current_user.is_admin:
@@ -78,6 +80,6 @@ def admin_players_delete():
 
     if request.method == 'POST':
         data_utils.delete_player(id=form.player_dd.data)
-        return redirect(url_for('admin_players_delete'))
+        return redirect(url_for('admin.players.admin_players_delete'))
 
     return render_template('admin/players/delete.html', form=form, title='Admin Delete Players')

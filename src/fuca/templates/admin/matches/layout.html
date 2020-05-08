@@ -2,9 +2,9 @@
 
 {% block admin_content %}
     <p>
-        <a href="{{ url_for('admin_matches_add') }}">Add Match</a> | 
-        <a href="{{ url_for('admin_matches_update') }}">Update Match</a> | 
-        <a href="{{ url_for('admin_matches_delete') }}">Delete Match</a>
+        <a href="{{ url_for('admin.matches.admin_matches_add') }}">Add Match</a> | 
+        <a href="{{ url_for('admin.matches.admin_matches_update') }}">Update Match</a> | 
+        <a href="{{ url_for('admin.matches.admin_matches_delete') }}">Delete Match</a>
     </p>
 
     {% block admin_match_content %}{% endblock admin_match_content%}

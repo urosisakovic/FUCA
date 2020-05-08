@@ -2,9 +2,9 @@
 
 {% block admin_content %}
     <p>
-        <a href="{{ url_for('admin_players_add') }}">Add Player</a> | 
-        <a href="{{ url_for('admin_players_update') }}">Update Player</a> | 
-        <a href="{{ url_for('admin_players_delete') }}">Delete Player</a>
+        <a href="{{ url_for('admin.players.admin_players_add') }}">Add Player</a> | 
+        <a href="{{ url_for('admin.players.admin_players_update') }}">Update Player</a> | 
+        <a href="{{ url_for('admin.players.admin_players_delete') }}">Delete Player</a>
     </p>
 
     {% block admin_players_content %}{% endblock admin_players_content%}

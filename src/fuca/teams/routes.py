@@ -1,12 +1,13 @@
 from datetime import datetime
 
-from flask import flash, redirect, render_template, url_for
+from flask import Blueprint, flash, redirect, render_template, url_for
 
 from fuca import app, dummydata
 from fuca.models import Match, News, Player, Statistics, Team
 
+teams = Blueprint('teams', __name__)
 
-@app.route("/team/<int:id>")
+@teams.route("/team/<int:id>")
 def team(id):
     team = Team.query.get(id)
     if not team:
@@ -20,7 +21,7 @@ def team(id):
 
 #TODO: Add team name in title.
 #TODO: Adress invalid id.
-@app.route("/teamresults/<int:id>")
+@teams.route("/teamresults/<int:id>")
 def teamresults(id):
     results_db = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
@@ -33,7 +34,7 @@ def teamresults(id):
 
 #TODO: Add team name in title.
 #TODO: Adress invalid id.
-@app.route("/teamschedule/<int:id>")
+@teams.route("/teamschedule/<int:id>")
 def teamschedule(id):
     schedule_db = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
@@ -46,7 +47,7 @@ def teamschedule(id):
 
 #TODO: Add team name in title.
 #TODO: Address invalid id.
-@app.route("/teamsquad/<int:id>")
+@teams.route("/teamsquad/<int:id>")
 def teamsquad(id):
     players_db = Player.query.filter(Player.team_id == id).all()
     players = [player.jinja_dict() for player in players_db]
