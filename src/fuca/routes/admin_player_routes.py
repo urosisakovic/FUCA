@@ -2,6 +2,7 @@ from datetime import datetime
 
 from flask import redirect, render_template, request, url_for
 
+from flask_login import current_user, login_required
 from fuca import app, data_utils
 from fuca.forms import (AdminAddPlayerForm, AdminDeletePlayerForm,
                         AdminUpdatePlayerForm)
@@ -9,12 +10,20 @@ from fuca.models import Player
 
 
 @app.route("/admin/players", methods=['GET', 'POST'])
+@login_required
 def admin_players():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     return render_template('admin/players/layout.html', title='Admin Players')
 
 
 @app.route("/admin/players/add", methods=['GET', 'POST'])
+@login_required
 def admin_players_add():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminAddPlayerForm()
     form.populate_dd()
 
@@ -34,7 +43,11 @@ def admin_players_add():
 
 
 @app.route("/admin/players/update", methods=['GET', 'POST'])
+@login_required
 def admin_players_update():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminUpdatePlayerForm()
     form.populate_dd()
 
@@ -55,7 +68,11 @@ def admin_players_update():
 
 
 @app.route("/admin/players/delete", methods=['GET', 'POST'])
+@login_required
 def admin_players_delete():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminDeletePlayerForm()
     form.populate_dd()
 

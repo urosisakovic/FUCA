@@ -1,5 +1,6 @@
 from flask import redirect, render_template, request, url_for
 
+from flask_login import current_user, login_required
 from fuca import app, data_utils
 from fuca.forms import (AdminAddStatisticsForm, AdminDeleteStatisticsForm,
                         AdminUpdateStatisticsForm)
@@ -7,12 +8,20 @@ from fuca.models import Statistics
 
 
 @app.route("/admin/statistics", methods=['GET', 'POST'])
+@login_required
 def admin_statistics():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     return render_template('admin/statistics/layout.html', title='Admin Statistics')
 
 
 @app.route("/admin/statistics/add", methods=['GET', 'POST'])
+@login_required
 def admin_statistics_add():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminAddStatisticsForm()
     form.populate_dd()
     
@@ -24,7 +33,11 @@ def admin_statistics_add():
 
 
 @app.route("/admin/statistics/update", methods=['GET', 'POST'])
+@login_required
 def admin_statistics_update():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminUpdateStatisticsForm()
     form.populate_dd()
     
@@ -41,7 +54,11 @@ def admin_statistics_update():
 
 
 @app.route("/admin/statistics/remove", methods=['GET', 'POST'])
+@login_required
 def admin_statistics_delete():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminDeleteStatisticsForm()
     form.populate_dd()
     

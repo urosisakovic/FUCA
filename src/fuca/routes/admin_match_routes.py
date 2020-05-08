@@ -1,6 +1,8 @@
 from datetime import datetime
+
 from flask import redirect, render_template, request, url_for
 
+from flask_login import current_user, login_required
 from fuca import app, data_utils
 from fuca.forms import (AdminAddMatchForm, AdminDeleteMatchForm,
                         AdminUpdateMatchForm)
@@ -8,12 +10,20 @@ from fuca.models import Match, Team
 
 
 @app.route("/admin/matches", methods=['GET', 'POST'])
+@login_required
 def admin_matches():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     return render_template('admin/matches/layout.html', title='Admin Matches')
 
 
 @app.route("/admin/matches/add", methods=['GET', 'POST'])
+@login_required
 def admin_matches_add():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminAddMatchForm()
     form.populate_dd()
 
@@ -30,7 +40,11 @@ def admin_matches_add():
 
 
 @app.route("/admin/matches/update", methods=['GET', 'POST'])
+@login_required
 def admin_matches_update():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminUpdateMatchForm()
     form.populate_dd()
 
@@ -48,7 +62,11 @@ def admin_matches_update():
 
 
 @app.route("/admin/matches/delete", methods=['GET', 'POST'])
+@login_required
 def admin_matches_delete():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminDeleteMatchForm()
     form.populate_dd()
 

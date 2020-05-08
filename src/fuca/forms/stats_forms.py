@@ -22,7 +22,7 @@ class AdminAddStatisticsForm(FlaskForm):
         match_choices = [(match['id'], match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
         self.match_dd.choices = match_choices
 
-        players_db = Player.query.all()
+        players_db = Player.query.filter_by(is_admin=False).all()
         players = [player.jinja_dict() for player in players_db]
         player_choices = [(player['team_id'], player['name']) for player in players]
         self.player_dd.choices = player_choices
@@ -44,7 +44,7 @@ class AdminUpdateStatisticsForm(FlaskForm):
         match_choices = [(match['id'], match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
         self.match_dd.choices = match_choices
 
-        players_db = Player.query.all()
+        players_db = Player.query.filter_by(is_admin=False).all()
         players = [player.jinja_dict() for player in players_db]
         player_choices = [(player['team_id'], player['name']) for player in players]
         self.player_dd.choices = player_choices
@@ -61,7 +61,7 @@ class AdminDeleteStatisticsForm(FlaskForm):
         match_choices = [(match['id'], match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
         self.match_dd.choices = match_choices
 
-        players_db = Player.query.all()
+        players_db = Player.query.filter_by(is_admin=False).all()
         players = [player.jinja_dict() for player in players_db]
         player_choices = [(player['team_id'], player['name']) for player in players]
         self.player_dd.choices = player_choices

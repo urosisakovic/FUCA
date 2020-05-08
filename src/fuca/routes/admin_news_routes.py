@@ -2,6 +2,7 @@ from datetime import datetime
 
 from flask import redirect, render_template, request, url_for
 
+from flask_login import current_user, login_required
 from fuca import app, data_utils
 from fuca.forms import (AdminAddNewsForm, AdminDeleteNewsForm,
                         AdminUpdateNewsForm)
@@ -9,13 +10,21 @@ from fuca.models import News
 
 
 @app.route("/admin/news", methods=['GET', 'POST'])
+@login_required
 def admin_news():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     return render_template('admin/news/layout.html',
                            title='Admin News')
 
 
 @app.route("/admin/news/add", methods=['GET', 'POST'])
+@login_required
 def admin_news_add():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminAddNewsForm()
     form.populate_dd()
 
@@ -31,7 +40,11 @@ def admin_news_add():
 
 
 @app.route("/admin/news/update", methods=['GET', 'POST'])
+@login_required
 def admin_news_update():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminUpdateNewsForm()
     form.populate_dd()
     
@@ -47,7 +60,11 @@ def admin_news_update():
 
 
 @app.route("/admin/news/delete", methods=['GET', 'POST'])
+@login_required
 def admin_news_delete():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminDeleteNewsForm()
     form.populate_dd()
 

@@ -3,6 +3,7 @@ from datetime import datetime
 
 from flask import flash, redirect, render_template, request, url_for
 
+from flask_login import current_user, login_required
 from fuca import app, data_utils
 from fuca.forms import (AdminAddTeamForm, AdminDeleteTeamForm,
                         AdminUpdateTeamForm)
@@ -10,12 +11,20 @@ from fuca.models import Team
 
 
 @app.route("/admin/teams", methods=['GET', 'POST'])
+@login_required
 def admin_teams():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     return render_template('admin/teams/layout.html', title='Admin Teams')
 
 
 @app.route("/admin/teams/add", methods=['GET', 'POST'])
+@login_required
 def admin_teams_add():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminAddTeamForm()
     form.populate_dd()
     
@@ -28,7 +37,11 @@ def admin_teams_add():
 
 
 @app.route("/admin/teams/update", methods=['GET', 'POST'])
+@login_required
 def admin_teams_update():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminUpdateTeamForm()
     form.populate_dd()
 
@@ -42,7 +55,11 @@ def admin_teams_update():
 
 
 @app.route("/admin/teams/delete", methods=['GET', 'POST'])
+@login_required
 def admin_teams_delete():
+    if not current_user.is_admin:
+        return "Access forbiden"
+
     form = AdminDeleteTeamForm()
     form.populate_dd()
 
