@@ -1,11 +1,11 @@
 from datetime import datetime
 
-from flask import flash, redirect, render_template, url_for
+from flask import flash, redirect, render_template, url_for, request
 
 from fuca import app, dummydata, data_utils
 from fuca.forms import LoginForm, RegisterForm
 from fuca.models import Match, News, Player, Statistics, Team
-from flask_login import login_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route("/")
@@ -70,6 +70,9 @@ def teams():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
     form = LoginForm()
     if form.validate_on_submit():
         valid, player = data_utils.exists_player(email=form.email.data,
@@ -77,8 +80,8 @@ def login():
             
         if valid:
             login_user(player, remember=form.remember_me.data)
-            flash('{} logged in!'.format(player.name), 'success')
-            return redirect(url_for('home'))
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login unsuccessful! Please check email and password.', 'danger')
                         
@@ -88,9 +91,25 @@ def login():
 #TODO: Add email verification.
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+
     form = RegisterForm()
     if form.validate_on_submit():
         player = data_utils.register_player(form.email.data, form.password.data)
         flash('Account for {} has been created! You are now able to log in.'.format(player.name), 'success')
         return redirect(url_for('login'))
     return render_template('home/register.html', form=form, title='Register')
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    flash('Successfully logged out!', 'success')
+    return redirect(url_for('home'))
+
+
+@app.route("/account")
+@login_required
+def account():
+    return render_template('home/account.html', title='My Account')
