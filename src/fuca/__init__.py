@@ -60,6 +60,9 @@ def create_app(config_class=Config):
     from fuca.admin.routes import adminhome
     app.register_blueprint(adminhome, url_prefix='/admin')
 
+    from fuca.errors.handlers import errors
+    app.register_blueprint(errors)
+
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
