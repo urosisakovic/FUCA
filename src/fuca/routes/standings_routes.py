@@ -18,7 +18,7 @@ def standings():
 
 @app.route("/bestplayers")
 def bestplayers():
-    players_db = Player.query.all()
+    players_db = Player.query.filter_by(is_admin=False).all()
     players = [player.jinja_dict() for player in players_db]
     players = sorted(players, key=lambda player: player['points'])[::-1]
     for player in players:
@@ -32,7 +32,7 @@ def bestplayers():
 
 @app.route("/bestscorers")
 def bestscorers():
-    players_db = Player.query.all()
+    players_db = Player.query.filter_by(is_admin=False).all()
     players = [player.jinja_dict() for player in players_db]
     players = sorted(players, key=lambda player: player['goals'])[::-1]
     for player in players:

@@ -11,10 +11,9 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/")
 @app.route("/home")
 def home():
-    news_db = News.query.all()
-    news_list = [news.jinja_dict() for news in news_db]
-    news_list = sorted(news_list, key=lambda news: news['raw_date'])[::-1]
-    return render_template('home/home.html', newslist=news_list)
+    page = request.args.get('page', 1, type=int)
+    news_db = News.query.order_by(News.date.desc()).paginate(page=page, per_page=5)
+    return render_template('home/home.html', newslist=news_db)
 
 
 @app.route("/results")
