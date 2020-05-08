@@ -196,6 +196,7 @@ def register_player(email, password):
     player.password = bcrypt.generate_password_hash(password).decode('utf-8')
     player.registered = True
     db.session.commit()
+    return player
 
 
 def is_registered_player(email):

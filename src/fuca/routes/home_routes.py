@@ -77,6 +77,7 @@ def login():
             
         if valid:
             login_user(player, remember=form.remember_me.data)
+            flash('{} logged in!'.format(player.name), 'success')
             return redirect(url_for('home'))
         else:
             flash('Login unsuccessful! Please check email and password.', 'danger')
@@ -89,7 +90,7 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        data_utils.register_player(form.email.data, form.password.data)
-        flash('Your account has been created! You are now able to log in.', 'success')
+        player = data_utils.register_player(form.email.data, form.password.data)
+        flash('Account for {} has been created! You are now able to log in.'.format(player.name), 'success')
         return redirect(url_for('login'))
     return render_template('home/register.html', form=form, title='Register')
