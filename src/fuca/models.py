@@ -1,5 +1,11 @@
 from datetime import datetime
-from fuca import db
+from fuca import db, login_manager
+from flask_login import UserMixin
+
+
+@login_manager.user_loader
+def load_user(player_id):
+    return Player.query.get(int(player_id))
 
 
 class News(db.Model):
@@ -20,7 +26,7 @@ class News(db.Model):
                 'id'            : self.id}
 
 
-class Player(db.Model):
+class Player(db.Model, UserMixin):
     __tablename__ = 'player'
     id          = db.Column(db.Integer,     primary_key=True)
     name        = db.Column(db.String(100), nullable=False)
@@ -29,6 +35,7 @@ class Player(db.Model):
     image       = db.Column(db.String(20),  nullable=False, default='default.jpg')
     email       = db.Column(db.String(120), unique=True,    nullable=False)
     password    = db.Column(db.String(60))
+    registered  = db.Column(db.Boolean, default=False)
     # foreign keys
     team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships

@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import SelectField, StringField, SubmitField
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired, Email, ValidationError
 
+from fuca import data_utils
 from fuca.models import Player, Team
 
 
@@ -19,6 +20,11 @@ class AdminAddPlayerForm(FlaskForm):
     team_dd = SelectField('Team', choices=[])
     
     submit = SubmitField('Submit Player')
+
+    def validate_email(self, email):
+        if data_utils.exists_player_with_email(email):
+            raise ValidationError('Player with that email already exists!')
+
 
     def populate_dd(self):
         self.birth_day.choices = [(val, val) for val in range(1, 32)]
@@ -46,6 +52,10 @@ class AdminUpdatePlayerForm(FlaskForm):
     team_dd = SelectField('Team', choices=[])
     
     submit = SubmitField('Submit Player')
+
+    def validate_email(self, email):
+        if data_utils.exists_player_with_email(email):
+            raise ValidationError('Player with that email already exists!')
 
     def populate_dd(self):
         self.birth_day.choices = [(val, val) for val in range(1, 32)]

@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from fuca import db, app
+from fuca import db, app, bcrypt
 from fuca.models import *
 
 def add_news(title, content):
@@ -189,3 +189,30 @@ def update_statistics(player_id,
 def delete_statistics(match_id, player_id):
     Statistics.query.filter_by(match_id=match_id).filter_by(player_id=player_id).delete()
     db.session.commit()
+
+
+def register_player(email, password):
+    player = Player.query.filter_by(email=email).first()
+    player.password = bcrypt.generate_password_hash(password).decode('utf-8')
+    player.registered = True
+    db.session.commit()
+
+
+def is_registered_player(email):
+    player = Player.query.filter_by(email=email).first()
+    return player.registered
+
+
+def exists_player_with_email(e):
+    player = Player.query.filter_by(email=e).first()
+    if player:
+        return True
+    else:
+        return False
+
+
+def exists_player(email, password):
+    player = Player.query.filter_by(email=email).first()
+    if player and bcrypt.check_password_hash(player.password, password):
+        return True, player
+    return False, player

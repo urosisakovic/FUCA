@@ -2,9 +2,10 @@ from datetime import datetime
 
 from flask import flash, redirect, render_template, url_for
 
-from fuca import app, dummydata
+from fuca import app, dummydata, data_utils
 from fuca.forms import LoginForm, RegisterForm
 from fuca.models import Match, News, Player, Statistics, Team
+from flask_login import login_user
 
 
 @app.route("/")
@@ -71,15 +72,24 @@ def teams():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'uros@uros.rs' and form.password.data == 'uros':
-            flash('Uros has been logged in!', 'success')
+        valid, player = data_utils.exists_player(email=form.email.data,
+                                                 password=form.password.data)
+            
+        if valid:
+            login_user(player, remember=form.remember_me.data)
             return redirect(url_for('home'))
         else:
-            flash('Not Uros. Please be Uros!', 'danger')
+            flash('Login unsuccessful! Please check email and password.', 'danger')
+                        
     return render_template('home/login.html', form=form, title='Login')
 
 
+#TODO: Add email verification.
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
-    return render_template('home/register.html', form=form, title='Login')
+    if form.validate_on_submit():
+        data_utils.register_player(form.email.data, form.password.data)
+        flash('Your account has been created! You are now able to log in.', 'success')
+        return redirect(url_for('login'))
+    return render_template('home/register.html', form=form, title='Register')
