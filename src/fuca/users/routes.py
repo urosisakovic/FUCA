@@ -4,7 +4,7 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required, login_user, logout_user
 from fuca import data_utils, dummydata
-from fuca.users.forms import LoginForm, RegisterForm
+from fuca.users.forms import LoginForm, RegisterForm, ChangePasswordForm
 from fuca.models import Match, News, Player, Statistics, Team
 
 users = Blueprint('users', __name__)
@@ -26,7 +26,7 @@ def login():
         else:
             flash('Login unsuccessful! Please check email and password.', 'danger')
                         
-    return render_template('home/login.html', form=form, title='Login')
+    return render_template('users/login.html', form=form, title='Login')
 
 
 @users.route("/register", methods=['GET', 'POST'])
@@ -39,7 +39,7 @@ def register():
         player = data_utils.register_player(form.email.data, form.password.data)
         flash('Account for {} has been created! You are now able to log in.'.format(player.name), 'success')
         return redirect(url_for('users.login'))
-    return render_template('home/register.html', form=form, title='Register')
+    return render_template('users/register.html', form=form, title='Register')
 
 
 @users.route("/logout")
@@ -52,4 +52,8 @@ def logout():
 @users.route("/account")
 @login_required
 def account():
-    return render_template('home/account.html', title='My Account')
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        pass
+
+    return render_template('users/account.html', form=form, title='My Account')
