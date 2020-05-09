@@ -95,7 +95,7 @@ def add_match(date_time, host_team_id, guest_team_id):
 
 
 def update_match(id, date_time, host_team_id, guest_team_id):
-    update_match = Match.query.filter_by(id=id).first()
+    update_match = Match.query.get(id)
     update_match.host_team_id = host_team_id
     update_match.guest_team_id = guest_team_id
     update_match.date_time = date_time
@@ -103,7 +103,7 @@ def update_match(id, date_time, host_team_id, guest_team_id):
 
 
 def delete_match(id):
-    Match.query.filter_by(id=id).delete()
+    Match.query.get(id).delete()
     db.session.commit()
 
 
@@ -116,7 +116,7 @@ def add_result(id,
                guest_team_yellow, 
                guest_team_red, 
                guest_team_shots):
-    match = Match.query.filter_by(id=id).first()
+    match = Match.query.get(id)
     
     match.host_team_goals = host_team_goals
     match.host_team_red = host_team_red

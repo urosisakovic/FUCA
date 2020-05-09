@@ -13,16 +13,16 @@
             <tr>
                 <td>{{ result.date }}</td>
                 <td style="white-space:nowrap">
-                    <a href="{{ url_for('teams.team', id=result.team1_id)}}">
-                        <img src="{{ result.team1_logo }}" width="100">
-                        {{ result.team1_name }}
+                    <a href="{{ url_for('teams.team', id=result.host_team_id)}}">
+                        <img src="{{ result.host_team_logo }}" width="100">
+                        {{ result.host_team.name }}
                     </a>
                 </td>
 
                 <td style="white-space:nowrap">
-                    <a href="{{ url_for('teams.team', id=result.team2_id)}}">
-                        <img src="{{ result.team2_logo }}" width="100">
-                        {{ result.team2_name }}
+                    <a href="{{ url_for('teams.team', id=result.guest_team_id)}}">
+                        <img src="{{ result.guest_team_logo }}" width="100">
+                        {{ result.guest_team.name }}
                     </a>
                 </td>
                 <td>{{ result.team1_goals }}: {{ result.team2_goals }}</td>

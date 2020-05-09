@@ -17,9 +17,8 @@ class AdminAddStatisticsForm(FlaskForm):
     submit = SubmitField('Add Statistics')
 
     def populate_dd(self):
-        matches_db = Match.query.all()
-        matches = [match.jinja_dict() for match in matches_db]
-        match_choices = [(match['id'], match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
+        matches = Match.query.all()
+        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
         self.match_dd.choices = match_choices
 
         players = Player.query.filter_by(is_admin=False).all()
@@ -38,9 +37,8 @@ class AdminUpdateStatisticsForm(FlaskForm):
     submit = SubmitField('Update Statistics')
 
     def populate_dd(self):
-        matches_db = Match.query.all()
-        matches = [match.jinja_dict() for match in matches_db]
-        match_choices = [(match['id'], match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
+        matches = Match.query.all()
+        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
         self.match_dd.choices = match_choices
 
         players = Player.query.filter_by(is_admin=False).all()
@@ -54,9 +52,8 @@ class AdminDeleteStatisticsForm(FlaskForm):
     submit = SubmitField('Delete Statistics')
 
     def populate_dd(self):
-        matches_db = Match.query.all()
-        matches = [match.jinja_dict() for match in matches_db]
-        match_choices = [(match['id'], match['team1_name'] + ' - ' + match['team2_name']) for match in matches]
+        matches = Match.query.all()
+        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
         self.match_dd.choices = match_choices
 
         players = Player.query.filter_by(is_admin=False).all()

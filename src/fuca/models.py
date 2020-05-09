@@ -95,18 +95,6 @@ class Match(db.Model):
 
     def __repr__(self):
         return f"Match(host team id: {self.host_team_id}, guest team id: {self.guest_team_id})"
-
-    def jinja_dict(self):
-        return {'date'          : self.date_time.strftime('%B %d, %Y; %H:%M'),
-                'team1_name'    : self.host_team.name,
-                'team1_goals'   : self.host_team_goals,
-                'team1_id'      : self.host_team_id,
-                'team2_name'    : self.guest_team.name,
-                'team2_goals'   : self.guest_team_goals,
-                'team2_id'      : self.guest_team_id,
-                'id'            : self.id,
-                'host_team'     : self.host_team,
-                'guest_team'    : self.guest_team}
                 
 
 class Team(db.Model):

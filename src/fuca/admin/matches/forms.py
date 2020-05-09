@@ -37,9 +37,8 @@ class AdminUpdateMatchForm(FlaskForm):
     submit = SubmitField('Update Match')
 
     def populate_dd(self):
-        matches_db = Match.query.all()
-        matches = [match.jinja_dict() for match in matches_db]
-        match_choices = [(match['id'], match['team1_name'] + ' vs ' + match['team2_name']) for match in matches]
+        matches = Match.query.all()
+        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
         self.match_dd.choices = match_choices
 
         teams = Team.query.all()
@@ -57,7 +56,6 @@ class AdminDeleteMatchForm(FlaskForm):
     submit = SubmitField('Delete Match')
 
     def populate_dd(self):
-        matches_db = Match.query.all()
-        matches = [match.jinja_dict() for match in matches_db]
-        match_choices = [(match['id'], match['team1_name'] + ' vs ' + match['team2_name']) for match in matches]
+        matches = Match.query.all()
+        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
         self.match_dd.choices = match_choices
