@@ -48,6 +48,14 @@ def admin_news_update():
 
     form = AdminUpdateNewsForm()
     form.populate_dd()
+
+    page = request.args.get('id', type=int)
+    if page:
+        news = News.query.get(page)
+        form.news_dd.default = page
+        form.process()
+        form.title.data = news.title
+        form.content.data = news.content
     
     if request.method == 'POST':
         data_utils.update_news(id=form.news_dd.data, 

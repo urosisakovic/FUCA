@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, StringField, SubmitField
+from wtforms import SelectField, StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 
 from fuca.models import News
@@ -7,7 +7,7 @@ from fuca.models import News
 
 class AdminAddNewsForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    content = StringField('Content', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Add News')
 
     def populate_dd(self):
@@ -15,9 +15,9 @@ class AdminAddNewsForm(FlaskForm):
 
 
 class AdminUpdateNewsForm(FlaskForm):
-    news_dd = SelectField('News', choices=[])
+    news_dd = SelectField('News', choices=[], id='select_news')
     title = StringField('Title', validators=[DataRequired()])
-    content = StringField('Content', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Update News')
 
     def populate_dd(self):

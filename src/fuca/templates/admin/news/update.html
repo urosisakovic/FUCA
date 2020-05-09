@@ -47,4 +47,24 @@
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
+    </div>
+
+    <script charset="utf-8" type="text/javascript">
+        $(function() {
+            var news = $('#select_news');
+        
+            // function to call XHR and update county dropdown
+            function initFields() {
+                var id = news.val();
+                document.location.href = "{{url_for('news.admin_news_update')}}" + "?id=" + id;
+            }
+        
+            // event listener to state dropdown change
+            news.on('change', function() {
+                alert(news.val())
+                initFields();
+            });
+        
+        });    
+    </script>
 {% endblock admin_news_content %}
