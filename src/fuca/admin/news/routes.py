@@ -51,11 +51,17 @@ def admin_news_update():
 
     page = request.args.get('id', type=int)
     if page:
-        news = News.query.get(page)
-        form.news_dd.default = page
-        form.process()
-        form.title.data = news.title
-        form.content.data = news.content
+        if page >= 0:
+            news = News.query.get(page)
+            form.news_dd.default = page
+            form.process()
+            form.title.data = news.title
+            form.content.data = news.content
+        else:
+            form.news_dd.default = 0
+            form.process()
+            form.title.data = ''
+            form.content.data = ''
     
     if request.method == 'POST':
         data_utils.update_news(id=form.news_dd.data, 
