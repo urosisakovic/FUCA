@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, abort
 
 from flask_login import current_user, login_required
 from fuca import data_utils
@@ -15,7 +15,7 @@ matches = Blueprint('matches', __name__)
 @login_required
 def admin_matches():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     return render_template('admin/matches/layout.html', title='Admin Matches')
 
@@ -24,7 +24,7 @@ def admin_matches():
 @login_required
 def admin_matches_add():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminAddMatchForm()
     form.populate_dd()
@@ -45,7 +45,7 @@ def admin_matches_add():
 @login_required
 def admin_matches_update():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminUpdateMatchForm()
     form.populate_dd()
@@ -67,7 +67,7 @@ def admin_matches_update():
 @login_required
 def admin_matches_delete():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminDeleteMatchForm()
     form.populate_dd()

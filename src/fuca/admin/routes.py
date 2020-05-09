@@ -9,7 +9,7 @@ adminhome = Blueprint('adminhome', __name__)
 @login_required
 def admin():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     return render_template('admin/layout.html', title='Admin')
         

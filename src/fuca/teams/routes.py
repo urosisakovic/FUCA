@@ -9,17 +9,14 @@ teams = Blueprint('teams', __name__)
 
 @teams.route("/team/<int:id>")
 def team(id):
-    team = Team.query.get(id)
-    if not team:
-        return "404"
-    image_file = url_for('static', filename='images/teams/{}'.format(team.logo_image))
-    return render_template('team/team.html', team=team, id=id, title=team.name, image_file=image_file)
+    team = Team.query.get_or_404(id)
+    team.image = url_for('static', filename='images/teams/{}'.format(team.logo_image))
+    return render_template('team/team.html', team=team, id=id, title=team.name)
 
 
-#TODO: Add team name in title.
-#TODO: Adress invalid id.
 @teams.route("/results/<int:id>")
 def teamresults(id):
+    team = Team.query.get_or_404(id)
     results = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
     for result in results:
@@ -28,10 +25,9 @@ def teamresults(id):
     return render_template('team/team-results.html', results=results, id=id, title='Team Results')
 
 
-#TODO: Add team name in title.
-#TODO: Adress invalid id.
 @teams.route("/schedule/<int:id>")
 def teamschedule(id):
+    team = Team.query.get_or_404(id)
     schedules = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
     for schedule in schedules:
@@ -40,10 +36,9 @@ def teamschedule(id):
     return render_template('team/team-schedule.html', schedule=schedules, id=id, title='Team Schedule')
 
 
-#TODO: Add team name in title.
-#TODO: Address invalid id.
 @teams.route("/squad/<int:id>")
 def teamsquad(id):
+    team = Team.query.get_or_404(id)
     players = Player.query.filter_by(team_id=id).all()
     for player in players:
         player.image = url_for('static', filename='images/players/{}'.format(player.image))

@@ -18,6 +18,9 @@ def admin_results():
 @results.route("adm/add", methods=['GET', 'POST'])
 @login_required
 def admin_results_add():
+    if not current_user.is_admin:
+        abort(403)
+
     form = AdminAddResultForm()
     form.populate_dd()
 
@@ -39,6 +42,9 @@ def admin_results_add():
 @results.route("adm/update", methods=['GET', 'POST'])
 @login_required
 def admin_results_update():
+    if not current_user.is_admin:
+        abort(403)
+
     form = AdminUpdateResultForm()
     form.populate_dd()
 
@@ -60,6 +66,9 @@ def admin_results_update():
 @results.route("adm/delete", methods=['GET', 'POST'])
 @login_required
 def admin_results_delete():
+    if not current_user.is_admin:
+        abort(403)
+
     form = AdminDeleteResultForm()
     form.populate_dd()
 

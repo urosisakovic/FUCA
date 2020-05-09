@@ -13,7 +13,7 @@ statistics = Blueprint('statistics', __name__)
 @login_required
 def admin_statistics():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     return render_template('admin/statistics/layout.html', title='Admin Statistics')
 
@@ -22,7 +22,7 @@ def admin_statistics():
 @login_required
 def admin_statistics_add():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminAddStatisticsForm()
     form.populate_dd()
@@ -38,7 +38,7 @@ def admin_statistics_add():
 @login_required
 def admin_statistics_update():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminUpdateStatisticsForm()
     form.populate_dd()
@@ -59,8 +59,8 @@ def admin_statistics_update():
 @login_required
 def admin_statistics_delete():
     if not current_user.is_admin:
-        return "Access forbiden"
-
+        abort(403)
+        
     form = AdminDeleteStatisticsForm()
     form.populate_dd()
     

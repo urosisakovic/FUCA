@@ -15,7 +15,7 @@ players = Blueprint('players', __name__)
 @login_required
 def admin_players():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     return render_template('admin/players/layout.html', title='Admin Players')
 
@@ -24,7 +24,7 @@ def admin_players():
 @login_required
 def admin_players_add():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminAddPlayerForm()
     form.populate_dd()
@@ -48,7 +48,7 @@ def admin_players_add():
 @login_required
 def admin_players_update():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminUpdatePlayerForm()
     form.populate_dd()
@@ -73,7 +73,7 @@ def admin_players_update():
 @login_required
 def admin_players_delete():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminDeletePlayerForm()
     form.populate_dd()

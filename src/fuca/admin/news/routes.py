@@ -14,7 +14,7 @@ news = Blueprint('news', __name__)
 @login_required
 def admin_news():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     return render_template('admin/news/layout.html',
                            title='Admin News')
@@ -24,7 +24,7 @@ def admin_news():
 @login_required
 def admin_news_add():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminAddNewsForm()
     form.populate_dd()
@@ -44,7 +44,7 @@ def admin_news_add():
 @login_required
 def admin_news_update():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminUpdateNewsForm()
     form.populate_dd()
@@ -64,7 +64,7 @@ def admin_news_update():
 @login_required
 def admin_news_delete():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminDeleteNewsForm()
     form.populate_dd()

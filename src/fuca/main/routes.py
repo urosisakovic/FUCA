@@ -37,9 +37,9 @@ def schedule():
 
 @main.route("/player/<int:id>")
 def player(id):
-    player = Player.query.get(id)
-    if not player:
-        return "404"
+    player = Player.query.get_or_404(id)
+    if player.is_admin:
+        return render_template('errors/404.html'), 404
     image_file = url_for('static', filename='images/players/{}'.format(player.image))
     return render_template('home/player.html', player=player, image_file=image_file, title=player.name)
 

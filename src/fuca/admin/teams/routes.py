@@ -16,7 +16,7 @@ adminteams = Blueprint('adminteams', __name__)
 @login_required
 def admin_teams():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     return render_template('admin/teams/layout.html', title='Admin Teams')
 
@@ -25,7 +25,7 @@ def admin_teams():
 @login_required
 def admin_teams_add():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminAddTeamForm()
     form.populate_dd()
@@ -42,7 +42,7 @@ def admin_teams_add():
 @login_required
 def admin_teams_update():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminUpdateTeamForm()
     form.populate_dd()
@@ -60,7 +60,7 @@ def admin_teams_update():
 @login_required
 def admin_teams_delete():
     if not current_user.is_admin:
-        return "Access forbiden"
+        abort(403)
 
     form = AdminDeleteTeamForm()
     form.populate_dd()
