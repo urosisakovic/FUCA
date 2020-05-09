@@ -1,11 +1,9 @@
-from datetime import datetime
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required, login_user, logout_user
-from fuca import data_utils, dummydata
+from fuca import data_utils
 from fuca.users.forms import LoginForm, RegisterForm, ChangePasswordForm
-from fuca.models import Match, News, Player, Statistics, Team
 
 users = Blueprint('users', __name__)
 

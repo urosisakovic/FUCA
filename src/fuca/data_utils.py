@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 from fuca import db, bcrypt
 from fuca.models import *
 from flask import current_app

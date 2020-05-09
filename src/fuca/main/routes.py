@@ -1,11 +1,8 @@
 from datetime import datetime
 
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, render_template, request, url_for
 
-from flask_login import current_user, login_required, login_user, logout_user
-from fuca import data_utils, dummydata
-from fuca.users.forms import LoginForm, RegisterForm
-from fuca.models import Match, News, Player, Statistics, Team
+from fuca.models import Match, News, Player, Team
 
 main = Blueprint('main', __name__)
 
@@ -42,15 +39,6 @@ def player(id):
         return render_template('errors/404.html'), 404
     image_file = url_for('static', filename='images/players/{}'.format(player.image))
     return render_template('home/player.html', player=player, image_file=image_file, title=player.name)
-
-
-@main.route("/stats")
-def stats():
-    return render_template('home/stats.html',
-                           title='Stats',
-                           stats=dummydata.stats,
-                           best_player=dummydata.stats_best_player,
-                           scorers=dummydata.stats_scorers)
 
 
 @main.route("/teams")

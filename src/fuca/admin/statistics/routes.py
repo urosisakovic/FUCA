@@ -4,7 +4,7 @@ from flask_login import current_user, login_required
 from fuca import data_utils
 from fuca.admin.statistics.forms import (AdminAddStatisticsForm, AdminDeleteStatisticsForm,
                                          AdminUpdateStatisticsForm)
-from fuca.models import Statistics, Match, Player
+from fuca.models import Match, Player
 from flask import Blueprint
 
 statistics = Blueprint('statistics', __name__)

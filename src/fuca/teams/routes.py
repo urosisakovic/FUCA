@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from flask import Blueprint, flash, redirect, render_template, url_for
+from flask import Blueprint, render_template, url_for
 
-from fuca import dummydata
-from fuca.models import Match, News, Player, Statistics, Team
+from fuca.models import Match, Player, Team
 
 teams = Blueprint('teams', __name__)
 
@@ -16,7 +15,7 @@ def team(id):
 
 @teams.route("/results/<int:id>")
 def teamresults(id):
-    team = Team.query.get_or_404(id)
+    Team.query.get_or_404(id)
     results = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
     for result in results:
@@ -27,7 +26,7 @@ def teamresults(id):
 
 @teams.route("/schedule/<int:id>")
 def teamschedule(id):
-    team = Team.query.get_or_404(id)
+    Team.query.get_or_404(id)
     schedules = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
     for schedule in schedules:
@@ -38,7 +37,7 @@ def teamschedule(id):
 
 @teams.route("/squad/<int:id>")
 def teamsquad(id):
-    team = Team.query.get_or_404(id)
+    Team.query.get_or_404(id)
     players = Player.query.filter_by(team_id=id).all()
     for player in players:
         player.image = url_for('static', filename='images/players/{}'.format(player.image))

@@ -6,7 +6,7 @@ from flask_login import current_user, login_required
 from fuca import data_utils
 from fuca.admin.matches.forms import (AdminAddMatchForm, AdminDeleteMatchForm,
                                       AdminUpdateMatchForm)
-from fuca.models import Match, Team
+from fuca.models import Match
 from flask import Blueprint
 
 matches = Blueprint('matches', __name__)

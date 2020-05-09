@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired
-from fuca.models import Team, Match
+from fuca.models import Match
 
 
 class AdminAddResultForm(FlaskForm):

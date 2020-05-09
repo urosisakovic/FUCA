@@ -1,9 +1,7 @@
-from datetime import datetime
 
-from flask import Blueprint, flash, redirect, render_template, url_for
+from flask import Blueprint, render_template, url_for
 
-from fuca import dummydata
-from fuca.models import Match, News, Player, Statistics, Team
+from fuca.models import Player, Team
 
 scores = Blueprint('standings', __name__)
 
