@@ -4,7 +4,7 @@ from flask_login import current_user, login_required
 from fuca import data_utils
 from fuca.admin.statistics.forms import (AdminAddStatisticsForm, AdminDeleteStatisticsForm,
                                          AdminUpdateStatisticsForm)
-from fuca.models import Statistics
+from fuca.models import Statistics, Match, Player
 from flask import Blueprint
 
 statistics = Blueprint('statistics', __name__)
@@ -42,6 +42,20 @@ def admin_statistics_update():
 
     form = AdminUpdateStatisticsForm()
     form.populate_dd()
+
+    match_id = request.args.get('id', type=int)
+    if match_id:
+        if match_id >= 0:
+            match = Match.query.get(match_id)
+            form.match_dd.default = match_id
+            players = Player.query.filter_by(team_id=match.host_team_id).all() + \
+                Player.query.filter_by(team_id=match.guest_team_id).all()
+            form.player_dd.choices = [(player.team_id, player.name) for player in players]
+            form.process()
+        else:
+            form.match_dd.default = 0
+            form.player_dd.default = 0
+            form.process()
     
     if request.method == 'POST':
         data_utils.update_statistics(match_id=form.match_dd.data,

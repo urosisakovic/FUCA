@@ -27,7 +27,7 @@ class AdminAddStatisticsForm(FlaskForm):
 
 
 class AdminUpdateStatisticsForm(FlaskForm):
-    match_dd = SelectField('Match', choices=[])
+    match_dd = SelectField('Match', choices=[], id='select_match')
     player_dd = SelectField('Player', choices=[])
 
     goals = StringField('Goals', validators=[DataRequired()])
@@ -38,12 +38,8 @@ class AdminUpdateStatisticsForm(FlaskForm):
 
     def populate_dd(self):
         matches = Match.query.all()
-        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
+        match_choices = [(-1, '')] + [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
         self.match_dd.choices = match_choices
-
-        players = Player.query.filter_by(is_admin=False).all()
-        player_choices = [(player.team_id, player.name) for player in players]
-        self.player_dd.choices = player_choices
 
 
 class AdminDeleteStatisticsForm(FlaskForm):
