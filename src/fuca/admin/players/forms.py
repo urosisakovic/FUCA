@@ -37,7 +37,7 @@ class AdminAddPlayerForm(FlaskForm):
 
 
 class AdminUpdatePlayerForm(FlaskForm):
-    player_dd = SelectField('Player', choices=[])
+    player_dd = SelectField('Player', choices=[], id='select_players')
 
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Number', validators=[DataRequired()])
@@ -62,11 +62,11 @@ class AdminUpdatePlayerForm(FlaskForm):
         self.birth_year.choices = [(val, val) for val in range(2020, 1940, -1)]
 
         teams = Team.query.all()
-        team_choices = [(team.id, team.name) for team in teams]
+        team_choices = [(-1, '')] + [(team.id, team.name) for team in teams]
         self.team_dd.choices = team_choices
 
         players = Player.query.filter_by(is_admin=False).all()
-        player_choices = [(player.team_id, player.name) for player in players]
+        player_choices = [(-1, '')] + [(player.id, player.name) for player in players]
         self.player_dd.choices = player_choices
 
 

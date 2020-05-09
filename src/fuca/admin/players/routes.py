@@ -53,6 +53,32 @@ def admin_players_update():
     form = AdminUpdatePlayerForm()
     form.populate_dd()
 
+    player_id = request.args.get('id', type=int)
+    if player_id:
+        if player_id >= 0:
+            player = Player.query.get(player_id)
+            form.player_dd.default = player_id
+            form.birth_day.default = int(player.birthdate.day)
+            form.birth_month.default = int(player.birthdate.month)
+            form.birth_year.default = int(player.birthdate.year)
+            form.team_dd.default = player.team_id
+            form.process()
+            form.name.data = player.name
+            form.number.data = player.number
+            form.email.data = player.email        
+            
+        else:
+            form.player_dd.default = 0
+            form.birth_day.default = 1
+            form.birth_month.default = 1
+            form.birth_year.default = 1
+            form.team_dd.data = 0
+            form.process()
+            form.name.data = ''
+            form.number.data = ''
+            form.email.data = ''
+            
+
     if request.method == 'POST':
         data_utils.update_player(id=form.player_dd.data,
                                  name=form.name.data,

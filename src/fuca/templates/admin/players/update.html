@@ -96,4 +96,18 @@
             </div>
         </form>
     </div>
+
+    <script charset="utf-8" type="text/javascript">
+        $(function() {
+            var players = $('#select_players');
+            // event listener to state dropdown change
+            players.on('change', function() {
+                var id = players.val();
+                if (id == -1)
+                    document.location.href = "{{url_for('players.admin_players_update')}}";
+                else
+                    document.location.href = "{{url_for('players.admin_players_update')}}" + "?id=" + id;
+            });
+        });    
+    </script>
 {% endblock admin_players_content %}
