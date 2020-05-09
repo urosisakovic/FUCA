@@ -49,7 +49,7 @@ def admin_news_update():
     form.populate_dd()
 
     news_id = request.args.get('id', type=int)
-    if news_id:
+    if request.method == 'GET' and news_id:
         if news_id >= 0:
             news = News.query.get(news_id)
             form.news_dd.default = news_id

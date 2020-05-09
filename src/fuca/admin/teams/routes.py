@@ -46,7 +46,7 @@ def admin_teams_update():
     form.populate_dd()
 
     team_id = request.args.get('id', type=int)
-    if team_id:
+    if request.method == 'GET' and team_id:
         if team_id >= 0:
             team = Team.query.get(team_id)
             form.teams_dd.default = team_id
@@ -61,7 +61,7 @@ def admin_teams_update():
         data_utils.update_team(id=form.teams_dd.data,
                                 name=form.name.data,
                                 image=form.image.data)
-        return redirect(url_for('teams.admin_teams_update'))
+        return redirect(url_for('adminteams.admin_teams_update'))
 
     return render_template('admin/teams/update.html', form=form, title='Admin Update Teams')
 

@@ -54,7 +54,7 @@ def admin_players_update():
     form.populate_dd()
 
     player_id = request.args.get('id', type=int)
-    if player_id:
+    if request.method == 'GET' and player_id:
         if player_id >= 0:
             player = Player.query.get(player_id)
             form.player_dd.default = player_id

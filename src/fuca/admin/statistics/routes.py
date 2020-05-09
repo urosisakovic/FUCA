@@ -44,7 +44,7 @@ def admin_statistics_update():
     form.populate_dd()
 
     match_id = request.args.get('id', type=int)
-    if match_id:
+    if request.method == 'GET' and match_id:
         if match_id >= 0:
             match = Match.query.get(match_id)
             form.match_dd.default = match_id

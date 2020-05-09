@@ -51,7 +51,7 @@ def admin_results_update():
     form.populate_dd()
 
     result_id = request.args.get('id', type=int)
-    if result_id:
+    if request.method == 'GET' and result_id:
         if result_id >= 0:
             match = Match.query.get(result_id)
             form.match_dd.default = result_id
@@ -90,7 +90,7 @@ def admin_results_update():
                                  guest_team_yellow=form.guest_team_yellow.data,
                                  guest_team_red=form.guest_team_red.data,
                                  guest_team_shots=form.guest_team_shots.data)
-        return redirect(url_for('results.admin_result_update'))
+        return redirect(url_for('results.admin_results_update'))
 
     return render_template('admin/results/update.html', form=form, title='Admin Update Results')
 
