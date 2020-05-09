@@ -93,16 +93,16 @@
                         <h5 class="text-uppercase text-light">League</h5>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!">Home</a>
+                                <a href="{{ url_for('main.home') }}">Home</a>
                             </li>
                             <li>
-                                <a href="#!">Standings</a>
+                                <a href="{{ url_for('main.results') }}">Results</a>
                             </li>
                             <li>
-                                <a href="#!">Results</a>
+                                <a href="{{ url_for('main.schedule') }}">Schedule</a>
                             </li>
                             <li>
-                                <a href="#!">Schedule</a>
+                                <a href="{{ url_for('main.teams') }}">Teams</a>
                             </li>
                         </ul>
                     </div>
@@ -111,16 +111,13 @@
             
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!">Stats</a>
+                                <a href="{{ url_for('standings.standings') }}">Standings</a>
                             </li>
                             <li>
-                                <a href="#!">Best players</a>
+                                <a href="{{ url_for('standings.bestplayers') }}">Best players</a>
                             </li>
                             <li>
-                                <a href="#!">Top scorers</a>
-                            </li>
-                            <li>
-                                <a href="#!">Teams</a>
+                                <a href="{{ url_for('standings.bestscorers') }}">Best scorers</a>
                             </li>
                         </ul>
                     </div>  
