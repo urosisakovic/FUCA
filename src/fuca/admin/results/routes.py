@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, abort
 
 from flask_login import current_user, login_required
 from fuca import data_utils
@@ -12,6 +12,8 @@ results = Blueprint('results', __name__)
 @results.route("/", methods=['GET', 'POST'])
 @login_required
 def admin_results():
+    if not current_user.is_admin:
+        abort(403)
     return render_template('admin/results/layout.html', title='Admin Results')
 
 
@@ -51,14 +53,6 @@ def admin_results_update():
     result_id = request.args.get('id', type=int)
     if result_id:
         if result_id >= 0:
-            print('--------------------------------------------------------------------------------')
-            print('--------------------------------------------------------------------------------')
-            print('--------------------------------------------------------------------------------')
-            print(result_id)
-            print('--------------------------------------------------------------------------------')
-            print('--------------------------------------------------------------------------------')
-            print('--------------------------------------------------------------------------------')
-
             match = Match.query.get(result_id)
             form.match_dd.default = result_id
             form.process()
