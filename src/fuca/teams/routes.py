@@ -49,8 +49,7 @@ def teamschedule(id):
 #TODO: Address invalid id.
 @teams.route("/squad/<int:id>")
 def teamsquad(id):
-    players_db = Player.query.filter(Player.team_id == id).all()
-    players = [player.jinja_dict() for player in players_db]
+    players = Player.query.filter_by(team_id=id).all()
     for player in players:
-        player['image'] = url_for('static', filename='images/players/{}'.format(player['image']))
+        player.image = url_for('static', filename='images/players/{}'.format(player.image))
     return render_template('team/team-squad.html', players=players, id=id, title='Team Squad')

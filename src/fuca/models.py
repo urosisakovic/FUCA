@@ -18,13 +18,6 @@ class News(db.Model):
     def __repr__(self):
         return f"News('{self.title}', '{self.date}')"
 
-    def jinja_dict(self):
-        return {'title'         : self.title,
-                'content'       : self.content,
-                'date'          : self.date.strftime('%B %d, %Y'),
-                'raw_date'      : self.date,
-                'id'            : self.id}
-
 
 class Player(db.Model, UserMixin):
     __tablename__ = 'player'
@@ -42,49 +35,37 @@ class Player(db.Model, UserMixin):
     # relationships
     statistics  = db.relationship('Statistics', backref='player', lazy=True) 
 
+    @property
     def goals(self):
         goals = 0
         for stat in self.statistics:
             goals += stat.goals
         return goals
 
+    @property
     def assists(self):
         assists = 0
         for stat in self.statistics:
             assists += stat.assists
         return assists
 
+    @property
     def red(self):
         red = 0
         for stat in self.statistics:
             red += stat.red
         return red
 
+    @property
     def yellow(self):
         yellow = 0
         for stat in self.statistics:
             yellow += stat.yellow
         return yellow
 
-    # TODO: Substitute points equation.
+    @property
     def points(self):
-        return self.goals() + self.assists() - self.yellow() - 2 * self.red()
-
-    # TODO: Create properties instead of methods for goals, assists...
-    def jinja_dict(self):
-        return {'name'          : self.name,
-                'birthdate'     : self.birthdate,
-                'image'         : self.image,
-                'email'         : self.email,
-                'team'          : self.team,
-                'number'        : self.number,
-                'goals'         : self.goals(),
-                'assists'       : self.assists(),
-                'red'           : self.red(),
-                'yellow'        : self.yellow(),
-                'points'        : self.points(),
-                'id'            : self.id,
-                'team_id'       : self.team_id}
+        return self.goals + self.assists - self.yellow - 2 * self.red
 
     def __repr__(self):
         return f"Player('{self.name}', '{self.email}', '{self.image}')"

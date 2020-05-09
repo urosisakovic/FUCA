@@ -67,9 +67,8 @@ class AdminUpdatePlayerForm(FlaskForm):
         team_choices = [(team['id'], team['name']) for team in teams]
         self.team_dd.choices = team_choices
 
-        players_db = Player.query.all()
-        players = [player.jinja_dict() for player in players_db]
-        player_choices = [(player['team_id'], player['name']) for player in players]
+        players = Player.query.filter_by(is_admin=False).all()
+        player_choices = [(player.team_id, player.name) for player in players]
         self.player_dd.choices = player_choices
 
 
@@ -78,7 +77,6 @@ class AdminDeletePlayerForm(FlaskForm):
     submit = SubmitField('Delete Player')
 
     def populate_dd(self):
-        players_db = Player.query.all()
-        players = [player.jinja_dict() for player in players_db]
-        player_choices = [(player['id'], player['name']) for player in players]
+        players = Player.query.filter_by(is_admin=False).all()
+        player_choices = [(player.team_id, player.name) for player in players]
         self.player_dd.choices = player_choices

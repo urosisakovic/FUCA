@@ -12,14 +12,14 @@ def add_news(title, content):
 
 
 def update_news(id, new_title, new_content):
-    update_news = News.query.filter_by(id=id).first()
+    update_news = News.query.get(id)
     update_news.title = new_title
     update_news.content = new_content
     db.session.commit()
 
 
 def delete_news(id):
-    News.query.filter_by(id=id).delete()
+    News.query.get(id).delete()
     db.session.commit()
 
 
@@ -46,7 +46,7 @@ def add_player(name, number, email, birthdate, team_id, image):
     
 
 def update_player(id, name, number, email, birthdate, team_id, image):
-    update_player = Player.query.filter_by(id=id).first()
+    update_player = Player.query.get(id)
     update_player.name = name
     update_player.number = number
     update_player.email = email
@@ -59,7 +59,7 @@ def update_player(id, name, number, email, birthdate, team_id, image):
 
 
 def delete_player(id):
-    Player.query.filter_by(id=id).delete()
+    Player.query.get(id).delete()
     db.session.commit()
 
 def add_team(name, image):
@@ -205,8 +205,8 @@ def is_registered_player(email):
     return player.registered
 
 
-def exists_player_with_email(e):
-    player = Player.query.filter_by(email=e).first()
+def exists_player_with_email(email):
+    player = Player.query.filter_by(email=email).first()
     if player:
         return True
     else:

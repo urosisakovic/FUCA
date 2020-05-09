@@ -21,10 +21,8 @@ class AdminUpdateNewsForm(FlaskForm):
     submit = SubmitField('Update News')
 
     def populate_dd(self):
-        news_db = News.query.all()
-        news_list = [news.jinja_dict() for news in news_db]
-        news_list = sorted(news_list, key=lambda news: news['raw_date'])[::-1]
-        news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
+        news = News.query.order_by(News.date.desc()).all()
+        news_choices = [(n.id, n.title + ' ' + n.date.strftime('%B %d, %Y')) for n in news]
         self.news_dd.choices = news_choices
 
 
@@ -33,8 +31,6 @@ class AdminDeleteNewsForm(FlaskForm):
     submit = SubmitField('Delete News')
 
     def populate_dd(self):
-        news_db = News.query.all()
-        news_list = [news.jinja_dict() for news in news_db]
-        news_list = sorted(news_list, key=lambda news: news['raw_date'])[::-1]
-        news_choices = [(news['id'], news['title'] + ' ' + news['date']) for news in news_list]
+        news = News.query.order_by(News.date.desc()).all()
+        news_choices = [(n.id, n.title + ' ' + n.date.strftime('%B %d, %Y')) for n in news]
         self.news_dd.choices = news_choices
