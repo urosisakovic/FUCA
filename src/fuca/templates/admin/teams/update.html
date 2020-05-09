@@ -44,4 +44,18 @@
             </div>
         </form>
     </div>
+
+    <script charset="utf-8" type="text/javascript">
+        $(function() {
+            var teams = $('#select_team');
+            // event listener to state dropdown change
+            teams.on('change', function() {
+                var id = teams.val();
+                if (id == -1)
+                    document.location.href = "{{url_for('adminteams.admin_teams_update')}}";
+                else
+                    document.location.href = "{{url_for('adminteams.admin_teams_update')}}" + "?id=" + id;
+            });
+        });    
+    </script>
 {% endblock admin_teams_content %}

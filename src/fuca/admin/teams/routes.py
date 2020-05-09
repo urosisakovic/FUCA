@@ -47,6 +47,18 @@ def admin_teams_update():
     form = AdminUpdateTeamForm()
     form.populate_dd()
 
+    team_id = request.args.get('id', type=int)
+    if team_id:
+        if team_id >= 0:
+            team = Team.query.get(team_id)
+            form.teams_dd.default = team_id
+            form.process()
+            form.name.data = team.name
+        else:
+            form.news_dd.default = 0
+            form.process()
+            form.name.data = ''
+
     if request.method == 'POST':
         data_utils.update_team(id=form.teams_dd.data,
                                 name=form.name.data,

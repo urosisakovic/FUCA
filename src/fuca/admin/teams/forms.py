@@ -16,14 +16,14 @@ class AdminAddTeamForm(FlaskForm):
 
 
 class AdminUpdateTeamForm(FlaskForm):
-    teams_dd = SelectField('Teams', choices=[])
+    teams_dd = SelectField('Teams', choices=[], id='select_team')
     name = StringField('Name', validators=[DataRequired()])
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Update Team')
 
     def populate_dd(self):
         teams = Team.query.all()
-        team_choices = [(team.id, team.name) for team in teams]
+        team_choices = [(-1, '')] + [(team.id, team.name) for team in teams]
         self.teams_dd.choices = team_choices
 
 
