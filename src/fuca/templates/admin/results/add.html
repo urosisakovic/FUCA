@@ -125,21 +125,6 @@
                         {{ form.guest_team_shots(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-
-                <div class="form-group">
-                    {{ form.best_player.label(class="form-control-label") }}
-                    {% if form.best_player.errors %}
-                        {{ form.best_player(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.best_player.errors %}
-                                <span> {{ error }} </span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.best_player(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}

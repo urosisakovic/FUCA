@@ -89,7 +89,6 @@ class Match(db.Model):
     # foreign keys
     host_team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     guest_team_id    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    best_player_id   = db.Column(db.Integer, db.ForeignKey('player.id'))
     # relationships
     statistics  = db.relationship('Statistics', backref='match', lazy=True) 
 

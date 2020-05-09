@@ -17,8 +17,6 @@ class AdminAddResultForm(FlaskForm):
     guest_team_red = StringField('Guest Team Red', validators=[DataRequired()])
     guest_team_shots = StringField('Guest Team Shots', validators=[DataRequired()])
 
-    best_player = StringField('Best Player', validators=[DataRequired()])
-
     submit = SubmitField('Add Results')
 
     def populate_dd(self):
@@ -28,7 +26,7 @@ class AdminAddResultForm(FlaskForm):
 
 
 class AdminUpdateResultForm(FlaskForm):
-    match_dd = SelectField('Result', choices=[])
+    match_dd = SelectField('Result', choices=[], id='select_results')
 
     host_team_goals = StringField('Host Team Goals', validators=[DataRequired()])
     host_team_yellow = StringField('Host Team Yellow', validators=[DataRequired()])
@@ -40,13 +38,11 @@ class AdminUpdateResultForm(FlaskForm):
     guest_team_red = StringField('Guest Team Red', validators=[DataRequired()])
     guest_team_shots = StringField('Guest Team Shots', validators=[DataRequired()])
 
-    best_player = StringField('Best Player', validators=[DataRequired()])
-
     submit = SubmitField('Update Results')
 
     def populate_dd(self):
         matches = Match.query.all()
-        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
+        match_choices = [(-1, '')] + [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
         self.match_dd.choices = match_choices
 
 
