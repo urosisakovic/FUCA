@@ -12,11 +12,8 @@ def team(id):
     team = Team.query.get(id)
     if not team:
         return "404"
-    team = team.jinja_dict()
-
-    image_file = url_for('static', filename='images/teams/{}'.format(team['logo']))
-
-    return render_template('team/team.html', team=team, id=id, title=team['name'], image_file=image_file)
+    image_file = url_for('static', filename='images/teams/{}'.format(team.logo_image))
+    return render_template('team/team.html', team=team, id=id, title=team.name, image_file=image_file)
 
 
 #TODO: Add team name in title.

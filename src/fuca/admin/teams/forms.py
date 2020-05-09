@@ -22,9 +22,8 @@ class AdminUpdateTeamForm(FlaskForm):
     submit = SubmitField('Update Team')
 
     def populate_dd(self):
-        teams_db = Team.query.all()
-        teams = [team.jinja_dict() for team in teams_db]
-        team_choices = [(team['id'], team['name']) for team in teams]
+        teams = Team.query.all()
+        team_choices = [(team.id, team.name) for team in teams]
         self.teams_dd.choices = team_choices
 
 
@@ -33,7 +32,6 @@ class AdminDeleteTeamForm(FlaskForm):
     submit = SubmitField('Delete Team')
 
     def populate_dd(self):
-        teams_db = Team.query.all()
-        teams = [team.jinja_dict() for team in teams_db]
-        team_choices = [(team['id'], team['name']) for team in teams]
+        teams = Team.query.all()
+        team_choices = [(team.id, team.name) for team in teams]
         self.teams_dd.choices = team_choices

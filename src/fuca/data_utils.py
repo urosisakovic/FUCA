@@ -73,7 +73,7 @@ def add_team(name, image):
 
 
 def update_team(id, name, image):
-    update_team = Team.query.filter_by(id=id).first()
+    update_team = Team.query.get(id)
     update_team.name = name
     if image:
         image_file = save_image(image, str(update_team.id), "teams")
@@ -82,7 +82,7 @@ def update_team(id, name, image):
 
 
 def delete_team(id):
-    Team.query.filter_by(id=id).delete()
+    Team.query.get(id).delete()
     db.session.commit()
 
 

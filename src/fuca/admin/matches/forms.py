@@ -14,9 +14,8 @@ class AdminAddMatchForm(FlaskForm):
     submit = SubmitField('Add Match')
 
     def populate_dd(self):
-        teams_db = Team.query.all()
-        teams = [team.jinja_dict() for team in teams_db]
-        team_choices = [(team['id'], team['name']) for team in teams]
+        teams = Team.query.all()
+        team_choices = [(team.id, team.name) for team in teams]
 
         self.host_team_dd.choices = team_choices
         self.guest_team_dd.choices = team_choices
@@ -43,9 +42,8 @@ class AdminUpdateMatchForm(FlaskForm):
         match_choices = [(match['id'], match['team1_name'] + ' vs ' + match['team2_name']) for match in matches]
         self.match_dd.choices = match_choices
 
-        teams_db = Team.query.all()
-        teams = [team.jinja_dict() for team in teams_db]
-        team_choices = [(team['id'], team['name']) for team in teams]
+        teams = Team.query.all()
+        team_choices = [(team.id, team.name) for team in teams]
         self.host_team_dd.choices = team_choices
         self.guest_team_dd.choices = team_choices
 

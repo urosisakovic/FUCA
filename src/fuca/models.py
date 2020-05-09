@@ -126,22 +126,12 @@ class Team(db.Model):
     guest_matches   = db.relationship('Match',  backref='guest_team',   lazy=True,  foreign_keys=Match.guest_team_id)
     players         = db.relationship('Player', backref='team',         lazy=True,  foreign_keys=Player.team_id)
 
+    @property
     def points(self):
         return self.wins*3 + self.draws*1
 
     def __repr__(self):
         return f"Team('{self.id}, {self.name}')"
-
-    def jinja_dict(self):
-        return {'name'          : self.name,
-                'logo'          : self.logo_image,
-                'matches'       : self.matches,
-                'wins'          : self.wins,
-                'losses'        : self.losses,
-                'draws'         : self.draws,
-                'goal_diff'     : self.goal_diff,
-                'points'        : self.points(),
-                'id'            : self.id}
 
 
 class Statistics(db.Model):

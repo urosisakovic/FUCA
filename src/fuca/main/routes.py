@@ -42,11 +42,8 @@ def player(id):
     player = Player.query.get(id)
     if not player:
         return "404"
-    player = player.jinja_dict()
-
-    image_file = url_for('static', filename='images/players/{}'.format(player['image']))
-
-    return render_template('home/player.html', player=player, image_file=image_file, title=player['name'])
+    image_file = url_for('static', filename='images/players/{}'.format(player.image))
+    return render_template('home/player.html', player=player, image_file=image_file, title=player.name)
 
 
 @main.route("/stats")
@@ -60,8 +57,7 @@ def stats():
 
 @main.route("/teams")
 def teams():
-    teams_db = Team.query.all()
-    teams = [team.jinja_dict() for team in teams_db]
+    teams = Team.query.all()
     for team in teams:
-        team['logo'] = url_for('static', filename='images/teams/{}'.format(team['logo']))
+        team.logo = url_for('static', filename='images/teams/{}'.format(team.logo_image))
     return render_template('home/teams.html', teams=teams, title='Teams')
