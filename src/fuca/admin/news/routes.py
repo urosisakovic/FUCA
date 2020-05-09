@@ -49,11 +49,11 @@ def admin_news_update():
     form = AdminUpdateNewsForm()
     form.populate_dd()
 
-    page = request.args.get('id', type=int)
-    if page:
-        if page >= 0:
-            news = News.query.get(page)
-            form.news_dd.default = page
+    news_id = request.args.get('id', type=int)
+    if news_id:
+        if news_id >= 0:
+            news = News.query.get(news_id)
+            form.news_dd.default = news_id
             form.process()
             form.title.data = news.title
             form.content.data = news.content

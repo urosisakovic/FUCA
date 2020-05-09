@@ -6,7 +6,7 @@
             {{ form.hidden_tag() }}
     
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Match</legend>
+                <legend class="border-bottom mb-4">Update Match</legend>
                 <div class="form-group">
                     {{ form.match_dd.label(class="form-control-label") }}
                     <p>
@@ -49,4 +49,18 @@
             </div>
         </form>
     </div>
+
+    <script charset="utf-8" type="text/javascript">
+        $(function() {
+            var matches = $('#select_matches');
+            // event listener to state dropdown change
+            matches.on('change', function() {
+                var id = matches.val();
+                if (id == -1)
+                    document.location.href = "{{url_for('matches.admin_matches_update')}}";
+                else
+                    document.location.href = "{{url_for('matches.admin_matches_update')}}" + "?id=" + id;
+            });
+        });    
+    </script>
 {% endblock admin_match_content %}

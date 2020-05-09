@@ -50,6 +50,26 @@ def admin_matches_update():
     form = AdminUpdateMatchForm()
     form.populate_dd()
 
+    match_id = request.args.get('id', type=int)
+    if match_id:
+        if match_id >= 0:
+            match = Match.query.get(match_id)
+            form.match_dd.default = match_id
+            form.host_team_dd.default = match.host_team_id
+            form.guest_team_dd.default = match.guest_team_id
+            form.day.default = match.date_time.day
+            form.month.default = match.date_time.month
+            form.year.default = match.date_time.year
+            form.process()
+        else:
+            form.match_dd.default = 0
+            form.host_team_dd.default = 0
+            form.guest_team_dd.default = 0
+            form.day.default = 1
+            form.month.default = 1
+            form.year.default = 2020
+            form.process()
+
     if request.method == 'POST':
         data_utils.update_match(id=form.match_dd.data,
                                 date_time=datetime(int(form.year.data),
