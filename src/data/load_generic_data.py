@@ -1,7 +1,9 @@
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)) + '/..')
 from datetime import datetime
 from random import randint
-from fuca import db, bcrypt
+from fuca import db, bcrypt, create_app
 from fuca.models import Match, News, Player, Statistics, Team
 
 # configu
@@ -19,9 +21,9 @@ def print_array(arr, newlines=2):
 
 
 def init_empty_db():
-    if os.path.exists('fuca/site.db'):
+    if os.path.exists('../fuca/site.db'):
         print("Removed site.db\n\n\n\n")
-        os.remove('fuca/site.db')
+        os.remove('../fuca/site.db')
 
     db.create_all()
 
@@ -132,13 +134,16 @@ def add_statistics():
 
 
 def main():
-    init_empty_db()
-    add_news()
-    add_admin()
-    add_teams()
-    add_players()
-    add_matches()
-    add_statistics()
+    app = create_app()
+    with app.app_context():   
+        db.init_app(app) 
+        init_empty_db()
+        add_news()
+        add_admin()
+        add_teams()
+        add_players()
+        add_matches()
+        add_statistics()
 
 
 if __name__ == '__main__':

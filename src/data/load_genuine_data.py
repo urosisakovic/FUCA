@@ -1,9 +1,14 @@
-import json
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)) + '/..')
+
+import json
 from datetime import datetime
 
-from fuca import db, bcrypt
+from fuca import bcrypt, create_app, db
 from fuca.models import Match, News, Player, Statistics, Team
+
+
 
 
 def print_array(arr, newlines=2):
@@ -14,9 +19,9 @@ def print_array(arr, newlines=2):
 
 
 def init_empty_db():
-    if os.path.exists('fuca/site.db'):
+    if os.path.exists('../fuca/site.db'):
         print("Removed site.db")
-        os.remove('fuca/site.db')
+        os.remove('../fuca/site.db')
 
     db.create_all()
 
@@ -37,7 +42,7 @@ def add_admin():
 
 
 def add_news():
-    news_filepath = 'data/news.json'
+    news_filepath = 'news.json'
     with open(news_filepath) as json_file:
         news_list = json.load(json_file)['news']
 
@@ -50,7 +55,7 @@ def add_news():
 
 
 def add_teams():
-    teams_filepath = 'data/teams.json'
+    teams_filepath = 'teams.json'
     with open(teams_filepath) as json_file:
         teams_list = json.load(json_file)['teams']
     
@@ -74,7 +79,7 @@ def string_to_date(str_date):
 
 
 def add_players():
-    players_filepath = 'data/players.json'
+    players_filepath = 'players.json'
     with open(players_filepath) as json_file:
         players_list = json.load(json_file)['players']
 
@@ -92,7 +97,7 @@ def add_players():
 
 
 def add_matches():
-    matches_filepath = 'data/matches.json'
+    matches_filepath = 'matches.json'
     with open(matches_filepath) as json_file:
         matches_list = json.load(json_file)['matches']
 
@@ -116,7 +121,7 @@ def add_matches():
 
 
 def add_statistics():
-    stats_filepath = 'data/statistics.json'
+    stats_filepath = 'statistics.json'
     with open(stats_filepath) as json_file:
         stats_list = json.load(json_file)['statistics']
 
@@ -135,13 +140,16 @@ def add_statistics():
 
 
 def main():
-    init_empty_db()
-    add_admin()
-    add_news()
-    add_teams()
-    add_players()
-    add_matches()
-    add_statistics()
+    app = create_app()
+    with app.app_context():   
+        db.init_app(app) 
+        init_empty_db()
+        add_admin()
+        add_news()
+        add_teams()
+        add_players()
+        add_matches()
+        add_statistics()
 
 
 if __name__ == '__main__':
