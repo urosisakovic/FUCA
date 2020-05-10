@@ -15,7 +15,7 @@
             <tr>
                 
                 <td style="white-space:nowrap">
-                    <a href="{{ url_for('teams.team', id=result.host_team_id)}}">
+                    <a href="{{ url_for('teams.team', id=result.host_team_id)}}"class="whitelink">
                         <img src="{{ result.host_team_logo }}" width="100">
                         {{ result.host_team.name }}
                     </a>
@@ -24,7 +24,7 @@
                 <td>{{ result.host_team_goals }}: {{ result.guest_team_goals }}</td>
 
                 <td class="tdguest" style="white-space:nowrap" >
-                    <a href="{{ url_for('teams.team', id=result.guest_team_id)}}">
+                    <a href="{{ url_for('teams.team', id=result.guest_team_id)}}"class="whitelink">
                         <img src="{{ result.guest_team_logo }}" width="100">
                         {{ result.guest_team.name }}
                     </a>

@@ -12,14 +12,14 @@
             <tr>
                 <td>{{ match.date_time.strftime('%B %d, %Y at %H:%M') }}</td>
                 <td style="white-space:nowrap">
-                    <a href="{{ url_for('teams.team', id=match.host_team_id)}}">
+                    <a href="{{ url_for('teams.team', id=match.host_team_id)}}"class="whitelink">
                         <img src="{{ match.host_team_logo }}" width="100">
                         {{ match.host_team.name }}
                     </a>
                 </td>
 
                 <td style="white-space:nowrap">
-                    <a href="{{ url_for('teams.team', id=match.guest_team_id)}}">
+                    <a href="{{ url_for('teams.team', id=match.guest_team_id)}}"class="whitelink">
                         <img src="{{ match.guest_team_logo }}" width="100">
                         {{ match.guest_team.name }}
                     </a>

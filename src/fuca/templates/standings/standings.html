@@ -17,9 +17,9 @@
         {% for team in teams %}
         <tr>
             <td style="white-space:nowrap">
-                <a href="{{ url_for('teams.team', id=team.id)}}">
-                    <img src="{{ team.logo }}" width="100">
-                    {{ team.name }}
+                <a href="{{ url_for('teams.team', id=team.id)}}" class="whitelink" >
+                    <img src="{{ team.logo }}" width="100"> &nbsp;
+                    {{ team.name}}
                 </a>
             </td>
             <td>{{ team.points }}</td>
