@@ -1,11 +1,17 @@
 {% extends 'admin/layout.html' %}
 
 {% block admin_content %}
+<br>
+<div class="card" style="width: 35rem;">
+    
+    <div class="card-body">
     <p>
-        <a href="{{ url_for('statistics.admin_statistics_add') }}">Add Statistics</a> | 
-        <a href="{{ url_for('statistics.admin_statistics_update') }}">Update Statistics</a> | 
-        <a href="{{ url_for('statistics.admin_statistics_delete') }}">Delete Statistics</a>
+        <a href="{{ url_for('statistics.admin_statistics_add') }}"class="customLink">Add Statistics</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="{{ url_for('statistics.admin_statistics_update') }}"class="customLink">Update Statistics</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="{{ url_for('statistics.admin_statistics_delete') }}"class="customLink">Delete Statistics</a>
     </p>
-
+    </div>
+</div>
+<br>
     {% block admin_stats_content %}{% endblock admin_stats_content%}
 {% endblock admin_content %}

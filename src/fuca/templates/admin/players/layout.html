@@ -1,11 +1,18 @@
 {% extends 'admin/layout.html' %}
 
 {% block admin_content %}
+<br>
+<div class="card" style="width: 30rem;">
+    
+    <div class="card-body">
     <p>
-        <a href="{{ url_for('players.admin_players_add') }}">Add Player</a> | 
-        <a href="{{ url_for('players.admin_players_update') }}">Update Player</a> | 
-        <a href="{{ url_for('players.admin_players_delete') }}">Delete Player</a>
+        <a href="{{ url_for('players.admin_players_add') }}" class="customLink">Add Player</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('players.admin_players_update') }}"class="customLink">Update Player</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="{{ url_for('players.admin_players_delete') }}"class="customLink">Delete Player</a>
     </p>
+    </div>
+</div>
+ <br>
 
     {% block admin_players_content %}{% endblock admin_players_content%}
 {% endblock admin_content %}

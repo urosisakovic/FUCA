@@ -1,11 +1,14 @@
 {% extends 'team/team-layout.html' %}
 
 {% block team_content %}
+
     {% for player in players %}
+
         <p>
             <a href="{{ url_for('main.player', id=player.id)}}">
                 <img src="{{ player.image }}" width="100"> {{ player.name }} {{ player.number }}
             </a>
         </p>
     {% endfor %}
+    
 {% endblock team_content %}

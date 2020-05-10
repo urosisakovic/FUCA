@@ -3,29 +3,33 @@
 {% block content %}
     <table class="table table-dark table-striped table-hover">
         <thead>
-            <th>Date</th>
+            
             <th>Host Team</th>
-            <th>Guest Team</th>
+            <th>Date</th>
             <th>Result</th>
+            <th>Guest Team</th>
+            
         </thead>
 
         {% for result in results %}
             <tr>
-                <td>{{ result.date_time.strftime('%B %d, %Y at %H:%M') }}</td>
+                
                 <td style="white-space:nowrap">
                     <a href="{{ url_for('teams.team', id=result.host_team_id)}}">
                         <img src="{{ result.host_team_logo }}" width="100">
                         {{ result.host_team.name }}
                     </a>
                 </td>
+                <td>{{ result.date_time.strftime('%B %d, %Y at %H:%M') }}</td>
+                <td>{{ result.host_team_goals }}: {{ result.guest_team_goals }}</td>
 
-                <td style="white-space:nowrap">
+                <td class="tdguest" style="white-space:nowrap" >
                     <a href="{{ url_for('teams.team', id=result.guest_team_id)}}">
                         <img src="{{ result.guest_team_logo }}" width="100">
                         {{ result.guest_team.name }}
                     </a>
                 </td>
-                <td>{{ result.host_team_goals }}: {{ result.guest_team_goals }}</td>
+                
             </tr>
         {% endfor %}
     </table>

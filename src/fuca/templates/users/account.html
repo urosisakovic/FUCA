@@ -2,11 +2,13 @@
 
 {% block content %}
     <div class="content-section">
-        <h1>Image: {{ current_user.image }}</h1>
-        <h1>Name: {{ current_user.name }}</h1>
-        <h1>Email: {{ current_user.email }}</h1>
-        <h1>Number: {{ current_user.number }}</h1>
-        <h1>Birthdate: {{ current_user.birthdate }}</h1>
+        <div class="jumbotron">
+        <h4><b>Image:</b> {{ current_user.image }}</h1>
+        <h4><b>Name:</b> {{ current_user.name }}</h1>
+        <h4><b>Email:</b> {{ current_user.email }}</h1>
+        <h4><b>Number:</b> {{ current_user.number }}</h1>
+        <h4><b>Birthdate</b>: {{ current_user.birthdate }}</h1>
+    </div>
 
         <form method="POST" action="">
             {{ form.hidden_tag() }}

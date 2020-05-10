@@ -1,11 +1,18 @@
 {% extends 'admin/layout.html' %}
 
 {% block admin_content %}
+<br>
+<div class="card" style="width: 30rem;">
+    
+    <div class="card-body">
     <p>
-        <a href="{{ url_for('adminteams.admin_teams_add') }}">Add Team</a> | 
-        <a href="{{ url_for('adminteams.admin_teams_update') }}">Update Team</a> | 
-        <a href="{{ url_for('adminteams.admin_teams_delete') }}">Delete Team</a>
+        <a href="{{ url_for('adminteams.admin_teams_add') }}"class="customLink">Add Team</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="{{ url_for('adminteams.admin_teams_update') }}"class="customLink">Update Team</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="{{ url_for('adminteams.admin_teams_delete') }}"class="customLink">Delete Team</a>
     </p>
+    </div>
+</div>
+<br>
 
     {% block admin_teams_content %}{% endblock admin_teams_content%}
 {% endblock admin_content %}

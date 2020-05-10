@@ -1,6 +1,9 @@
 {% extends 'home/layout.html' %}
 
 {% block content %}
+<div class="card">
+    
+    <div class="card-body">
     <p><img src="{{ image_file }}" width="100"></p>
     <p>Player name: {{ player.name }}</p>
     <p>Player number: {{ player.number }}</p>
@@ -9,4 +12,6 @@
     <p>Player assists: {{ player.assists }}</p>
     <p>Player yellow: {{ player.yellow }}</p>
     <p>Player red: {{ player.red }}</p>
+    </div>
+</div>
 {% endblock content %}

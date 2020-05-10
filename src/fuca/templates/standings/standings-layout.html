@@ -2,9 +2,26 @@
 
 {% block content %}
 
-    <a href="{{ url_for('standings.standings') }}">Standings</a> | 
-    <a href="{{ url_for('standings.bestplayers') }}">Best players</a> | 
-    <a href="{{ url_for('standings.bestscorers') }}">Best scorers</a>
+
+    
+  
+                <div class="card col-md-8">
+    
+                    <div class="card-body">
+                        <a href="{{ url_for('standings.standings') }}" class="customLink">Standings</a> | 
+                        <a href="{{ url_for('standings.bestplayers') }}"class="customLink">Best players</a> | 
+                        <a href="{{ url_for('standings.bestscorers') }}"class="customLink">Best scorers</a>
+                    </div>
+    
+                </div>
+         
+
+<br>
+        
+
+  
+
+    
 
     {% block standings_content %}{% endblock standings_content%}
 {% endblock content %}

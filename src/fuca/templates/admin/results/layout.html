@@ -1,11 +1,18 @@
 {% extends 'admin/layout.html' %}
 
 {% block admin_content %}
+<br>
+<div class="card" style="width: 30rem;">
+    
+    <div class="card-body">
     <p>
-        <a href="{{ url_for('results.admin_results_add') }}">Add Result</a> | 
-        <a href="{{ url_for('results.admin_results_update') }}">Update Result</a> | 
-        <a href="{{ url_for('results.admin_results_delete') }}">Delete Result</a>
+        <a href="{{ url_for('results.admin_results_add') }}" class="customLink">Add Result</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="{{ url_for('results.admin_results_update') }}" class="customLink">Update Result</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('results.admin_results_delete') }}" class="customLink">Delete Result</a>
     </p>
+    </div>
+</div>
+    <br>
 
     {% block admin_result_content %}{% endblock admin_result_content%}
 {% endblock admin_content %}

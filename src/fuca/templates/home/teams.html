@@ -10,7 +10,7 @@
         {% for team in teams %}
             <tr>
                 <td><a href="{{ url_for('teams.team', id=team.id)}}"><img src="{{ team.logo }}" width="100"></a></td>
-                <td><a href="{{ url_for('teams.team', id=team.id)}}">{{ team.name }}</a></td>
+                <td style="vertical-align: middle"><a href="{{ url_for('teams.team', id=team.id)}}">{{ team.name }}</a></td>
             </tr>
         {% endfor %}
     </table>

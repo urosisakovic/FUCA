@@ -1,11 +1,18 @@
 {% extends 'admin/layout.html' %}
 
 {% block admin_content %}
-    <p>
-        <a href="{{ url_for('news.admin_news_add') }}">Add News</a> | 
-        <a href="{{ url_for('news.admin_news_update') }}">Update News</a> | 
-        <a href="{{ url_for('news.admin_news_delete') }}">Delete News</a>
-    </p>
+<br>
 
+<div class="card" style="width: 30rem;">
+    
+    <div class="card-body">
+    <p>
+        <a href="{{ url_for('news.admin_news_add') }}"class="customLink">Add News</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a href="{{ url_for('news.admin_news_update') }}"class="customLink">Update News</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('news.admin_news_delete') }}"class="customLink">Delete News</a>
+    </p>
+    </div>
+</div>
+<br>
     {% block admin_news_content %}{% endblock admin_news_content%}
 {% endblock admin_content %}

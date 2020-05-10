@@ -1,6 +1,7 @@
 {% extends 'team/team-layout.html' %}
 
 {% block team_content %}
+
     <p><img src="{{ team.image }}" width="100"></p>
     <p>Team name: {{ team.name }}</p>
     <p>Team matches: {{ team.matches }}</p>
@@ -9,4 +10,5 @@
     <p>Team draws: {{ team.draws }}</p>
     <p>Team goal_diff: {{ team.goal_diff }}</p>
     <p>Team points: {{ team.points }}</p>
+    
 {% endblock team_content %}
