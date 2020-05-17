@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import SelectField, StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, ValidationError
 
 from fuca.models import Team
 
@@ -10,6 +10,10 @@ class AdminAddTeamForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Add Team')
+
+    def validate_name(self, name):
+        if Team.query.filter_by(name=name.data).first():
+            raise ValidationError('Team with that name already exists!')
 
     def populate_dd(self):
         pass

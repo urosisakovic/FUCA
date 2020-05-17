@@ -29,10 +29,11 @@ def admin_teams_add():
     form.populate_dd()
     
     if request.method == 'POST':
-        data_utils.add_team(name=form.name.data,
-                            image=form.image.data)
-        flash('Successfully added a new team', 'success')
-        return redirect(url_for('adminteams.admin_teams_add'))
+        if form.validate():
+            data_utils.add_team(name=form.name.data,
+                                image=form.image.data)
+            flash('Successfully added a new team', 'success')
+            return redirect(url_for('adminteams.admin_teams_add'))
 
     return render_template('admin/teams/add.html', form=form, title='Admin Add Teams')
 
