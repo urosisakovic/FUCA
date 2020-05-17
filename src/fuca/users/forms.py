@@ -38,19 +38,19 @@ class RegisterForm(FlaskForm):
 
 class ChangePasswordForm(FlaskForm):
     current_password = PasswordField('Current Password', 
-                                     validators=[Email(), DataRequired()])
+                                     validators=[DataRequired()])
     new_password = PasswordField('Password',
                                 validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('new_password')])
+                                     validators=[EqualTo('new_password')])
     submit = SubmitField('Change Password')
 
     def validate_current_password(self, current_password):
-        valid, _ = data_utils.exists_player(current_user.email)
+        valid, _ = data_utils.exists_player(current_user.email, current_password.data)
         if not valid:
             raise ValidationError('Current password is not correct.')
 
-    def validate_password(self, password):
+    def validate_new_password(self, password):
         rules = [lambda s: any(c.isupper() for c in s),
                  lambda s: any(c.islower() for c in s),
                  lambda s: any(c.isdigit() for c in s),

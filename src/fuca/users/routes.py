@@ -47,11 +47,13 @@ def logout():
     return redirect(url_for('main.home'))
 
 
-@users.route("/account")
+@users.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = ChangePasswordForm()
     if form.validate_on_submit():
-        pass
+        data_utils.register_player(current_user.email, form.new_password.data)
+        flash('You have successfully changed your password.', 'success')
 
-    return render_template('users/account.html', form=form, title='My Account')
+    image_file = url_for('static', filename='images/players/{}'.format(current_user.image))
+    return render_template('users/account.html', form=form, image_file=image_file, title='My Account')
