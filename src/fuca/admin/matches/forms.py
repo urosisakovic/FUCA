@@ -27,7 +27,6 @@ class AdminAddMatchForm(FlaskForm):
 
     def validate_guest_team_dd(self, guest_team_dd):
         if guest_team_dd.data == self.host_team_dd.data:
-            print('RAISING')
             raise ValidationError('Host and guest teams must be different.')
 
 

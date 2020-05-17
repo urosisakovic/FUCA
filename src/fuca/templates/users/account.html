@@ -3,11 +3,16 @@
 {% block content %}
     <div class="content-section">
         <div class="jumbotron">
-        <h4><img src="{{ image_file }}" width="100"></h1>
-        <h4>{{ current_user.name }}</h1>
-        <h4><b>Email:</b> {{ current_user.email }}</h1>
-        <h4><b>Jersey Number:</b> {{ current_user.number }}</h1>
-        <h4><b>Birthdate</b>: {{ current_user.birthdate.strftime('%d. %m. %Y.') }}</h1>
+        {% if current_user.is_admin%}
+            <h1>Admin</h1>
+            <p>When logging in, your email should be "admin@admin.admin."</p>
+        {% else %}
+            <h4><img src="{{ image_file }}" width="100"></h1>
+            <h4>{{ current_user.name }}</h1>
+            <h4><b>Email:</b> {{ current_user.email }}</h1>
+            <h4><b>Jersey Number:</b> {{ current_user.number }}</h1>
+            <h4><b>Birthdate</b>: {{ current_user.birthdate.strftime('%d. %m. %Y.') }}</h1>
+        {% endif %}
     </div>
 
         <form method="POST" action="">

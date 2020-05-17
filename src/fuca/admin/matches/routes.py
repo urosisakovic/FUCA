@@ -39,8 +39,6 @@ def admin_matches_add():
                                 guest_team_id=form.guest_team_dd.data)
             flash('Successfully added a new match', 'success')
             return redirect(url_for('matches.admin_matches_add'))
-        else:
-            print('NOT VALIDATED')
 
     return render_template('admin/matches/add.html', form=form, title='Admin Add Matches')
 
