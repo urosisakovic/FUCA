@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SelectField, SubmitField
+from wtforms.validators import ValidationError
 
 from fuca.models import Match, Team
 
@@ -23,6 +24,11 @@ class AdminAddMatchForm(FlaskForm):
         self.day.choices = [(val, val) for val in range(1, 32)]
         self.month.choices = [(val, val) for val in range(1, 13)]
         self.year.choices = [(val, val) for val in range(2020, 1940, -1)]
+
+    def validate_guest_team_dd(self, guest_team_dd):
+        if guest_team_dd.data == self.host_team_dd.data:
+            print('RAISING')
+            raise ValidationError('Host and guest teams must be different.')
 
 
 class AdminUpdateMatchForm(FlaskForm):

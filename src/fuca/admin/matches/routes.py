@@ -30,14 +30,17 @@ def admin_matches_add():
     form.populate_dd()
 
     if request.method == 'POST':
-        data_utils.add_match(date_time=datetime(int(form.year.data),
-                                                int(form.month.data), 
-                                                int(form.day.data), 
-                                                0, 0, 0),
-                             host_team_id=form.host_team_dd.data,
-                             guest_team_id=form.guest_team_dd.data)
-        flash('Successfully added a new match', 'success')
-        return redirect(url_for('matches.admin_matches_add'))
+        if form.validate():
+            data_utils.add_match(date_time=datetime(int(form.year.data),
+                                                    int(form.month.data), 
+                                                    int(form.day.data), 
+                                                    0, 0, 0),
+                                host_team_id=form.host_team_dd.data,
+                                guest_team_id=form.guest_team_dd.data)
+            flash('Successfully added a new match', 'success')
+            return redirect(url_for('matches.admin_matches_add'))
+        else:
+            print('NOT VALIDATED')
 
     return render_template('admin/matches/add.html', form=form, title='Admin Add Matches')
 

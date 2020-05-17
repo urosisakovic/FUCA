@@ -10,31 +10,38 @@
                 <div class="form-group">
                     {{ form.host_team_dd.label(class="form-control-label") }}
                     <p>
-                        {{form.host_team_dd()}}
+                        {{form.host_team_dd(class="form-control")}}
                     </p>
                 </div>
 
                 <div class="form-group">
                     {{ form.guest_team_dd.label(class="form-control-label") }}
-                    <p>
-                        {{form.guest_team_dd()}}
-                    </p>
+                    {% if form.guest_team_dd.errors %}
+                        {{ form.guest_team_dd(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.guest_team_dd.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.guest_team_dd(class="form-control") }}
+                    {% endif %}
                 </div>
 
                 <div class="form-group">
                     {{ form.day.label(class="form-control-label") }}
                     <p>
-                        {{form.day()}}
+                        {{form.day(class="form-control")}}
                     </p>
                     
                     {{ form.month.label(class="form-control-label") }}
                     <p>
-                        {{form.month()}}
+                        {{form.month(class="form-control")}}
                     </p>
 
                     {{ form.year.label(class="form-control-label") }}
                     <p>
-                        {{form.year()}}
+                        {{form.year(class="form-control")}}
                     </p>
                 </div>                
             </fieldset>
