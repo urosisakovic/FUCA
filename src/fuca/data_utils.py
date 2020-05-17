@@ -18,7 +18,7 @@ def update_news(id, new_title, new_content):
 
 
 def delete_news(id):
-    News.query.get(id).delete()
+    news = News.query.filter_by(id=id).delete()
     db.session.commit()
 
 
@@ -58,7 +58,7 @@ def update_player(id, name, number, email, birthdate, team_id, image):
 
 
 def delete_player(id):
-    Player.query.get(id).delete()
+    Player.query.filter_by(id=id).delete()
     db.session.commit()
 
 def add_team(name, image):
@@ -81,7 +81,7 @@ def update_team(id, name, image):
 
 
 def delete_team(id):
-    Team.query.get(id).delete()
+    Team.query.filter_by(id=id).delete()
     db.session.commit()
 
 
@@ -102,7 +102,7 @@ def update_match(id, date_time, host_team_id, guest_team_id):
 
 
 def delete_match(id):
-    Match.query.get(id).delete()
+    Match.query.filter_by(id=id).delete()
     db.session.commit()
 
 

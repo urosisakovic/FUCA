@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, abort
+from flask import redirect, render_template, request, url_for, abort, flash
 
 from flask_login import current_user, login_required
 from fuca import data_utils
@@ -29,6 +29,7 @@ def admin_statistics_add():
     
     if request.method == 'POST':
         data_utils.add_statistics()
+        flash('Successfully added a new statistics', 'success')
         return redirect(url_for('statistics.admin_statistics_add'))
 
     return render_template('admin/statistics/add.html', form=form, title='Admin Add Statistics')
@@ -64,6 +65,7 @@ def admin_statistics_update():
                                      assists=form.assists.data,
                                      yellow=form.yellow.data,
                                      red=form.red.data)
+        flash('Successfully updated a statistics', 'success')
         return redirect(url_for('statistics.admin_statistics_update'))
 
     return render_template('admin/statistics/update.html', form=form, title='Admin Update Statistics')
@@ -81,6 +83,7 @@ def admin_statistics_delete():
     if request.method == 'POST':
         data_utils.delete_statistics(match_id=form.match_dd.data,
                                      player_id=form.player_dd.data)
+        flash('Successfully deleted a statistics', 'success')
         return redirect(url_for('statistics.admin_statistics_delete'))
 
     return render_template('admin/statistics/delete.html', form=form, title='Admin Delete Statistics')

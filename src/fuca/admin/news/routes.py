@@ -1,5 +1,5 @@
 
-from flask import Blueprint, redirect, render_template, request, url_for, abort
+from flask import Blueprint, redirect, render_template, request, url_for, abort, flash
 
 from flask_login import current_user, login_required
 from fuca import data_utils
@@ -31,6 +31,7 @@ def admin_news_add():
     if form.validate_on_submit():
         data_utils.add_news(title=form.title.data,
                             content=form.content.data)
+        flash('Successfully added new news.', 'success')
 
         return redirect(url_for('news.admin_news_add'))
 
@@ -66,6 +67,7 @@ def admin_news_update():
         data_utils.update_news(id=form.news_dd.data, 
                                new_title=form.title.data,
                                new_content=form.content.data)
+        flash('Successfully updated news', 'success')
         return redirect(url_for('news.admin_news_update'))
 
     return render_template('admin/news/update.html',
@@ -84,6 +86,7 @@ def admin_news_delete():
 
     if request.method == 'POST':
         data_utils.delete_news(id=form.news_dd.data)
+        flash('Successfully deleted news', 'success')
         return redirect(url_for('news.admin_news_delete'))
 
     return render_template('admin/news/delete.html',

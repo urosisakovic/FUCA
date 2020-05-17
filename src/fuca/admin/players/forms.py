@@ -76,5 +76,5 @@ class AdminDeletePlayerForm(FlaskForm):
 
     def populate_dd(self):
         players = Player.query.filter_by(is_admin=False).all()
-        player_choices = [(player.team_id, player.name) for player in players]
+        player_choices = [(player.id, player.name) for player in players]
         self.player_dd.choices = player_choices

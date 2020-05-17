@@ -16,7 +16,9 @@ def login():
     if form.validate_on_submit():
         valid, player = data_utils.exists_player(email=form.email.data,
                                                  password=form.password.data)
-            
+
+        print('Player: ', player)
+
         if valid:
             login_user(player, remember=form.remember_me.data)
             next_page = request.args.get('next')

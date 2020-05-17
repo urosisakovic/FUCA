@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import redirect, render_template, request, url_for, abort
+from flask import redirect, render_template, request, url_for, abort, flash
 
 from flask_login import current_user, login_required
 from fuca import data_utils
@@ -39,6 +39,7 @@ def admin_players_add():
                                                  0, 0, 0),
                               team_id=form.team_dd.data,
                               image=form.image.data)
+        flash('Successfully added a new player', 'success')
         return redirect(url_for('players.admin_players_add'))
 
     return render_template('admin/players/add.html', form=form, title='Admin Add Players')
@@ -90,6 +91,7 @@ def admin_players_update():
                                                     0, 0, 0),
                                  team_id=form.team_dd.data,
                                  image=form.image.data)
+        flash('Successfully updated a player', 'success')
         return redirect(url_for('players.admin_players_update'))
 
     return render_template('admin/players/update.html', form=form, title='Admin Update Players')
@@ -106,6 +108,7 @@ def admin_players_delete():
 
     if request.method == 'POST':
         data_utils.delete_player(id=form.player_dd.data)
+        flash('Successfully deleted a team', 'success')
         return redirect(url_for('players.admin_players_delete'))
 
     return render_template('admin/players/delete.html', form=form, title='Admin Delete Players')

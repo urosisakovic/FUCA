@@ -1,5 +1,5 @@
 
-from flask import redirect, render_template, request, url_for, abort
+from flask import redirect, render_template, request, url_for, abort, flash
 
 from flask_login import current_user, login_required
 from fuca import data_utils
@@ -31,7 +31,8 @@ def admin_teams_add():
     if request.method == 'POST':
         data_utils.add_team(name=form.name.data,
                             image=form.image.data)
-        return redirect(url_for('teams.admin_teams_add'))
+        flash('Successfully added a new team', 'success')
+        return redirect(url_for('adminteams.admin_teams_add'))
 
     return render_template('admin/teams/add.html', form=form, title='Admin Add Teams')
 
@@ -61,6 +62,7 @@ def admin_teams_update():
         data_utils.update_team(id=form.teams_dd.data,
                                 name=form.name.data,
                                 image=form.image.data)
+        flash('Successfully updated a team', 'success')
         return redirect(url_for('adminteams.admin_teams_update'))
 
     return render_template('admin/teams/update.html', form=form, title='Admin Update Teams')
@@ -77,6 +79,7 @@ def admin_teams_delete():
 
     if request.method == 'POST':
         data_utils.delete_team(id=form.teams_dd.data)
-        return redirect(url_for('teams.admin_teams_delete'))
+        flash('Successfully deleted a team', 'success')
+        return redirect(url_for('adminteams.admin_teams_delete'))
 
     return render_template('admin/teams/delete.html', form=form, title='Admin Delete Teams')
