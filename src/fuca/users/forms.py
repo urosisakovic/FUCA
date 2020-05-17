@@ -20,7 +20,9 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_email(self, email):
-        if not data_utils.exists_player_with_email(email.data):
+        valid, player = data_utils.exists_player_with_email(email.data)
+
+        if not valid:
             raise ValidationError('This email is not registered to a FUCA player.')
 
         if data_utils.is_registered_player(email.data):

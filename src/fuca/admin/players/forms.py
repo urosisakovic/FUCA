@@ -22,7 +22,8 @@ class AdminAddPlayerForm(FlaskForm):
     submit = SubmitField('Submit Player')
 
     def validate_email(self, email):
-        if data_utils.exists_player_with_email(email):
+        valid, player = data_utils.exists_player_with_email(email.data)
+        if valid:
             raise ValidationError('Player with that email already exists!')
 
 
@@ -52,9 +53,15 @@ class AdminUpdatePlayerForm(FlaskForm):
     
     submit = SubmitField('Submit Player')
 
+    player_id = -1
+
     def validate_email(self, email):
-        if data_utils.exists_player_with_email(email):
-            raise ValidationError('Player with that email already exists!')
+        if self.player_id > -1:
+            player = Player.query.get(self.player_id)
+            if player:
+                valid, _ = data_utils.exists_player_with_email(email.data)
+                if player.email != email.data and valid:             
+                    raise ValidationError('Player with that email already exists!')
 
     def populate_dd(self):
         self.birth_day.choices = [(val, val) for val in range(1, 32)]

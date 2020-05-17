@@ -207,9 +207,9 @@ def is_registered_player(email):
 def exists_player_with_email(email):
     player = Player.query.filter_by(email=email).first()
     if player:
-        return True
+        return True, player
     else:
-        return False
+        return False, player
 
 
 def exists_player(email, password):

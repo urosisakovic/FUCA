@@ -30,17 +30,18 @@ def admin_players_add():
     form.populate_dd()
 
     if request.method == 'POST':
-        data_utils.add_player(name=form.name.data,
-                              number=form.number.data,
-                              email=form.email.data,
-                              birthdate=datetime(int(form.birth_year.data),
-                                                 int(form.birth_month.data),
-                                                 int(form.birth_day.data),
-                                                 0, 0, 0),
-                              team_id=form.team_dd.data,
-                              image=form.image.data)
-        flash('Successfully added a new player', 'success')
-        return redirect(url_for('players.admin_players_add'))
+        if form.validate():
+            data_utils.add_player(name=form.name.data,
+                                  number=form.number.data,
+                                  email=form.email.data,
+                                  birthdate=datetime(int(form.birth_year.data),
+                                                     int(form.birth_month.data),
+                                                     int(form.birth_day.data),
+                                                     0, 0, 0),
+                                  team_id=form.team_dd.data,
+                                  image=form.image.data)
+            flash('Successfully added a new player', 'success')
+            return redirect(url_for('players.admin_players_add'))
 
     return render_template('admin/players/add.html', form=form, title='Admin Add Players')
 
@@ -66,8 +67,7 @@ def admin_players_update():
             form.process()
             form.name.data = player.name
             form.number.data = player.number
-            form.email.data = player.email        
-            
+            form.email.data = player.email          
         else:
             form.player_dd.default = 0
             form.birth_day.default = 1
@@ -81,19 +81,21 @@ def admin_players_update():
             
 
     if request.method == 'POST':
-        data_utils.update_player(id=form.player_dd.data,
-                                 name=form.name.data,
-                                 number=form.number.data,
-                                 email=form.email.data,
-                                 birthdate=datetime(int(form.birth_year.data),
-                                                    int(form.birth_month.data),
-                                                    int(form.birth_day.data),
-                                                    0, 0, 0),
-                                 team_id=form.team_dd.data,
-                                 image=form.image.data)
-        flash('Successfully updated a player', 'success')
-        return redirect(url_for('players.admin_players_update'))
-
+        form.player_id = int(form.player_dd.data)
+        if form.validate():
+            data_utils.update_player(id=form.player_dd.data,
+                                     name=form.name.data,
+                                     number=form.number.data,
+                                     email=form.email.data,
+                                     birthdate=datetime(int(form.birth_year.data),
+                                                        int(form.birth_month.data),
+                                                        int(form.birth_day.data),
+                                                        0, 0, 0),
+                                     team_id=form.team_dd.data,
+                                     image=form.image.data)
+            flash('Successfully updated a player', 'success')
+            return redirect(url_for('players.admin_players_update'))
+        
     return render_template('admin/players/update.html', form=form, title='Admin Update Players')
 
 
