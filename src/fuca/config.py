@@ -1,4 +1,12 @@
+import os
+
 class Config:
-    #TODO: Generate real random key
-    SECRET_KEY = 'eyJhbGciOiJIUzUxMiIsImlhdCI6MTU4OTgyNzc5OCwiZXhwIjoxNTg5ODI3ODI4fQ.eyJ1c2VyX2lkIjoxfQ.nJIyRLp3_5dnhEgVIveCZ33534UztJ0_ZnbY0_BjJ4XM3mxxO8zOF5vMT3Nxo6lAE0LOk2vWDrUeUm9rl0HNDw'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    
+    MAIL_USERNAME = os.environ.get('EMAIL_USER')
+    MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True

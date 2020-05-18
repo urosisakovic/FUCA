@@ -60,3 +60,30 @@ class ChangePasswordForm(FlaskForm):
         if not all(rule(password.data) for rule in rules):
             raise ValidationError('Password must contain at least 1 uppecase character,\
                                   1 lowercase chacater, 1 digit and 1 special character.')
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[Email(), DataRequired()])
+    submit = SubmitField('Request Password Reset')
+
+    def validate_email(self, email):
+        valid, player = data_utils.exists_player_with_email(email.data)
+
+        if not valid:
+            raise ValidationError('This email is not registered to a FUCA player.')
+            return
+
+class ResetPasswordForm(FlaskForm):
+    new_password = PasswordField('New Password', validators=[DataRequired(), Length(min=8, max=30)])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('new_password')])
+    submit = SubmitField('Reset Password')
+
+    def validate_new_password(self, password):
+        rules = [lambda s: any(c.isupper() for c in s),
+                 lambda s: any(c.islower() for c in s),
+                 lambda s: any(c.isdigit() for c in s),
+                 lambda s: any(not c.isalnum() for c in s)]
+        if not all(rule(password.data) for rule in rules):
+            raise ValidationError('Password must contain at least 1 uppecase character,\
+                                  1 lowercase chacater, 1 digit and 1 special character.')

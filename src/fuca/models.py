@@ -1,6 +1,8 @@
 from datetime import datetime
 from fuca import db, login_manager
 from flask_login import UserMixin
+from flask import current_app
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
 @login_manager.user_loader
@@ -34,6 +36,20 @@ class Player(db.Model, UserMixin):
     team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships
     statistics  = db.relationship('Statistics', backref='player', lazy=True) 
+
+    def get_reset_token(self, expires_sec=600):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'player_id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            player_id = s.loads(token)['player_id']
+        except:
+            None
+        return Player.query.get(player_id)
+
 
     @property
     def goals(self):

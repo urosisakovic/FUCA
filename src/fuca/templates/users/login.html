@@ -43,7 +43,7 @@
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
         <small class="text-muted ml-2">
-            <a href="#"> Forgot password? </a>
+            <a href="{{ url_for('users.reset_request') }}"> Forgot password? </a>
         </small>
     </form>
 </div>
@@ -51,6 +51,7 @@
 <div class="border-top pt-3">
     <small class="text-muted">
         Only league players should login. If you are a league player without an account contact league organizers.
+        You are a league player and not registered? <a href="{{ url_for('users.register') }}">Register here!</a>
     </small>
 </div>
 {% endblock content %}

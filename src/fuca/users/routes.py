@@ -2,9 +2,11 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required, login_user, logout_user
-from fuca import data_utils, db
-from fuca.users.forms import LoginForm, RegisterForm, ChangePasswordForm
-from fuca.models import Match, PlayingMatch
+from fuca import data_utils, db, mail
+from fuca.users.forms import (LoginForm, RegisterForm, ChangePasswordForm,
+                                RequestResetForm, ResetPasswordForm)
+from fuca.models import Match, PlayingMatch, Player
+from flask_mail import Message
 
 users = Blueprint('users', __name__)
 
@@ -123,3 +125,59 @@ def myteam():
     return render_template('users/myteam.html',
                             matches=matches,
                             title='My Team')
+
+
+def send_reset_email(player):
+    token = player.get_reset_token()
+    msg = Message('Password Reset Request',
+                  sender='noreply@fuca.com',
+                  recipients=[player.email])
+
+    msg.body = '''
+To reset your password, visit the following link:
+{}
+
+If you did not make this request, then simply ignore this email and no changes will be made.
+'''.format(url_for('users.reset_token', token=token, _external=True))
+
+    mail.send(msg)
+
+
+@users.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+
+    form = RequestResetForm()
+
+    if form.validate_on_submit():
+        player = Player.query.filter_by(email=form.email.data).first()
+        send_reset_email(player)
+        flash('An email has been sent with instruction to reset your password', 'info')
+        return redirect(url_for('users.login'))
+
+    return render_template('users/reset_request.html',
+                            form=form,
+                            title='Reset Password')
+
+
+@users.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
+
+    player = Player.verify_reset_token(token)
+
+    if player is None:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('users.reset_request'))
+
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        data_utils.register_player(player.email, form.new_password.data)
+        flash('Your password has been updated! You are now able to log in!', 'success')
+        return redirect(url_for('users.login'))
+
+    return render_template('users/reset_token.html',
+                            form=form,
+                            title='Reset Password')
