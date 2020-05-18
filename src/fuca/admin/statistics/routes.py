@@ -26,11 +26,30 @@ def admin_statistics_add():
 
     form = AdminAddStatisticsForm()
     form.populate_dd()
+
+    match_id = request.args.get('match_id', type=int)
+    if request.method == 'GET' and match_id:
+        if match_id >= 0:
+            match = Match.query.get(match_id)
+            form.match_dd.default = match_id
+            players = Player.query.filter_by(team_id=match.host_team_id).all() + \
+                Player.query.filter_by(team_id=match.guest_team_id).all()
+            form.player_dd.choices = [(-1, '')] + [(player.id, '{} [{}]'.format(player.name, player.team.name)) for player in players]
+
+            form.process()
     
     if request.method == 'POST':
-        data_utils.add_statistics()
-        flash('Successfully added a new statistics', 'success')
-        return redirect(url_for('statistics.admin_statistics_add'))
+        if form.validate():
+            data_utils.add_statistics(match_id=form.match_dd.data,
+                                      player_id=form.player_dd.data,
+                                      goals=form.goals.data,
+                                      assists=form.assists.data,
+                                      yellow=form.yellow.data,
+                                      red=form.red.data)
+            flash('Successfully added a new statistics', 'success')
+            return redirect(url_for('statistics.admin_statistics_add'))
+        else:
+            print(form.errors)
 
     return render_template('admin/statistics/add.html', form=form, title='Admin Add Statistics')
 
@@ -44,29 +63,31 @@ def admin_statistics_update():
     form = AdminUpdateStatisticsForm()
     form.populate_dd()
 
-    match_id = request.args.get('id', type=int)
-    if request.method == 'GET' and match_id:
+    match_id = request.args.get('match_id', type=int)
+    if request.method == 'GET' and match_id and not player_id:
         if match_id >= 0:
             match = Match.query.get(match_id)
             form.match_dd.default = match_id
             players = Player.query.filter_by(team_id=match.host_team_id).all() + \
                 Player.query.filter_by(team_id=match.guest_team_id).all()
-            form.player_dd.choices = [(player.team_id, player.name) for player in players]
+            form.player_dd.choices = [(-1, '')] + [(player.id, '{} [{}]'.format(player.name, player.team.name)) for player in players]
             form.process()
         else:
             form.match_dd.default = 0
             form.player_dd.default = 0
             form.process()
+        
     
     if request.method == 'POST':
-        data_utils.update_statistics(match_id=form.match_dd.data,
-                                     player_id=form.player_dd.data,
-                                     goals=form.goals.data,
-                                     assists=form.assists.data,
-                                     yellow=form.yellow.data,
-                                     red=form.red.data)
-        flash('Successfully updated a statistics', 'success')
-        return redirect(url_for('statistics.admin_statistics_update'))
+        if form.validate():
+            data_utils.update_statistics(match_id=form.match_dd.data,
+                                        player_id=form.player_dd.data,
+                                        goals=form.goals.data,
+                                        assists=form.assists.data,
+                                        yellow=form.yellow.data,
+                                        red=form.red.data)
+            flash('Successfully updated a statistics', 'success')
+            return redirect(url_for('statistics.admin_statistics_update'))
 
     return render_template('admin/statistics/update.html', form=form, title='Admin Update Statistics')
 
@@ -79,6 +100,20 @@ def admin_statistics_delete():
         
     form = AdminDeleteStatisticsForm()
     form.populate_dd()
+
+    match_id = request.args.get('match_id', type=int)
+    if request.method == 'GET' and match_id:
+        if match_id >= 0:
+            match = Match.query.get(match_id)
+            form.match_dd.default = match_id
+            players = Player.query.filter_by(team_id=match.host_team_id).all() + \
+                Player.query.filter_by(team_id=match.guest_team_id).all()
+            form.player_dd.choices = [(-1, '')] + [(player.id, '{} [{}]'.format(player.name, player.team.name)) for player in players]
+            form.process()
+        else:
+            form.match_dd.default = 0
+            form.player_dd.default = 0
+            form.process()
     
     if request.method == 'POST':
         data_utils.delete_statistics(match_id=form.match_dd.data,

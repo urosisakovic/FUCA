@@ -92,7 +92,7 @@
                 if (id == -1)
                     document.location.href = "{{url_for('statistics.admin_statistics_update')}}";
                 else
-                    document.location.href = "{{url_for('statistics.admin_statistics_update')}}" + "?id=" + id;
+                    document.location.href = "{{url_for('statistics.admin_statistics_update')}}" + "?match_id=" + id;
             });
         });    
     </script>

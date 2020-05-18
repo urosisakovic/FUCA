@@ -10,15 +10,30 @@
                 
                 <div class="form-group">
                     {{ form.match_dd.label(class="form-control-label") }}
-                    <p>
-                        {{form.match_dd(class="form-control")}}
-                    </p>
+                    {% if form.match_dd.errors %}
+                        {{ form.match_dd(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.match_dd.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.match_dd(class="form-control form-control-lg") }}
+                    {% endif %}
                 </div>
+
                 <div class="form-group">
                     {{ form.player_dd.label(class="form-control-label") }}
-                    <p>
-                        {{form.player_dd(class="form-control")}}
-                    </p>
+                    {% if form.player_dd.errors %}
+                        {{ form.player_dd(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.player_dd.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.player_dd(class="form-control form-control-lg") }}
+                    {% endif %}
                 </div>
                 
                 <div class="form-group">
@@ -83,4 +98,18 @@
             </div>
         </form>
     </div>
+
+    <script charset="utf-8" type="text/javascript">
+        $(function() {
+            var matches = $('#select_match_add');
+            // event listener to state dropdown change
+            matches.on('change', function() {
+                var id = matches.val();
+                if (id == -1)
+                    document.location.href = "{{url_for('statistics.admin_statistics_add')}}";
+                else
+                    document.location.href = "{{url_for('statistics.admin_statistics_add')}}" + "?match_id=" + id;
+            });
+        });    
+    </script>
 {% endblock admin_stats_content %}

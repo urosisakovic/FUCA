@@ -26,4 +26,18 @@
             </div>
         </form>
     </div>
+
+    <script charset="utf-8" type="text/javascript">
+        $(function() {
+            var matches = $('#select_match_delete');
+            // event listener to state dropdown change
+            matches.on('change', function() {
+                var id = matches.val();
+                if (id == -1)
+                    document.location.href = "{{url_for('statistics.admin_statistics_delete')}}";
+                else
+                    document.location.href = "{{url_for('statistics.admin_statistics_delete')}}" + "?match_id=" + id;
+            });
+        });    
+    </script>
 {% endblock admin_stats_content %}
