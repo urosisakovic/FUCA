@@ -90,7 +90,79 @@ class Match(db.Model):
     host_team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     guest_team_id    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships
-    statistics  = db.relationship('Statistics', backref='match', lazy=True) 
+    statistics  = db.relationship('Statistics', backref='match', lazy=True)
+
+    @property
+    def host_team_playing(self):
+        cnt = 0
+
+        players = Player.query.filter_by(team_id=self.host_team_id).all()
+        for player in players:
+            playing = PlayingMatch.query.filter_by(player_id=player.id).filter_by(match_id=self.id).first()
+            if playing and playing.playing:
+                cnt += 1
+
+        return cnt
+
+    @property
+    def host_team_not_playing(self):
+        cnt = 0
+
+        players = Player.query.filter_by(team_id=self.host_team_id).all()
+        for player in players:
+            playing = PlayingMatch.query.filter_by(player_id=player.id).filter_by(match_id=self.id).first()
+            if playing and not playing.playing:
+                cnt += 1
+
+        return cnt
+
+    @property
+    def host_team_pending(self):
+        cnt = 0
+
+        players = Player.query.filter_by(team_id=self.host_team_id).all()
+        for player in players:
+            playing = PlayingMatch.query.filter_by(player_id=player.id).filter_by(match_id=self.id).first()
+            if not playing:
+                cnt += 1
+
+        return cnt
+
+    @property
+    def guest_team_playing(self):
+        cnt = 0
+
+        players = Player.query.filter_by(team_id=self.host_team_id).all()
+        for player in players:
+            playing = PlayingMatch.query.filter_by(player_id=player.id).filter_by(match_id=self.id).first()
+            if playing and playing.playing:
+                cnt += 1
+
+        return cnt
+
+    @property
+    def guest_team_not_playing(self):
+        cnt = 0
+
+        players = Player.query.filter_by(team_id=self.host_team_id).all()
+        for player in players:
+            playing = PlayingMatch.query.filter_by(player_id=player.id).filter_by(match_id=self.id).first()
+            if playing and not playing.playing:
+                cnt += 1
+
+        return cnt
+
+    @property
+    def guest_team_pending(self):
+        cnt = 0
+
+        players = Player.query.filter_by(team_id=self.host_team_id).all()
+        for player in players:
+            playing = PlayingMatch.query.filter_by(player_id=player.id).filter_by(match_id=self.id).first()
+            if not playing:
+                cnt += 1
+
+        return cnt
 
     def __repr__(self):
         return f"Match(host team id: {self.host_team_id}, guest team id: {self.guest_team_id})"
@@ -116,6 +188,10 @@ class Team(db.Model):
     @property
     def points(self):
         return self.wins*3 + self.draws*1
+            
+    @property
+    def players_count(self):
+        return len(self.players)
 
     def __repr__(self):
         return f"Team('{self.id}, {self.name}')"
@@ -134,3 +210,12 @@ class Statistics(db.Model):
 
     def __repr__(self):
         return f"Statistics(id = {self.id})"
+
+
+class PlayingMatch(db.Model):
+    __tablename__ = 'playingMatch'
+    id          = db.Column(db.Integer, primary_key=True)
+    playing     = db.Column(db.Boolean, nullable=False)
+    # foreign keys
+    player_id   = db.Column(db.Integer, db.ForeignKey('player.id'), nullable=False)
+    match_id    = db.Column(db.Integer, db.ForeignKey('player.id'),nullable=False)
