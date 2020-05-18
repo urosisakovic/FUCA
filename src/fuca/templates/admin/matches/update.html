@@ -9,10 +9,18 @@
                 <legend class="border-bottom mb-4">Update Match</legend>
                 <div class="form-group">
                     {{ form.match_dd.label(class="form-control-label") }}
-                    <p>
-                        {{form.match_dd(class="form-control")}}
-                    </p>
+                    {% if form.match_dd.errors %}
+                        {{ form.match_dd(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.match_dd.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.match_dd(class="form-control") }}
+                    {% endif %}
                 </div>
+
                 <div class="form-group">
                     {{ form.host_team_dd.label(class="form-control-label") }}
                     <p>

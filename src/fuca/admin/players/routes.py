@@ -94,6 +94,8 @@ def admin_players_update():
                                      image=form.image.data)
             flash('Successfully updated a player', 'success')
             return redirect(url_for('players.admin_players_update'))
+        else:
+            print(form.errors)
         
     return render_template('admin/players/update.html', form=form, title='Admin Update Players')
 

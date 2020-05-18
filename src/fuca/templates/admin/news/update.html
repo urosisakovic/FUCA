@@ -10,9 +10,16 @@
 
                 <div class="form-group">
                     {{ form.news_dd.label(class="form-control-label") }}
-                    <p>
-                        {{form.news_dd(class="form-control")}}
-                    </p>
+                    {% if form.news_dd.errors %}
+                        {{ form.news_dd(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.news_dd.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.news_dd(class="form-control form-control-lg") }}
+                    {% endif %}
                 </div>
 
                 <div class="form-group">

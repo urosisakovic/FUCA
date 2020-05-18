@@ -69,12 +69,17 @@ class AdminUpdatePlayerForm(FlaskForm):
     
     submit = SubmitField('Submit Player')
 
-    def validate_email(self, email):
-        update_player = Player.query.get(self.player_dd.data)
-        valid, player = data_utils.exists_player_with_email(email.data)
+    def validate_player_dd(self, player_dd):
+        if player_dd.data == -1:
+            raise ValidationError('You must select a player.')
 
-        if valid and update_player.id != player.id:             
-            raise ValidationError('Player with that email already exists!')
+    def validate_email(self, email):
+        if self.player_dd.data > -1:
+            update_player = Player.query.get(self.player_dd.data)
+            valid, player = data_utils.exists_player_with_email(email.data)
+
+            if valid and update_player.id != player.id:             
+                raise ValidationError('Player with that email already exists!')
 
     def validate_number(self, number):
         try: 
@@ -84,7 +89,7 @@ class AdminUpdatePlayerForm(FlaskForm):
         except ValueError:
             raise ValidationError('Invalid jersey number!')
 
-        teammates = Player.query.filter_by(team_id=self.team_dd.data).filter(Player.id != elf.player_dd.data).all()
+        teammates = Player.query.filter_by(team_id=self.team_dd.data).filter(Player.id != self.player_dd.data).all()
         teammates_numbers = [teammate.number for teammate in teammates]
         if int(number.data) in teammates_numbers:
             raise ValidationError('Other teammate already has that number!')
@@ -95,7 +100,7 @@ class AdminUpdatePlayerForm(FlaskForm):
         self.birth_year.choices = [(val, val) for val in range(2020, 2025)]
 
         teams = Team.query.all()
-        team_choices = [(-1, '')] + [(team.id, team.name) for team in teams]
+        team_choices = [(team.id, team.name) for team in teams]
         self.team_dd.choices = team_choices
 
         players = Player.query.filter_by(is_admin=False).all()

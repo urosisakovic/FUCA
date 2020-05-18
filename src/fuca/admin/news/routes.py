@@ -64,11 +64,12 @@ def admin_news_update():
             form.content.data = ''
     
     if request.method == 'POST':
-        data_utils.update_news(id=form.news_dd.data, 
-                               new_title=form.title.data,
-                               new_content=form.content.data)
-        flash('Successfully updated news', 'success')
-        return redirect(url_for('news.admin_news_update'))
+        if form.validate():
+            data_utils.update_news(id=form.news_dd.data, 
+                                new_title=form.title.data,
+                                new_content=form.content.data)
+            flash('Successfully updated news', 'success')
+            return redirect(url_for('news.admin_news_update'))
 
     return render_template('admin/news/update.html',
                            form=form,

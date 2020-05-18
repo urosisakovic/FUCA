@@ -30,6 +30,10 @@ class AdminUpdateTeamForm(FlaskForm):
         team_choices = [(-1, '')] + [(team.id, team.name) for team in teams]
         self.teams_dd.choices = team_choices
 
+    def validate_teams_dd(self, teams_dd):
+        if teams_dd.data == -1:
+            raise ValidationError('You must select a team.')
+
     def validate_name(self, name):
         team = Team.query.filter_by(name=name.data).first()
         if team and team.id != self.teams_dd.data:

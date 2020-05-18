@@ -49,7 +49,7 @@ class AdminUpdateMatchForm(FlaskForm):
 
     def populate_dd(self):
         matches = Match.query.all()
-        match_choices = [(match.id, '{} vs {} at {}'.format(match.host_team.name,
+        match_choices = [(-1, '')] + [(match.id, '{} vs {} at {}'.format(match.host_team.name,
                                                             match.guest_team.name,
                                                             match.date_time.strftime('%d. %m. %Y.'))) for match in matches]
         self.match_dd.choices = match_choices
@@ -64,6 +64,10 @@ class AdminUpdateMatchForm(FlaskForm):
         self.day.choices = [(val, val) for val in range(1, 32)]
         self.month.choices = [(val, val) for val in range(1, 13)]
         self.year.choices = [(val, val) for val in range(2020, 2025)]
+
+    def validate_match_dd(self, match_dd):
+        if match_dd.data == -1:
+            raise ValidationError('You must select a match.')
 
     def validate_guest_team_dd(self, guest_team_dd):
         if guest_team_dd.data == self.host_team_dd.data:
