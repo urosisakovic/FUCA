@@ -29,6 +29,17 @@
                 </div>
 
                 <div class="form-group">
+                    {{ form.minutes.label(class="form-control-label") }}
+                    <p>
+                        {{form.minutes(class="form-control")}}
+                    </p>
+
+                    {{ form.hours.label(class="form-control-label") }}
+                    <p>
+                        {{form.hours(class="form-control")}}
+                    </p>
+
+
                     {{ form.day.label(class="form-control-label") }}
                     <p>
                         {{form.day(class="form-control")}}

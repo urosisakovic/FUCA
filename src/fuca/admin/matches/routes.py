@@ -34,7 +34,9 @@ def admin_matches_add():
             data_utils.add_match(date_time=datetime(int(form.year.data),
                                                     int(form.month.data), 
                                                     int(form.day.data), 
-                                                    0, 0, 0),
+                                                    int(form.hours.data),
+                                                    int(form.minutes.data),
+                                                    0),
                                 host_team_id=form.host_team_dd.data,
                                 guest_team_id=form.guest_team_dd.data)
             flash('Successfully added a new match', 'success')
@@ -62,6 +64,8 @@ def admin_matches_update():
             form.day.default = match.date_time.day
             form.month.default = match.date_time.month
             form.year.default = match.date_time.year
+            form.minutes.default = match.date_time.minute
+            form.hours.default = match.date_time.hour
             form.process()
         else:
             form.match_dd.default = 0
@@ -70,18 +74,25 @@ def admin_matches_update():
             form.day.default = 1
             form.month.default = 1
             form.year.default = 2020
+            form.hours.default = 0
+            form.minutes.default = 0
             form.process()
 
     if request.method == 'POST':
-        data_utils.update_match(id=form.match_dd.data,
-                                date_time=datetime(int(form.year.data),
-                                                   int(form.month.data),
-                                                   int(form.day.data),
-                                                   0, 0, 0),
-                                host_team_id=form.host_team_dd.data,
-                                guest_team_id=form.guest_team_dd.data)
-        flash('Successfully updated a match', 'success')
-        return redirect(url_for('matches.admin_matches_update'))
+        if form.validate():
+            data_utils.update_match(id=form.match_dd.data,
+                                    date_time=datetime(int(form.year.data),
+                                                    int(form.month.data),
+                                                    int(form.day.data),
+                                                    int(form.hours.data),
+                                                    int(form.minutes.data),
+                                                    0),
+                                    host_team_id=form.host_team_dd.data,
+                                    guest_team_id=form.guest_team_dd.data)
+            flash('Successfully updated a match', 'success')
+            return redirect(url_for('matches.admin_matches_update'))
+        else:
+            print(form.errors)
 
     return render_template('admin/matches/update.html', form=form, title='Admin Update Matches')
 

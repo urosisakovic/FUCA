@@ -6,12 +6,14 @@ from fuca.models import Match, Team
 
 
 class AdminAddMatchForm(FlaskForm):
-    host_team_dd = SelectField('Host Team', choices=[])
-    guest_team_dd = SelectField('Guest Team', choices=[])
+    host_team_dd = SelectField('Host Team', choices=[], coerce=int)
+    guest_team_dd = SelectField('Guest Team', choices=[], coerce=int)
 
-    day = SelectField('Day',choices=[])
-    month = SelectField('Month',choices=[])
-    year = SelectField('Year', choices=[])
+    hours = SelectField('Hours', choices=[], coerce=int)
+    minutes = SelectField('Minutes', choices=[], coerce=int)
+    day = SelectField('Day', choices=[], coerce=int)
+    month = SelectField('Month', choices=[], coerce=int)
+    year = SelectField('Year', choices=[], coerce=int)
     submit = SubmitField('Add Match')
 
     def populate_dd(self):
@@ -21,9 +23,11 @@ class AdminAddMatchForm(FlaskForm):
         self.host_team_dd.choices = team_choices
         self.guest_team_dd.choices = team_choices
 
+        self.minutes.choices = [(val, val) for val in range(0, 60, 5)]
+        self.hours.choices = [(val, val) for val in range(0, 24)]
         self.day.choices = [(val, val) for val in range(1, 32)]
         self.month.choices = [(val, val) for val in range(1, 13)]
-        self.year.choices = [(val, val) for val in range(2020, 1940, -1)]
+        self.year.choices = [(val, val) for val in range(2020, 2025)]
 
     def validate_guest_team_dd(self, guest_team_dd):
         if guest_team_dd.data == self.host_team_dd.data:
@@ -31,19 +35,23 @@ class AdminAddMatchForm(FlaskForm):
 
 
 class AdminUpdateMatchForm(FlaskForm):
-    match_dd = SelectField('Match', choices=[], id='select_matches')
+    match_dd = SelectField('Match', choices=[], id='select_matches', coerce=int)
 
-    host_team_dd = SelectField('Host Team', choices=[])
-    guest_team_dd = SelectField('Guest Team', choices=[])
+    host_team_dd = SelectField('Host Team', choices=[], coerce=int)
+    guest_team_dd = SelectField('Guest Team', choices=[], coerce=int)
 
-    day = SelectField('Day',choices=[])
-    month = SelectField('Month',choices=[])
-    year = SelectField('Year', choices=[])
+    hours = SelectField('Hours', choices=[], coerce=int)
+    minutes = SelectField('Minutes', choices=[], coerce=int)
+    day = SelectField('Day',choices=[], coerce=int)
+    month = SelectField('Month',choices=[], coerce=int)
+    year = SelectField('Year', choices=[], coerce=int)
     submit = SubmitField('Update Match')
 
     def populate_dd(self):
         matches = Match.query.all()
-        match_choices = [(-1, '')] + [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
+        match_choices = [(match.id, '{} vs {} at {}'.format(match.host_team.name,
+                                                            match.guest_team.name,
+                                                            match.date_time.strftime('%d. %m. %Y.')) for match in matches]
         self.match_dd.choices = match_choices
 
         teams = Team.query.all()
@@ -51,9 +59,15 @@ class AdminUpdateMatchForm(FlaskForm):
         self.host_team_dd.choices = team_choices
         self.guest_team_dd.choices = team_choices
 
+        self.minutes.choices = [(val, val) for val in range(0, 60, 5)]
+        self.hours.choices = [(val, val) for val in range(0, 24)]
         self.day.choices = [(val, val) for val in range(1, 32)]
         self.month.choices = [(val, val) for val in range(1, 13)]
-        self.year.choices = [(val, val) for val in range(2020, 1940, -1)]
+        self.year.choices = [(val, val) for val in range(2020, 2025)]
+
+    def validate_guest_team_dd(self, guest_team_dd):
+        if guest_team_dd.data == self.host_team_dd.data:
+            raise ValidationError('Host and guest teams must be different.')
 
 
 class AdminDeleteMatchForm(FlaskForm):
@@ -62,5 +76,8 @@ class AdminDeleteMatchForm(FlaskForm):
 
     def populate_dd(self):
         matches = Match.query.all()
-        match_choices = [(match.id, match.host_team.name + ' vs ' + match.guest_team.name) for match in matches]
+        match_choices = [(match.id, '{} vs {} at {}'.format(match.host_team.name,
+                                                            match.guest_team.name,
+                                                            match.date_time.strftime('%d. %m. %Y.')) for match in matches]
         self.match_dd.choices = match_choices
+
