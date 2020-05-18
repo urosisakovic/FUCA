@@ -60,11 +60,12 @@ def admin_teams_update():
             form.name.data = ''
 
     if request.method == 'POST':
-        data_utils.update_team(id=form.teams_dd.data,
-                                name=form.name.data,
-                                image=form.image.data)
-        flash('Successfully updated a team', 'success')
-        return redirect(url_for('adminteams.admin_teams_update'))
+        if form.validate():
+            data_utils.update_team(id=form.teams_dd.data,
+                                   name=form.name.data,
+                                   image=form.image.data)
+            flash('Successfully updated a team', 'success')
+            return redirect(url_for('adminteams.admin_teams_update'))
 
     return render_template('admin/teams/update.html', form=form, title='Admin Update Teams')
 

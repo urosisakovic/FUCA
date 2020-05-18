@@ -20,7 +20,7 @@ class AdminAddTeamForm(FlaskForm):
 
 
 class AdminUpdateTeamForm(FlaskForm):
-    teams_dd = SelectField('Teams', choices=[], id='select_team')
+    teams_dd = SelectField('Teams', choices=[], coerce=int, id='select_team')
     name = StringField('Name', validators=[DataRequired()])
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Update Team')
@@ -29,6 +29,11 @@ class AdminUpdateTeamForm(FlaskForm):
         teams = Team.query.all()
         team_choices = [(-1, '')] + [(team.id, team.name) for team in teams]
         self.teams_dd.choices = team_choices
+
+    def validate_name(self, name):
+        team = Team.query.filter_by(name=name.data).first()
+        if team and team.id != self.teams_dd.data:
+            raise ValidationError('Team with that name already exists')
 
 
 class AdminDeleteTeamForm(FlaskForm):
