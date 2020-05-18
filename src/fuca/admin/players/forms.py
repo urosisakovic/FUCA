@@ -1,23 +1,26 @@
+from datetime import datetime
+
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, ValidationError
 
 from fuca import data_utils
+
 from fuca.models import Player, Team
 
 
 class AdminAddPlayerForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    number = StringField('Number', validators=[DataRequired()])
+    number = StringField('Jersey Number', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
 
-    birth_day = SelectField('Day',choices=[])
-    birth_month = SelectField('Month',choices=[])
-    birth_year = SelectField('Year', choices=[])
+    birth_day = SelectField('Day',choices=[], coerce=int)
+    birth_month = SelectField('Month',choices=[], coerce=int)
+    birth_year = SelectField('Year', choices=[], coerce=int)
     
     image = FileField('Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
-    team_dd = SelectField('Team', choices=[])
+    team_dd = SelectField('Team', choices=[], coerce=int)
     
     submit = SubmitField('Submit Player')
 
@@ -25,6 +28,19 @@ class AdminAddPlayerForm(FlaskForm):
         valid, player = data_utils.exists_player_with_email(email.data)
         if valid:
             raise ValidationError('Player with that email already exists!')
+
+    def validate_number(self, number):
+        try: 
+            n = int(number.data)
+            if n >= 100 or n < 0:
+                raise ValidationError('Invalid jersey number!')
+        except ValueError:
+            raise ValidationError('Invalid jersey number!')
+
+        teammates = Player.query.filter_by(team_id=self.team_dd.data).all()
+        teammates_numbers = [teammate.number for teammate in teammates]
+        if int(number.data) in teammates_numbers:
+            raise ValidationError('Other teammate already has that number!')
 
 
     def populate_dd(self):
@@ -38,30 +54,40 @@ class AdminAddPlayerForm(FlaskForm):
 
 
 class AdminUpdatePlayerForm(FlaskForm):
-    player_dd = SelectField('Player', choices=[], id='select_players')
+    player_dd = SelectField('Player', choices=[], id='select_players', coerce=int)
 
     name = StringField('Name', validators=[DataRequired()])
-    number = StringField('Number', validators=[DataRequired()])
+    number = StringField('Jersey Number', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
 
-    birth_day = SelectField('Day',choices=[])
-    birth_month = SelectField('Month',choices=[])
-    birth_year = SelectField('Year', choices=[])
+    birth_day = SelectField('Day',choices=[], coerce=int)
+    birth_month = SelectField('Month',choices=[], coerce=int)
+    birth_year = SelectField('Year', choices=[], coerce=int)
     
     image = FileField("Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
-    team_dd = SelectField('Team', choices=[])
+    team_dd = SelectField('Team', choices=[], coerce=int)
     
     submit = SubmitField('Submit Player')
 
-    player_id = -1
-
     def validate_email(self, email):
-        if self.player_id > -1:
-            player = Player.query.get(self.player_id)
-            if player:
-                valid, _ = data_utils.exists_player_with_email(email.data)
-                if player.email != email.data and valid:             
-                    raise ValidationError('Player with that email already exists!')
+        update_player = Player.query.get(self.player_dd.data)
+        valid, player = data_utils.exists_player_with_email(email.data)
+
+        if valid and update_player.id != player.id:             
+            raise ValidationError('Player with that email already exists!')
+
+    def validate_number(self, number):
+        try: 
+            n = int(number.data)
+            if n >= 100 or n < 0:
+                raise ValidationError('Invalid jersey number!')
+        except ValueError:
+            raise ValidationError('Invalid jersey number!')
+
+        teammates = Player.query.filter_by(team_id=self.team_dd.data).filter(Player.id != elf.player_dd.data).all()
+        teammates_numbers = [teammate.number for teammate in teammates]
+        if int(number.data) in teammates_numbers:
+            raise ValidationError('Other teammate already has that number!')
 
     def populate_dd(self):
         self.birth_day.choices = [(val, val) for val in range(1, 32)]
@@ -83,5 +109,5 @@ class AdminDeletePlayerForm(FlaskForm):
 
     def populate_dd(self):
         players = Player.query.filter_by(is_admin=False).all()
-        player_choices = [(player.id, player.name) for player in players]
+        player_choices = [(player.id, player.name + ' ' + str(player.number) + ' [' + player.team.name + ']') for player in players]
         self.player_dd.choices = player_choices

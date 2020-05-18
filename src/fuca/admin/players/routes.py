@@ -42,7 +42,7 @@ def admin_players_add():
                                   image=form.image.data)
             flash('Successfully added a new player', 'success')
             return redirect(url_for('players.admin_players_add'))
-
+    
     return render_template('admin/players/add.html', form=form, title='Admin Add Players')
 
 
@@ -81,7 +81,6 @@ def admin_players_update():
             
 
     if request.method == 'POST':
-        form.player_id = int(form.player_dd.data)
         if form.validate():
             data_utils.update_player(id=form.player_dd.data,
                                      name=form.name.data,
