@@ -27,17 +27,18 @@ def admin_results_add():
     form.populate_dd()
 
     if request.method == 'POST':
-        data_utils.add_result(id=form.match_dd.data, 
-                              host_team_goals=form.host_team_goals.data,
-                              host_team_yellow=form.host_team_yellow.data,
-                              host_team_red=form.host_team_red.data,
-                              host_team_shots=form.host_team_shots.data, 
-                              guest_team_goals=form.guest_team_goals.data,
-                              guest_team_yellow=form.guest_team_yellow.data,
-                              guest_team_red=form.guest_team_red.data,
-                              guest_team_shots=form.guest_team_shots.data)
-        flash('Successfully added a new result', 'success')
-        return redirect(url_for('results.admin_result_add'))
+        if form.validate():
+            data_utils.add_result(id=form.match_dd.data, 
+                                host_team_goals=form.host_team_goals.data,
+                                host_team_yellow=form.host_team_yellow.data,
+                                host_team_red=form.host_team_red.data,
+                                host_team_shots=form.host_team_shots.data, 
+                                guest_team_goals=form.guest_team_goals.data,
+                                guest_team_yellow=form.guest_team_yellow.data,
+                                guest_team_red=form.guest_team_red.data,
+                                guest_team_shots=form.guest_team_shots.data)
+            flash('Successfully added a new result', 'success')
+            return redirect(url_for('results.admin_results_add'))
 
     return render_template('admin/results/add.html', form=form, title='Admin Add Results')
 
@@ -82,17 +83,18 @@ def admin_results_update():
             form.guest_team_shots.data = ''
 
     if request.method == 'POST':
-        data_utils.update_result(id=form.match_dd.data, 
-                                 host_team_goals=form.host_team_goals.data,
-                                 host_team_yellow=form.host_team_yellow.data,
-                                 host_team_red=form.host_team_red.data,
-                                 host_team_shots=form.host_team_shots.data, 
-                                 guest_team_goals=form.guest_team_goals.data,
-                                 guest_team_yellow=form.guest_team_yellow.data,
-                                 guest_team_red=form.guest_team_red.data,
-                                 guest_team_shots=form.guest_team_shots.data)
-        flash('Successfully updated a result', 'success')
-        return redirect(url_for('results.admin_results_update'))
+        if form.validate():
+            data_utils.update_result(id=form.match_dd.data, 
+                                    host_team_goals=form.host_team_goals.data,
+                                    host_team_yellow=form.host_team_yellow.data,
+                                    host_team_red=form.host_team_red.data,
+                                    host_team_shots=form.host_team_shots.data, 
+                                    guest_team_goals=form.guest_team_goals.data,
+                                    guest_team_yellow=form.guest_team_yellow.data,
+                                    guest_team_red=form.guest_team_red.data,
+                                    guest_team_shots=form.guest_team_shots.data)
+            flash('Successfully updated a result', 'success')
+            return redirect(url_for('results.admin_results_update'))
 
     return render_template('admin/results/update.html', form=form, title='Admin Update Results')
 
@@ -109,6 +111,6 @@ def admin_results_delete():
     if request.method == 'POST':
         data_utils.delete_result(id=form.match_dd.data)
         flash('Successfully deleted a result', 'success')
-        return redirect(url_for('results.admin_result_delete'))
+        return redirect(url_for('results.admin_results_delete'))
 
     return render_template('admin/results/delete.html', form=form, title='Admin Delete Results')

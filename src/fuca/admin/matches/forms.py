@@ -51,7 +51,7 @@ class AdminUpdateMatchForm(FlaskForm):
         matches = Match.query.all()
         match_choices = [(match.id, '{} vs {} at {}'.format(match.host_team.name,
                                                             match.guest_team.name,
-                                                            match.date_time.strftime('%d. %m. %Y.')) for match in matches]
+                                                            match.date_time.strftime('%d. %m. %Y.'))) for match in matches]
         self.match_dd.choices = match_choices
 
         teams = Team.query.all()
@@ -78,6 +78,6 @@ class AdminDeleteMatchForm(FlaskForm):
         matches = Match.query.all()
         match_choices = [(match.id, '{} vs {} at {}'.format(match.host_team.name,
                                                             match.guest_team.name,
-                                                            match.date_time.strftime('%d. %m. %Y.')) for match in matches]
+                                                            match.date_time.strftime('%d. %m. %Y.'))) for match in matches]
         self.match_dd.choices = match_choices
 
