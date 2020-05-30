@@ -43,7 +43,7 @@ def add_admin():
 
 def add_news():
     news_filepath = 'news.json'
-    with open(news_filepath) as json_file:
+    with open(news_filepath, encoding="utf8") as json_file:
         news_list = json.load(json_file)['news']
 
     cnt = 0
@@ -56,7 +56,7 @@ def add_news():
 
 def add_teams():
     teams_filepath = 'teams.json'
-    with open(teams_filepath) as json_file:
+    with open(teams_filepath, encoding="utf8") as json_file:
         teams_list = json.load(json_file)['teams']
     
     cnt = 0
@@ -80,7 +80,7 @@ def string_to_date(str_date):
 
 def add_players():
     players_filepath = 'players.json'
-    with open(players_filepath) as json_file:
+    with open(players_filepath, encoding="utf8") as json_file:
         players_list = json.load(json_file)['players']
 
     cnt = 0
@@ -98,7 +98,7 @@ def add_players():
 
 def add_matches():
     matches_filepath = 'matches.json'
-    with open(matches_filepath) as json_file:
+    with open(matches_filepath, encoding="utf8") as json_file:
         matches_list = json.load(json_file)['matches']
 
     cnt = 0
@@ -122,7 +122,7 @@ def add_matches():
 
 def add_statistics():
     stats_filepath = 'statistics.json'
-    with open(stats_filepath) as json_file:
+    with open(stats_filepath, encoding="utf8") as json_file:
         stats_list = json.load(json_file)['statistics']
 
     cnt = 0
