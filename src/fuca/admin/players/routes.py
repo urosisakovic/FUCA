@@ -1,3 +1,6 @@
+"""
+Author: Uros Isakovic
+"""
 from datetime import datetime
 
 from flask import redirect, render_template, request, url_for, abort, flash

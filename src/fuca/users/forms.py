@@ -1,3 +1,6 @@
+"""
+Author: Djodje Vucinic
+"""
 from flask_wtf import FlaskForm
 from fuca import data_utils
 from wtforms import BooleanField, PasswordField, StringField, SubmitField

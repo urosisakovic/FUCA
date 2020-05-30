@@ -1,3 +1,6 @@
+"""
+Author: Uros Isakovic
+"""
 from flask_wtf import FlaskForm
 from fuca.models import News
 from wtforms import SelectField, StringField, SubmitField, TextAreaField

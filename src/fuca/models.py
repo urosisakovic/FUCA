@@ -1,3 +1,6 @@
+"""
+Author: Igor Andrejic
+"""
 from datetime import datetime
 from fuca import db, login_manager
 from flask_login import UserMixin

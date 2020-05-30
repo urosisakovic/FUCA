@@ -1,3 +1,6 @@
+"""
+Author: Igor Andrejic
+"""
 import os
 from fuca import db, bcrypt
 from fuca.models import *

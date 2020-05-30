@@ -1,3 +1,6 @@
+"""
+Author: Nikola Barjaktarevic
+"""
 from datetime import datetime
 
 from flask import Blueprint, render_template, request, url_for

@@ -1,4 +1,6 @@
-
+"""
+Author: Nikola Barjaktarevic
+"""
 from flask import Blueprint, render_template, url_for
 
 from fuca.models import Player, Team

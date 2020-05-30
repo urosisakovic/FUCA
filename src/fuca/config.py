@@ -1,3 +1,6 @@
+"""
+Author: Djodje Vucinic
+"""
 import os
 
 class Config:

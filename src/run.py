@@ -1,3 +1,6 @@
+"""
+Author: Djordje Vucinic
+"""
 from fuca import create_app
 
 if __name__ == '__main__':

@@ -1,4 +1,7 @@
 
+"""
+Author: Uros Isakovic
+"""
 from flask import Blueprint, redirect, render_template, request, url_for, abort, flash
 
 from flask_login import current_user, login_required

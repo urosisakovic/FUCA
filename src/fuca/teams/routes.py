@@ -1,3 +1,6 @@
+"""
+Author: Djodje Vucinic
+"""
 from datetime import datetime
 
 from flask import Blueprint, render_template, url_for
