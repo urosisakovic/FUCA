@@ -8,6 +8,9 @@ from fuca.models import Match, Player
 
 
 class AdminAddStatisticsForm(FlaskForm):
+    """
+    Class which implements admin form for adding statistics.
+    """
     match_dd = SelectField('Match', choices=[], coerce=int, id='select_match_add')
     player_dd = SelectField('Player', choices=[], coerce=int)
 
@@ -42,6 +45,9 @@ class AdminAddStatisticsForm(FlaskForm):
     
 
 class AdminUpdateStatisticsForm(FlaskForm):
+    """
+    Class which implements admin form for updating statistics.
+    """
     match_dd = SelectField('Match', choices=[], id='select_match', coerce=int)
     player_dd = SelectField('Player', choices=[], coerce=int)
 
@@ -76,6 +82,9 @@ class AdminUpdateStatisticsForm(FlaskForm):
 
 
 class AdminDeleteStatisticsForm(FlaskForm):
+    """
+    Class which implements admin form for deleting statistics.
+    """
     match_dd = SelectField('Match', choices=[], coerce=int, id='select_match_delete')
     player_dd = SelectField('Player', choices=[], coerce=int)
     submit = SubmitField('Delete Statistics')

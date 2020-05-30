@@ -9,6 +9,9 @@ from fuca.models import Match, Team
 
 
 class AdminAddMatchForm(FlaskForm):
+    """
+    Class which implements admin form for adding matches.
+    """
     host_team_dd = SelectField('Host Team', choices=[], coerce=int)
     guest_team_dd = SelectField('Guest Team', choices=[], coerce=int)
 
@@ -38,6 +41,9 @@ class AdminAddMatchForm(FlaskForm):
 
 
 class AdminUpdateMatchForm(FlaskForm):
+    """
+    Class which implements admin form for updating matches.
+    """
     match_dd = SelectField('Match', choices=[], id='select_matches', coerce=int)
 
     host_team_dd = SelectField('Host Team', choices=[], coerce=int)
@@ -78,6 +84,9 @@ class AdminUpdateMatchForm(FlaskForm):
 
 
 class AdminDeleteMatchForm(FlaskForm):
+    """
+    Class which implements admin form for deleting matches.
+    """
     match_dd = SelectField('Match', choices=[])
     submit = SubmitField('Delete Match')
 

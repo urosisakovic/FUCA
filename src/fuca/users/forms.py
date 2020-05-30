@@ -9,6 +9,9 @@ from flask_login import current_user
 
 
 class LoginForm(FlaskForm):
+    """
+    Class which implements user form for logging in.
+    """
     email = StringField('Email', validators=[Email(), DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
@@ -16,6 +19,9 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
+    """
+    Class which implements user form for registering.
+    """
     email = StringField('Email', validators=[Email(), DataRequired()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=30)])
     confirm_password = PasswordField('Confirm Password',
@@ -42,6 +48,9 @@ class RegisterForm(FlaskForm):
 
 
 class ChangePasswordForm(FlaskForm):
+    """
+    Class which implements user form for changing password.
+    """
     current_password = PasswordField('Current Password', 
                                      validators=[DataRequired()])
     new_password = PasswordField('Password',
@@ -66,6 +75,9 @@ class ChangePasswordForm(FlaskForm):
 
 
 class RequestResetForm(FlaskForm):
+    """
+    Class which implements user form for requesting a password reset.
+    """
     email = StringField('Email', validators=[Email(), DataRequired()])
     submit = SubmitField('Request Password Reset')
 
@@ -77,6 +89,9 @@ class RequestResetForm(FlaskForm):
             return
 
 class ResetPasswordForm(FlaskForm):
+    """
+    Class which implements user form for validating a password reset.
+    """
     new_password = PasswordField('New Password', validators=[DataRequired(), Length(min=8, max=30)])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('new_password')])

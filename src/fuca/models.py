@@ -14,6 +14,9 @@ def load_user(player_id):
 
 
 class News(db.Model):
+    """
+    Class which represent NEWS table in database.
+    """
     __tablename__ = 'news'
     id          = db.Column(db.Integer,     primary_key=True)
     date        = db.Column(db.DateTime,    nullable=False, default=datetime.utcnow)
@@ -25,6 +28,9 @@ class News(db.Model):
 
 
 class Player(db.Model, UserMixin):
+    """
+    Class which represent PLAYER table in database.
+    """
     __tablename__ = 'player'
     id          = db.Column(db.Integer,     primary_key=True)
     name        = db.Column(db.String(100), nullable=False)
@@ -91,6 +97,9 @@ class Player(db.Model, UserMixin):
 
 
 class Match(db.Model):
+    """
+    Class which represent MATCH table in database.
+    """
     __tablename__ = 'match'
     id                      = db.Column(db.Integer, primary_key=True)
     date_time               = db.Column(db.DateTime, nullable=False)
@@ -188,6 +197,9 @@ class Match(db.Model):
                 
 
 class Team(db.Model):
+    """
+    Class which represent TEAM table in database.
+    """
     __tablename__ = 'team'
     id          = db.Column(db.Integer,     primary_key=True)
     name        = db.Column(db.String(100), nullable=False, unique=True)
@@ -217,6 +229,9 @@ class Team(db.Model):
 
 
 class Statistics(db.Model):
+    """
+    Class which represent STATISTICS table in database.
+    """
     __tablename__ = 'statistics'
     id          = db.Column(db.Integer, primary_key=True)
     goals       = db.Column(db.Integer, nullable=False)
@@ -232,6 +247,9 @@ class Statistics(db.Model):
 
 
 class PlayingMatch(db.Model):
+    """
+    Class which represent MATCH table in database.
+    """
     __tablename__ = 'playingMatch'
     id          = db.Column(db.Integer, primary_key=True)
     playing     = db.Column(db.Boolean, nullable=False)

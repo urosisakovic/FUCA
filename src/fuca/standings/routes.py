@@ -9,6 +9,9 @@ scores = Blueprint('standings', __name__)
 
 @scores.route("/")
 def standings():
+    """
+    Route function for standings page.
+    """
     teams = Team.query.all()
     teams = list(reversed(sorted(teams, key=lambda team: team.points)))
     for team in teams:
@@ -19,6 +22,9 @@ def standings():
 
 @scores.route("/bestplayers")
 def bestplayers():
+    """
+    Route function for best-players page.
+    """
     players = Player.query.filter_by(is_admin=False).all()
     players = list(reversed(sorted(players, key=lambda player: player.points)))
     for player in players:
@@ -31,6 +37,9 @@ def bestplayers():
 
 @scores.route("/bestscorers")
 def bestscorers():
+    """
+    Route function for best-scorers page.
+    """
     players = Player.query.filter_by(is_admin=False).all()
     players = list(reversed(sorted(players, key=lambda player: player.goals)))
     for player in players:

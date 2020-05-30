@@ -15,6 +15,9 @@ users = Blueprint('users', __name__)
 
 @users.route("/login", methods=['GET', 'POST'])
 def login():
+    """
+    Route function for login page.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
 
@@ -37,6 +40,9 @@ def login():
 
 @users.route("/register", methods=['GET', 'POST'])
 def register():
+    """
+    Route function for register page.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
 
@@ -50,6 +56,9 @@ def register():
 
 @users.route("/logout")
 def logout():
+    """
+    Route function for logout page.
+    """
     logout_user()
     flash('Successfully logged out!', 'success')
     return redirect(url_for('main.home'))
@@ -58,6 +67,9 @@ def logout():
 @users.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+    """
+    Route function for account page.
+    """
     form = ChangePasswordForm()
     if form.validate_on_submit():
         data_utils.register_player(current_user.email, form.new_password.data)
@@ -70,6 +82,9 @@ def account():
 @users.route("/myteam", methods=['GET'])
 @login_required
 def myteam():
+    """
+    Route function for my-team page.
+    """
     matches = Match.query.filter_by(host_team_id=current_user.team_id).all() +\
         Match.query.filter_by(guest_team_id=current_user.team_id).all()
 
@@ -131,6 +146,9 @@ def myteam():
 
 
 def send_reset_email(player):
+    """
+    Route function for reset email page.
+    """
     token = player.get_reset_token()
     msg = Message('Password Reset Request',
                   sender='noreply@fuca.com',
@@ -148,6 +166,9 @@ If you did not make this request, then simply ignore this email and no changes w
 
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
+    """
+    Route function for request reset page.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
 
@@ -166,6 +187,9 @@ def reset_request():
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
+    """
+    Route function for validating reset password request page.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
 

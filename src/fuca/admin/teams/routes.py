@@ -16,6 +16,10 @@ adminteams = Blueprint('adminteams', __name__)
 @adminteams.route("/", methods=['GET', 'POST'])
 @login_required
 def admin_teams():
+    """
+    Route reserved for admin access only.
+    Used for administration of teams.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -25,6 +29,10 @@ def admin_teams():
 @adminteams.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_teams_add():
+    """
+    Route reserved for admin access only.
+    Used for adding teams.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -44,6 +52,10 @@ def admin_teams_add():
 @adminteams.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_teams_update():
+    """
+    Route reserved for admin access only.
+    Used for updating teams.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -76,6 +88,10 @@ def admin_teams_update():
 @adminteams.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_teams_delete():
+    """
+    Route reserved for admin access only.
+    Used for deleting teams.
+    """
     if not current_user.is_admin:
         abort(403)
 

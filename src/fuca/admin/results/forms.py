@@ -8,6 +8,9 @@ from fuca.models import Match
 
 
 class AdminAddResultForm(FlaskForm):
+    """
+    Class which implements admin form for adding results.
+    """
     match_dd = SelectField('Match', choices=[], coerce=int)
 
     host_team_goals = StringField('Host Team Goals', validators=[DataRequired()])
@@ -99,6 +102,9 @@ class AdminAddResultForm(FlaskForm):
 
 
 class AdminUpdateResultForm(FlaskForm):
+    """
+    Class which implements admin form for updating results.
+    """
     match_dd = SelectField('Result', choices=[], id='select_results', coerce=int)
 
     host_team_goals = StringField('Host Team Goals', validators=[DataRequired()])
@@ -190,6 +196,9 @@ class AdminUpdateResultForm(FlaskForm):
         
 
 class AdminDeleteResultForm(FlaskForm):
+    """
+    Class which implements admin form for deleting results.
+    """
     match_dd = SelectField('Result', choices=[], coerce=int)
     submit = SubmitField('Delete Results')
 

@@ -4,6 +4,9 @@ Author: Djodje Vucinic
 import os
 
 class Config:
+    """
+    Configuration class for Flask app.
+    """
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     

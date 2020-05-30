@@ -12,6 +12,9 @@ main = Blueprint('main', __name__)
 @main.route("/")
 @main.route("/home")
 def home():
+    """
+    Home page route function.
+    """
     page = request.args.get('page', 1, type=int)
     news = News.query.order_by(News.date.desc()).paginate(page=page, per_page=5)
     return render_template('home/home.html', newslist=news)
@@ -19,6 +22,9 @@ def home():
 
 @main.route("/results")
 def results():
+    """
+    Result page route function.
+    """
     results = Match.query.filter(Match.date_time < datetime.now()).all()
     for result in results:
         result.host_team_logo = url_for('static', filename='images/teams/{}'.format(result.host_team.logo_image))
@@ -28,6 +34,9 @@ def results():
 
 @main.route("/schedule")
 def schedule():
+    """
+    Schedule page route function.
+    """
     schedules = Match.query.filter(Match.date_time >= datetime.now()).all()
     for schedule in schedules:
         schedule.host_team_logo = url_for('static', filename='images/teams/{}'.format(schedule.host_team.logo_image))
@@ -37,6 +46,9 @@ def schedule():
 
 @main.route("/player/<int:id>")
 def player(id):
+    """
+    Player page route function.
+    """
     player = Player.query.get_or_404(id)
     if player.is_admin:
         return render_template('errors/404.html'), 404
@@ -46,6 +58,9 @@ def player(id):
 
 @main.route("/teams")
 def teams():
+    """
+    Teams page route function.
+    """
     teams = Team.query.all()
     for team in teams:
         team.logo = url_for('static', filename='images/teams/{}'.format(team.logo_image))

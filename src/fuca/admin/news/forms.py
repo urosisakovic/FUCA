@@ -8,6 +8,9 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 class AdminAddNewsForm(FlaskForm):
+    """
+    Class which implements admin form for adding news.
+    """
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Add News')
@@ -17,6 +20,9 @@ class AdminAddNewsForm(FlaskForm):
 
 
 class AdminUpdateNewsForm(FlaskForm):
+    """
+    Class which implements admin form for updating news.
+    """
     news_dd = SelectField('News', choices=[], id='select_news', coerce=int)
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
@@ -33,6 +39,9 @@ class AdminUpdateNewsForm(FlaskForm):
 
 
 class AdminDeleteNewsForm(FlaskForm):
+    """
+    Class which implements admin form for deleting news.
+    """
     news_dd = SelectField('News', choices=[])
     submit = SubmitField('Delete News')
 

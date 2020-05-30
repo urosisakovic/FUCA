@@ -17,6 +17,10 @@ matches = Blueprint('matches', __name__)
 @matches.route("", methods=['GET', 'POST'])
 @login_required
 def admin_matches():
+    """
+    Route reserved for admin access only.
+    Used for administration of matches.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -26,6 +30,10 @@ def admin_matches():
 @matches.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_matches_add():
+    """
+    Route reserved for admin access only.
+    Used for adding new matches.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -51,6 +59,10 @@ def admin_matches_add():
 @matches.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_matches_update():
+    """
+    Route reserved for admin access only.
+    Used for updating matches.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -103,6 +115,10 @@ def admin_matches_update():
 @matches.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_matches_delete():
+    """
+    Route reserved for admin access only.
+    Used for deleting matches.
+    """
     if not current_user.is_admin:
         abort(403)
 

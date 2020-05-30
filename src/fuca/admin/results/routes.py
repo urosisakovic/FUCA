@@ -15,6 +15,10 @@ results = Blueprint('results', __name__)
 @results.route("/", methods=['GET', 'POST'])
 @login_required
 def admin_results():
+    """
+    Route reserved for admin access only.
+    Used for administration of players.
+    """
     if not current_user.is_admin:
         abort(403)
     return render_template('admin/results/layout.html', title='Admin Results')
@@ -23,6 +27,10 @@ def admin_results():
 @results.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_results_add():
+    """
+    Route reserved for admin access only.
+    Used for adding players.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -49,6 +57,10 @@ def admin_results_add():
 @results.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_results_update():
+    """
+    Route reserved for admin access only.
+    Used for updating players.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -105,6 +117,10 @@ def admin_results_update():
 @results.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_results_delete():
+    """
+    Route reserved for admin access only.
+    Used for deleting players.
+    """
     if not current_user.is_admin:
         abort(403)
 

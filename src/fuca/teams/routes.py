@@ -11,6 +11,12 @@ teams = Blueprint('teams', __name__)
 
 @teams.route("/team/<int:id>")
 def team(id):
+    """
+    Route function for team page.
+    
+    Args:
+        id(int): Team id.
+    """
     team = Team.query.get_or_404(id)
     team.image = url_for('static', filename='images/teams/{}'.format(team.logo_image))
     return render_template('team/team.html', team=team, id=id, title=team.name)
@@ -18,6 +24,12 @@ def team(id):
 
 @teams.route("/results/<int:id>")
 def teamresults(id):
+    """
+    Route function for team result page.
+    
+    Args:
+        id(int): Team id.
+    """
     Team.query.get_or_404(id)
     results = Match.query.filter(Match.date_time <= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time <= datetime.now()).filter(Match.host_team_id == id).all()
@@ -29,6 +41,12 @@ def teamresults(id):
 
 @teams.route("/schedule/<int:id>")
 def teamschedule(id):
+    """
+    Route function for team schedule page.
+    
+    Args:
+        id(int): Team id.
+    """
     Team.query.get_or_404(id)
     schedules = Match.query.filter(Match.date_time >= datetime.now()).filter(Match.guest_team_id == id).all() +\
         Match.query.filter(Match.date_time >= datetime.now()).filter(Match.host_team_id == id).all()
@@ -40,6 +58,12 @@ def teamschedule(id):
 
 @teams.route("/squad/<int:id>")
 def teamsquad(id):
+    """
+    Route function for team squad page.
+    
+    Args:
+        id(int): Team id.
+    """
     Team.query.get_or_404(id)
     players = Player.query.filter_by(team_id=id).all()
     for player in players:

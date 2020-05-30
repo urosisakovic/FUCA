@@ -14,6 +14,9 @@ from fuca.models import Player, Team
 
 
 class AdminAddPlayerForm(FlaskForm):
+    """
+    Class which implements admin form for adding players.
+    """
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Jersey Number', validators=[DataRequired()])
     email = StringField('Email', validators=[Email(), DataRequired()])
@@ -57,6 +60,9 @@ class AdminAddPlayerForm(FlaskForm):
 
 
 class AdminUpdatePlayerForm(FlaskForm):
+    """
+    Class which implements admin form for updating players.
+    """
     player_dd = SelectField('Player', choices=[], id='select_players', coerce=int)
 
     name = StringField('Name', validators=[DataRequired()])
@@ -112,6 +118,9 @@ class AdminUpdatePlayerForm(FlaskForm):
 
 
 class AdminDeletePlayerForm(FlaskForm):
+    """
+    Class which implements admin form for deleting players.
+    """
     player_dd = SelectField('Player', choices=[])
     submit = SubmitField('Delete Player')
 

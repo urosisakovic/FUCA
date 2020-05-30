@@ -15,6 +15,10 @@ news = Blueprint('news', __name__)
 @news.route("/", methods=['GET', 'POST'])
 @login_required
 def admin_news():
+    """
+    Route reserved for admin access only.
+    Used for administration of news.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -25,6 +29,10 @@ def admin_news():
 @news.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_news_add():
+    """
+    Route reserved for admin access only.
+    Used for adding news.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -46,6 +54,10 @@ def admin_news_add():
 @news.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_news_update():
+    """
+    Route reserved for admin access only.
+    Used for updating news.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -82,6 +94,10 @@ def admin_news_update():
 @news.route("/delete", methods=['GET', 'POST'])
 @login_required
 def admin_news_delete():
+    """
+    Route reserved for admin access only.
+    Used for deleting news.
+    """
     if not current_user.is_admin:
         abort(403)
 

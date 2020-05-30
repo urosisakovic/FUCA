@@ -15,6 +15,10 @@ statistics = Blueprint('statistics', __name__)
 @statistics.route("", methods=['GET', 'POST'])
 @login_required
 def admin_statistics():
+    """
+    Route reserved for admin access only.
+    Used for administration of statistics.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -24,6 +28,10 @@ def admin_statistics():
 @statistics.route("/add", methods=['GET', 'POST'])
 @login_required
 def admin_statistics_add():
+    """
+    Route reserved for admin access only.
+    Used for adding statistics.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -60,6 +68,10 @@ def admin_statistics_add():
 @statistics.route("/update", methods=['GET', 'POST'])
 @login_required
 def admin_statistics_update():
+    """
+    Route reserved for admin access only.
+    Used for updating statistics.
+    """
     if not current_user.is_admin:
         abort(403)
 
@@ -98,6 +110,10 @@ def admin_statistics_update():
 @statistics.route("/remove", methods=['GET', 'POST'])
 @login_required
 def admin_statistics_delete():
+    """
+    Route reserved for admin access only.
+    Used for deleting statistics.
+    """
     if not current_user.is_admin:
         abort(403)
         

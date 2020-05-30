@@ -10,6 +10,9 @@ from fuca.models import Team
 
 
 class AdminAddTeamForm(FlaskForm):
+    """
+    Class which implements admin form for adding teams.
+    """
     name = StringField('Name', validators=[DataRequired()])
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Add Team')
@@ -23,6 +26,9 @@ class AdminAddTeamForm(FlaskForm):
 
 
 class AdminUpdateTeamForm(FlaskForm):
+    """
+    Class which implements admin form for updating teams.
+    """
     teams_dd = SelectField('Teams', choices=[], coerce=int, id='select_team')
     name = StringField('Name', validators=[DataRequired()])
     image = FileField("Team Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
@@ -44,6 +50,9 @@ class AdminUpdateTeamForm(FlaskForm):
 
 
 class AdminDeleteTeamForm(FlaskForm):
+    """
+    Class which implements admin form for deleting teams.
+    """
     teams_dd = SelectField('Teams', choices=[])
     submit = SubmitField('Delete Team')
 
