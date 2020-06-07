@@ -9641,22 +9641,6 @@
       "value": ""
     }]
   }, {
-    "id": "0584ced8-11a8-468e-8300-6ed42b03e52a",
-    "name": "Adm-add statistics",
-    "commands": []
-  }, {
-    "id": "0b24c032-b2e0-4c65-969b-89a2d4b3fe54",
-    "name": "Adm-update statistics",
-    "commands": []
-  }, {
-    "id": "733f76b5-f3f3-47aa-9b1b-0242da98bd2b",
-    "name": "Adm-delete statistics",
-    "commands": []
-  }, {
-    "id": "27388456-b290-48e2-8639-d7dbe8b5b079",
-    "name": "Promena lozinke uspesna",
-    "commands": []
-  }, {
     "id": "3fab6d1e-71d3-423c-beaf-e1e2f0e56207",
     "name": "Promena lozinke neuspesna los confirm",
     "commands": [{
@@ -10147,14 +10131,14 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["daad516d-bc15-4bfd-abb5-73b45ff78d81", "1e778443-3d09-4669-b6a9-e272a213c8b9", "0dce132e-f2ec-4baf-a79a-82583869ecc2", "0584ced8-11a8-468e-8300-6ed42b03e52a", "fc26f35a-cfe1-45a5-91c4-eec66eb0e4c1", "f4a1b9d1-c67f-4dcb-9e40-6d54eb2012e8", "5ef3a7f6-1579-4020-a691-c8b44db2a66c", "06715aae-5de4-4c87-92f4-de373c3fece2", "267d06b3-de91-44f6-898f-dc5ffa455f79", "2c693df2-0d40-406d-958c-65acb5b15b45", "0b24c032-b2e0-4c65-969b-89a2d4b3fe54", "f4cada9e-8118-436f-93b7-1b741e21c534", "c8783f02-18ab-4ae6-83c1-90310170902a", "3c2149a9-7f6d-4c38-a520-fb540db1cebd", "bddeaae1-35e7-40bf-a8af-44ce4b098aed", "6748dbd0-de97-4e05-a00e-723ad16a0da6", "733f76b5-f3f3-47aa-9b1b-0242da98bd2b", "18c5b809-9463-41c4-a394-7aceee6bd561"]
+    "tests": ["daad516d-bc15-4bfd-abb5-73b45ff78d81", "1e778443-3d09-4669-b6a9-e272a213c8b9", "0dce132e-f2ec-4baf-a79a-82583869ecc2", "fc26f35a-cfe1-45a5-91c4-eec66eb0e4c1", "f4a1b9d1-c67f-4dcb-9e40-6d54eb2012e8", "5ef3a7f6-1579-4020-a691-c8b44db2a66c", "06715aae-5de4-4c87-92f4-de373c3fece2", "267d06b3-de91-44f6-898f-dc5ffa455f79", "2c693df2-0d40-406d-958c-65acb5b15b45", "f4cada9e-8118-436f-93b7-1b741e21c534", "c8783f02-18ab-4ae6-83c1-90310170902a", "3c2149a9-7f6d-4c38-a520-fb540db1cebd", "bddeaae1-35e7-40bf-a8af-44ce4b098aed", "6748dbd0-de97-4e05-a00e-723ad16a0da6", "18c5b809-9463-41c4-a394-7aceee6bd561"]
   }, {
     "id": "e84e3671-8975-4f39-914f-6409338e9ada",
     "name": "Promena lozinke",
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["3fab6d1e-71d3-423c-beaf-e1e2f0e56207", "27388456-b290-48e2-8639-d7dbe8b5b079", "c0e84fbf-1a97-43c4-8d8d-6f973fdc1933"]
+    "tests": ["3fab6d1e-71d3-423c-beaf-e1e2f0e56207", "c0e84fbf-1a97-43c4-8d8d-6f973fdc1933"]
   }],
   "urls": ["http://localhost:5000/"],
   "plugins": []
