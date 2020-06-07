@@ -43,8 +43,8 @@ class RegisterForm(FlaskForm):
                  lambda s: any(c.isdigit() for c in s),
                  lambda s: any(not c.isalnum() for c in s)]
         if not all(rule(password.data) for rule in rules):
-            raise ValidationError('Password must contain at least 1 uppecase character,\
-                                  1 lowercase chacater, 1 digit and 1 special character.')
+            raise ValidationError('Password must contain at least 1 uppercase character,\
+                                  1 lowercase character, 1 digit and 1 special character.')
 
 
 class ChangePasswordForm(FlaskForm):
@@ -70,8 +70,8 @@ class ChangePasswordForm(FlaskForm):
                  lambda s: any(c.isdigit() for c in s),
                  lambda s: any(not c.isalnum() for c in s)]
         if not all(rule(password.data) for rule in rules):
-            raise ValidationError('Password must contain at least 1 uppecase character,\
-                                  1 lowercase chacater, 1 digit and 1 special character.')
+            raise ValidationError('Password must contain at least 1 uppercase character,\
+                                  1 lowercase character, 1 digit and 1 special character.')
 
 
 class RequestResetForm(FlaskForm):
@@ -103,5 +103,5 @@ class ResetPasswordForm(FlaskForm):
                  lambda s: any(c.isdigit() for c in s),
                  lambda s: any(not c.isalnum() for c in s)]
         if not all(rule(password.data) for rule in rules):
-            raise ValidationError('Password must contain at least 1 uppecase character,\
-                                  1 lowercase chacater, 1 digit and 1 special character.')
+            raise ValidationError('Password must contain at least 1 uppercase character,\
+                                  1 lowercase character, 1 digit and 1 special character.')

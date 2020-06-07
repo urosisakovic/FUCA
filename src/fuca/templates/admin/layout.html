@@ -1,18 +1,15 @@
-{% extends 'home/layout.html' %}
+{% extends 'home/layout.html' %} {% block content %}
+<div class="card container">
 
-{% block content %}
-<div class="card" style="width: 40rem;">
-    
     <div class="card-body">
-    <a href="{{ url_for('news.admin_news') }}" class="customLink">News</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{{ url_for('adminteams.admin_teams') }}"class="customLink">Teams</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{{ url_for('players.admin_players') }}"class="customLink">Players</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{{ url_for('matches.admin_matches') }}"class="customLink">Matches</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{{ url_for('results.admin_results') }}"class="customLink">Results</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{{ url_for('statistics.admin_statistics') }}"class="customLink">Statistics</a>
+        <a href="{{ url_for('news.admin_news') }}" class="customLink">News</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('adminteams.admin_teams') }}" class="customLink">Teams</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('players.admin_players') }}" class="customLink">Players</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('matches.admin_matches') }}" class="customLink">Matches</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('results.admin_results') }}" class="customLink">Results</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('statistics.admin_statistics') }}" class="customLink">Statistics</a>
     </div>
 
 </div>
 
-    {% block admin_content %}{% endblock admin_content%}
-{% endblock content %}
+{% block admin_content %}{% endblock admin_content%} {% endblock content %}
