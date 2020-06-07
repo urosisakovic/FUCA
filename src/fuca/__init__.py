@@ -19,7 +19,7 @@ login_manager.login_message_category = 'info'
 
 def create_app(config_class=Config):
     """
-    Function which create Flash App.
+    Function which creates Flask App.
 
     Args:
         config_class(class): A class which fields are represent app's
