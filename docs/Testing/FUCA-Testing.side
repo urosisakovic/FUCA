@@ -9655,22 +9655,26 @@
   }, {
     "id": "27388456-b290-48e2-8639-d7dbe8b5b079",
     "name": "Promena lozinke uspesna",
+    "commands": []
+  }, {
+    "id": "3fab6d1e-71d3-423c-beaf-e1e2f0e56207",
+    "name": "Promena lozinke neuspesna los confirm",
     "commands": [{
-      "id": "dc1d8b37-d201-4a06-9df2-2972f104e453",
+      "id": "351c4c22-0f03-4023-92e0-9eebef6319c1",
       "comment": "",
       "command": "open",
       "target": "http://localhost:5000/",
       "targets": [],
       "value": ""
     }, {
-      "id": "20fca4c3-0bf1-4d0b-b471-5fe7ff7bba74",
+      "id": "3414b6a5-40d3-493d-b68f-b01dd2b757b7",
       "comment": "",
       "command": "setWindowSize",
       "target": "1418x808",
       "targets": [],
       "value": ""
     }, {
-      "id": "15d3b487-4156-453a-a880-50a7ba699855",
+      "id": "f7aa3600-fd4f-49d9-8c32-0f031e867d01",
       "comment": "",
       "command": "click",
       "target": "linkText=Login",
@@ -9685,7 +9689,7 @@
       ],
       "value": ""
     }, {
-      "id": "5a5b0f6c-ccdc-4dec-ba5c-e13430adb780",
+      "id": "90f17b8e-c5fe-4f0e-b3cf-0991435b2140",
       "comment": "",
       "command": "click",
       "target": "id=email",
@@ -9699,7 +9703,7 @@
       ],
       "value": ""
     }, {
-      "id": "2f5c4da9-35d0-4d8d-aca5-22436de17f2f",
+      "id": "c3d7d3e6-bd15-46fc-9035-b135d3e9d92e",
       "comment": "",
       "command": "type",
       "target": "id=email",
@@ -9713,7 +9717,7 @@
       ],
       "value": "igorandrejic99@gmail.com"
     }, {
-      "id": "dd9bbf05-a375-4f78-bec4-75e83fcbd9ce",
+      "id": "e9f8ac09-584d-477f-993c-e8a998d5b87b",
       "comment": "",
       "command": "click",
       "target": "id=password",
@@ -9727,7 +9731,7 @@
       ],
       "value": ""
     }, {
-      "id": "7f68a614-c87f-4307-b777-88152c284968",
+      "id": "9f4d6c1d-ba4d-4c4a-9b97-8640219ceff5",
       "comment": "",
       "command": "type",
       "target": "id=password",
@@ -9741,21 +9745,21 @@
       ],
       "value": "Igor123#"
     }, {
-      "id": "4252603f-e0f8-46b6-a967-54cd774c1ba1",
+      "id": "fc398e44-efd6-4af5-aa77-15bfd0adbe49",
       "comment": "",
-      "command": "sendKeys",
-      "target": "id=password",
+      "command": "click",
+      "target": "id=submit",
       "targets": [
-        ["id=password", "id"],
-        ["name=password", "name"],
-        ["css=#password", "css:finder"],
-        ["xpath=//input[@id='password']", "xpath:attributes"],
-        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[2]/input", "xpath:position"]
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
       ],
-      "value": "${KEY_ENTER}"
+      "value": ""
     }, {
-      "id": "cafa500a-2181-4bec-a74c-040aeca58ba3",
+      "id": "9102ebf5-c81c-4d4f-b2fe-ff9aa2086bb5",
       "comment": "",
       "command": "click",
       "target": "linkText=My Account",
@@ -9770,7 +9774,7 @@
       ],
       "value": ""
     }, {
-      "id": "51b3bfe4-d606-4554-b723-9a069e051363",
+      "id": "28901c86-d580-4bfd-bd9c-9d0350493a4e",
       "comment": "",
       "command": "click",
       "target": "id=current_password",
@@ -9784,7 +9788,7 @@
       ],
       "value": ""
     }, {
-      "id": "b7018daf-0afb-4d74-8057-523b345d0178",
+      "id": "a9b1f67c-5511-426e-b748-ef9e8fa72029",
       "comment": "",
       "command": "type",
       "target": "id=current_password",
@@ -9798,7 +9802,21 @@
       ],
       "value": "Igor123#"
     }, {
-      "id": "ce63d893-980b-4e33-8cf5-2229b5373227",
+      "id": "ec0defb3-dca0-49d0-94ad-29b59d03236c",
+      "comment": "",
+      "command": "click",
+      "target": "id=new_password",
+      "targets": [
+        ["id=new_password", "id"],
+        ["name=new_password", "name"],
+        ["css=#new_password", "css:finder"],
+        ["xpath=//input[@id='new_password']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "63a62b4a-4572-43be-89f2-d514aff7bb8b",
       "comment": "",
       "command": "type",
       "target": "id=new_password",
@@ -9810,9 +9828,21 @@
         ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[2]/input", "xpath:idRelative"],
         ["xpath=//div[2]/input", "xpath:position"]
       ],
-      "value": "Igor123$"
+      "value": "Igor123@#"
     }, {
-      "id": "07e5c136-5c9b-4c00-a2d5-36285bbb70e8",
+      "id": "de6e2efa-80bb-4810-adba-53776a4b4c74",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(4) > #current_password",
+      "targets": [
+        ["css=.form-group:nth-child(4) > #current_password", "css:finder"],
+        ["xpath=(//input[@id='current_password'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e86a768f-bfa8-4952-b138-a2a2e2e4fc39",
       "comment": "",
       "command": "type",
       "target": "css=.form-group:nth-child(4) > #current_password",
@@ -9822,9 +9852,9 @@
         ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[3]/input", "xpath:idRelative"],
         ["xpath=//div[3]/input", "xpath:position"]
       ],
-      "value": "Igor123$"
+      "value": "Igor123456@"
     }, {
-      "id": "671b4616-5fe9-41e0-b30c-c89881221d37",
+      "id": "0bcb05a0-1af0-401e-a266-c6732980da27",
       "comment": "",
       "command": "click",
       "target": "id=submit",
@@ -9835,6 +9865,257 @@
         ["xpath=//input[@id='submit']", "xpath:attributes"],
         ["xpath=//div[@id='content-wrap']/main/div/div/div/form/div/input", "xpath:idRelative"],
         ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1ab896f-d089-4aa0-bcc5-9862a1ebf2af",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.invalid-feedback > span",
+      "targets": [
+        ["css=.invalid-feedback > span", "css:finder"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[3]/div/span", "xpath:idRelative"],
+        ["xpath=//div/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Field must be equal to new_password.')]", "xpath:innerText"]
+      ],
+      "value": "Field must be equal to new_password."
+    }, {
+      "id": "faae491f-3219-421a-b499-fad9185de611",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-nav:nth-child(2) > .nav-item:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//div[@id='navbarToggle']/div[2]/a[3]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//div[2]/a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c0e84fbf-1a97-43c4-8d8d-6f973fdc1933",
+    "name": "Promena lozinke neuspesna los current pass",
+    "commands": [{
+      "id": "e1ca7786-83f3-4d13-b495-fc16e2708c57",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:5000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5b565af0-f081-4b78-b06c-98ced8d31d41",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1422x808",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "502c3175-427c-484e-a551-efb60e4e0702",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.navbar-nav:nth-child(2) > .nav-item:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//div[@id='navbarToggle']/div[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "49771ea4-e411-4ee8-91e8-394face21bf4",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a8ad1c26-8f91-4e6d-9725-e323036f40b5",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "igorandrejic99@gmail.com"
+    }, {
+      "id": "5e07cf72-9304-4313-ba86-760d80700ed1",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e689c028-f302-4798-a943-b4b98b1964e0",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Igor123#"
+    }, {
+      "id": "b6621cda-b11f-43b6-ad07-f3b64a50f550",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b80fa3af-c76d-4122-98f9-5911fb6563f7",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=My Account",
+      "targets": [
+        ["linkText=My Account", "linkText"],
+        ["css=.navbar-nav:nth-child(2) > .nav-item:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'My Account')]", "xpath:link"],
+        ["xpath=//div[@id='navbarToggle']/div[2]/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/account')]", "xpath:href"],
+        ["xpath=//div[2]/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'My Account')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bc9f0470-c889-42e2-b1ef-871d673514ca",
+      "comment": "",
+      "command": "click",
+      "target": "css=.content-section",
+      "targets": [
+        ["css=.content-section", "css:finder"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div", "xpath:idRelative"],
+        ["xpath=//main/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f152aca1-a344-4416-81b1-b42cffeccd01",
+      "comment": "",
+      "command": "click",
+      "target": "id=current_password",
+      "targets": [
+        ["id=current_password", "id"],
+        ["name=current_password", "name"],
+        ["css=.form-group:nth-child(2) > #current_password", "css:finder"],
+        ["xpath=//input[@id='current_password']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bd9ba5ae-2e4b-4f47-84ff-bb97d00dd53b",
+      "comment": "",
+      "command": "type",
+      "target": "id=current_password",
+      "targets": [
+        ["id=current_password", "id"],
+        ["name=current_password", "name"],
+        ["css=.form-group:nth-child(2) > #current_password", "css:finder"],
+        ["xpath=//input[@id='current_password']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "igor123"
+    }, {
+      "id": "402b1911-4b09-4347-b8bb-84a28fc318c4",
+      "comment": "",
+      "command": "type",
+      "target": "id=new_password",
+      "targets": [
+        ["id=new_password", "id"],
+        ["name=new_password", "name"],
+        ["css=#new_password", "css:finder"],
+        ["xpath=//input[@id='new_password']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Igor123@"
+    }, {
+      "id": "09d38603-915a-4b7d-8166-be6c68e2e1ca",
+      "comment": "",
+      "command": "type",
+      "target": "css=.form-group:nth-child(4) > #current_password",
+      "targets": [
+        ["css=.form-group:nth-child(4) > #current_password", "css:finder"],
+        ["xpath=(//input[@id='current_password'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "Igor123@"
+    }, {
+      "id": "87eb1882-b43a-4dad-a25d-066f61815a09",
+      "comment": "",
+      "command": "click",
+      "target": "id=submit",
+      "targets": [
+        ["id=submit", "id"],
+        ["name=submit", "name"],
+        ["css=#submit", "css:finder"],
+        ["xpath=//input[@id='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "97d946ec-49f8-4b44-ab28-112e18405355",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.form-group:nth-child(2) > .invalid-feedback > span",
+      "targets": [
+        ["css=.form-group:nth-child(2) > .invalid-feedback > span", "css:finder"],
+        ["xpath=//div[@id='content-wrap']/main/div/div/div/form/fieldset/div/div/span", "xpath:idRelative"],
+        ["xpath=//div/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Current password is not correct.')]", "xpath:innerText"]
+      ],
+      "value": "Current password is not correct."
+    }, {
+      "id": "374e76b0-fa2c-4ad9-a3eb-79f0b474372c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-nav:nth-child(2) > .nav-item:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//div[@id='navbarToggle']/div[2]/a[3]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//div[2]/a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
       ],
       "value": ""
     }]
@@ -9867,6 +10148,13 @@
     "parallel": false,
     "timeout": 300,
     "tests": ["daad516d-bc15-4bfd-abb5-73b45ff78d81", "1e778443-3d09-4669-b6a9-e272a213c8b9", "0dce132e-f2ec-4baf-a79a-82583869ecc2", "0584ced8-11a8-468e-8300-6ed42b03e52a", "fc26f35a-cfe1-45a5-91c4-eec66eb0e4c1", "f4a1b9d1-c67f-4dcb-9e40-6d54eb2012e8", "5ef3a7f6-1579-4020-a691-c8b44db2a66c", "06715aae-5de4-4c87-92f4-de373c3fece2", "267d06b3-de91-44f6-898f-dc5ffa455f79", "2c693df2-0d40-406d-958c-65acb5b15b45", "0b24c032-b2e0-4c65-969b-89a2d4b3fe54", "f4cada9e-8118-436f-93b7-1b741e21c534", "c8783f02-18ab-4ae6-83c1-90310170902a", "3c2149a9-7f6d-4c38-a520-fb540db1cebd", "bddeaae1-35e7-40bf-a8af-44ce4b098aed", "6748dbd0-de97-4e05-a00e-723ad16a0da6", "733f76b5-f3f3-47aa-9b1b-0242da98bd2b", "18c5b809-9463-41c4-a394-7aceee6bd561"]
+  }, {
+    "id": "e84e3671-8975-4f39-914f-6409338e9ada",
+    "name": "Promena lozinke",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["3fab6d1e-71d3-423c-beaf-e1e2f0e56207", "27388456-b290-48e2-8639-d7dbe8b5b079", "c0e84fbf-1a97-43c4-8d8d-6f973fdc1933"]
   }],
   "urls": ["http://localhost:5000/"],
   "plugins": []
