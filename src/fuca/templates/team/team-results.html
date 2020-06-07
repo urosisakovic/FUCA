@@ -1,8 +1,6 @@
-{% extends 'team/team-layout.html' %}
+{% extends 'team/team-layout.html' %} {% block team_content %}
 
-{% block team_content %}
-
-    <table>
+<table>
 
     <thead>
         <th>Date</th>
@@ -12,24 +10,22 @@
     </thead>
 
     {% for result in results %}
-        <tr>
-            <td>{{ result.date }}</td>
-            <td style="white-space:nowrap">
-                <a href="{{ url_for('teams.team', id=result.host_team_id)}}">
-                    <img src="{{ result.host_team_logo }}" width="100" width="100">
-                    {{ result.host_team.name }}
-                </a>
-            </td>
+    <tr>
+        <td>{{ result.date_time.strftime('%d. %m. %Y.') }}</td>
+        <td style="white-space:nowrap">
+            <a href="{{ url_for('teams.team', id=result.host_team_id)}}">
+                <img src="{{ result.host_team_logo }}" width="100" width="100"> {{ result.host_team.name }}
+            </a>
+        </td>
 
-            <td style="white-space:nowrap">
-                <a href="{{ url_for('teams.team', id=result.guest_team_id)}}" width="100">
-                    <img src="{{ result.guest_team_logo }}" width="100">
-                    {{ result.guest_team.name }}
-                </a>
-            </td>
-            <td>{{ result.team1_goals }} : {{ result.team2_goals }}</td>
-        </tr>
+        <td style="white-space:nowrap">
+            <a href="{{ url_for('teams.team', id=result.guest_team_id)}}" width="100">
+                <img src="{{ result.guest_team_logo }}" width="100"> {{ result.guest_team.name }}
+            </a>
+        </td>
+        <td>{{ result.host_team_goals }} : {{ result.guest_team_goals }}</td>
+    </tr>
     {% endfor %}
-    </table>
-   
+</table>
+
 {% endblock team_content %}

@@ -2,6 +2,7 @@
 """
 Author: Djodje Vucinic
 """
+from datetime import datetime
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from flask_login import current_user, login_required, login_user, logout_user
@@ -72,6 +73,8 @@ def account():
     """
     form = ChangePasswordForm()
     if form.validate_on_submit():
+        print(form.new_password.data)
+        print(form.confirm_password.data)
         data_utils.register_player(current_user.email, form.new_password.data)
         flash('You have successfully changed your password.', 'success')
 
@@ -85,8 +88,8 @@ def myteam():
     """
     Route function for my-team page.
     """
-    matches = Match.query.filter_by(host_team_id=current_user.team_id).all() +\
-        Match.query.filter_by(guest_team_id=current_user.team_id).all()
+    matches = Match.query.filter(Match.date_time > datetime.now()).filter(Match.host_team_id == current_user.team_id).all() +\
+        Match.query.filter(Match.date_time > datetime.now()).filter(Match.guest_team_id == current_user.team_id).all()
 
     match_id = request.args.get('match', type=int)
     player_id = request.args.get('player', type=int)
