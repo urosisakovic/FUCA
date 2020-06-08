@@ -71,14 +71,15 @@ class AdminUpdateStatisticsForm(FlaskForm):
     def validate_player_dd(self, player_dd):
         if player_dd.data == -1:
             raise ValidationError('You must choose a player.')
-            return
 
         player = Player.query.get(player_dd.data)
         match = Match.query.get(self.match_dd.data)
 
         if player and match: 
             if player.team_id not in [match.host_team_id, match.guest_team_id]:
-                raise ValidationError('Player is not in the host or the guest team.') 
+                raise ValidationError('Player is not in the host or the guest team.')
+        else:
+            raise ValidationError('Not a valid choice.')
 
 
 class AdminDeleteStatisticsForm(FlaskForm):

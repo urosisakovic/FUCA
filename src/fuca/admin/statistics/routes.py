@@ -50,17 +50,16 @@ def admin_statistics_add():
             form.process()
     
     if request.method == 'POST':
-        if form.validate():
-            data_utils.add_statistics(match_id=form.match_dd.data,
-                                      player_id=form.player_dd.data,
-                                      goals=form.goals.data,
-                                      assists=form.assists.data,
-                                      yellow=form.yellow.data,
-                                      red=form.red.data)
-            flash('Successfully added a new statistics', 'success')
-            return redirect(url_for('statistics.admin_statistics_add'))
-        else:
-            print(form.errors)
+        data_utils.add_statistics(match_id=form.match_dd.data,
+                                    player_id=form.player_dd.data,
+                                    goals=form.goals.data,
+                                    assists=form.assists.data,
+                                    yellow=form.yellow.data,
+                                    red=form.red.data)
+        flash('Successfully added a new statistics', 'success')
+        return redirect(url_for('statistics.admin_statistics_add'))
+    else:
+        print(form.errors)
 
     return render_template('admin/statistics/add.html', form=form, title='Admin Add Statistics')
 
@@ -79,7 +78,7 @@ def admin_statistics_update():
     form.populate_dd()
 
     match_id = request.args.get('match_id', type=int)
-    if request.method == 'GET' and match_id and not player_id:
+    if request.method == 'GET' and match_id:
         if match_id >= 0:
             match = Match.query.get(match_id)
             form.match_dd.default = match_id
@@ -94,15 +93,14 @@ def admin_statistics_update():
         
     
     if request.method == 'POST':
-        if form.validate():
-            data_utils.update_statistics(match_id=form.match_dd.data,
-                                        player_id=form.player_dd.data,
-                                        goals=form.goals.data,
-                                        assists=form.assists.data,
-                                        yellow=form.yellow.data,
-                                        red=form.red.data)
-            flash('Successfully updated a statistics', 'success')
-            return redirect(url_for('statistics.admin_statistics_update'))
+        data_utils.update_statistics(match_id=form.match_dd.data,
+                                    player_id=form.player_dd.data,
+                                    goals=form.goals.data,
+                                    assists=form.assists.data,
+                                    yellow=form.yellow.data,
+                                    red=form.red.data)
+        flash('Successfully updated a statistics', 'success')
+        return redirect(url_for('statistics.admin_statistics_update'))
 
     return render_template('admin/statistics/update.html', form=form, title='Admin Update Statistics')
 

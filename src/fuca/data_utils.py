@@ -333,7 +333,7 @@ def update_statistics(player_id,
         yellow(int): New Yellow cards.
         red(int): New Red cards.
     """
-    update_statistics = Statistics.query.filter_by(match_id=match_id).filter_by(player_id=player_id)
+    update_statistics = Statistics.query.filter_by(match_id=match_id).filter_by(player_id=player_id).first()
     update_statistics.player_id = player_id
     update_statistics.match_id = match_id
     update_statistics.goals = goals
