@@ -1,44 +1,39 @@
-"""
-Author: Uros Isakovic
-"""
-
 import os
 import sys
-sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)) + '/..')
-
 import json
 from datetime import datetime
 
+
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)) + '/..')
 from fuca import bcrypt, create_app, db
 from fuca.models import Match, News, Player, Statistics, Team
-
-
 
 
 def print_array(arr, newlines=2):
     for el in arr:
         print(el)
-    for nl in range(newlines):
-        print('\n')
+    for _ in range(newlines):
+        print('')
 
 
 def init_empty_db():
     if os.path.exists('../fuca/site.db'):
-        print("Removed site.db")
+        print('Removed site.db')
         os.remove('../fuca/site.db')
 
     db.create_all()
 
 
 def add_admin():
-    admin = Player(name='admin',
-                   email='admin@admin.admin',
-                   password=bcrypt.generate_password_hash('admin').decode('utf-8'),
-                   registered=True,
-                   is_admin=True,
-                   birthdate=datetime.now(),
-                   number=-1,
-                   team_id=-1)
+    admin = Player(
+        name='admin',
+        email='admin@admin.admin',
+        password=bcrypt.generate_password_hash('admin').decode('utf-8'),
+        registered=True,
+        is_admin=True,
+        birthdate=datetime.now(),
+        number=-1,
+        team_id=-1)
     db.session.add(admin)
     db.session.commit()
 
@@ -47,7 +42,7 @@ def add_admin():
 
 def add_news():
     news_filepath = 'news.json'
-    with open(news_filepath, encoding="utf8") as json_file:
+    with open(news_filepath, encoding='utf8') as json_file:
         news_list = json.load(json_file)['news']
 
     cnt = 0
@@ -60,7 +55,7 @@ def add_news():
 
 def add_teams():
     teams_filepath = 'teams.json'
-    with open(teams_filepath, encoding="utf8") as json_file:
+    with open(teams_filepath, encoding='utf8') as json_file:
         teams_list = json.load(json_file)['teams']
     
     cnt = 0
@@ -84,7 +79,7 @@ def string_to_date(str_date):
 
 def add_players():
     players_filepath = 'players.json'
-    with open(players_filepath, encoding="utf8") as json_file:
+    with open(players_filepath, encoding='utf8') as json_file:
         players_list = json.load(json_file)['players']
 
     cnt = 0
@@ -102,7 +97,7 @@ def add_players():
 
 def add_matches():
     matches_filepath = 'matches.json'
-    with open(matches_filepath, encoding="utf8") as json_file:
+    with open(matches_filepath, encoding='utf8') as json_file:
         matches_list = json.load(json_file)['matches']
 
     cnt = 0
@@ -126,7 +121,7 @@ def add_matches():
 
 def add_statistics():
     stats_filepath = 'statistics.json'
-    with open(stats_filepath, encoding="utf8") as json_file:
+    with open(stats_filepath, encoding='utf8') as json_file:
         stats_list = json.load(json_file)['statistics']
 
     cnt = 0

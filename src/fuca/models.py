@@ -5,7 +5,7 @@ from datetime import datetime
 from fuca import db, login_manager
 from flask_login import UserMixin
 from flask import current_app
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import URLSafeTimedSerializer
 
 
 @login_manager.user_loader
@@ -32,33 +32,33 @@ class Player(db.Model, UserMixin):
     Class which represent PLAYER table in database.
     """
     __tablename__ = 'player'
-    id          = db.Column(db.Integer,     primary_key=True)
-    name        = db.Column(db.String(100), nullable=False)
-    birthdate   = db.Column(db.DateTime,    nullable=False)
-    number      = db.Column(db.Integer,     nullable=False)
-    image       = db.Column(db.String(20),  nullable=False, default='default.jpg')
-    email       = db.Column(db.String(120), unique=True,    nullable=False)
-    password    = db.Column(db.String(200))
-    registered  = db.Column(db.Boolean, default=False)
-    is_admin    = db.Column(db.Boolean, default=False)
+    id = db.Column(db.Integer,     primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    birthdate = db.Column(db.DateTime,    nullable=False)
+    number = db.Column(db.Integer,     nullable=False)
+    image = db.Column(db.String(20),  nullable=False, default='default.jpg')
+    email = db.Column(db.String(120), unique=True,    nullable=False)
+    password = db.Column(db.String(200))
+    registered = db.Column(db.Boolean, default=False)
+    is_admin = db.Column(db.Boolean, default=False)
     # foreign keys
-    team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     # relationships
-    statistics  = db.relationship('Statistics', backref='player', lazy=True) 
+    statistics = db.relationship('Statistics', backref='player', lazy=True) 
 
     def get_reset_token(self, expires_sec=600):
-        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
-        return s.dumps({'player_id': self.id}).decode('utf-8')
+        s = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+        return s.dumps({'player_id': self.id})
 
     @staticmethod
     def verify_reset_token(token):
-        s = Serializer(current_app.config['SECRET_KEY'])
+        s = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+
         try:
             player_id = s.loads(token)['player_id']
-        except:
-            None
+        except Exception:
+            return None
         return Player.query.get(player_id)
-
 
     @property
     def goals(self):
@@ -93,7 +93,7 @@ class Player(db.Model, UserMixin):
         return self.goals + self.assists - self.yellow - 2 * self.red
 
     def __repr__(self):
-        return f"Player('{self.name}', '{self.email}', '{self.image}')"
+        return f'Player('{self.name}', '{self.email}', '{self.image}')'
 
 
 class Match(db.Model):
@@ -101,24 +101,24 @@ class Match(db.Model):
     Class which represent MATCH table in database.
     """
     __tablename__ = 'match'
-    id                      = db.Column(db.Integer, primary_key=True)
-    date_time               = db.Column(db.DateTime, nullable=False)
-    
-    host_team_goals         = db.Column(db.Integer, default=0)
-    host_team_yellow        = db.Column(db.Integer, default=0)
-    host_team_red           = db.Column(db.Integer, default=0)
-    host_team_shots         = db.Column(db.Integer, default=0)
+    id = db.Column(db.Integer, primary_key=True)
+    date_time = db.Column(db.DateTime, nullable=False)
 
-    guest_team_goals        = db.Column(db.Integer, default=0)
-    guest_team_yellow       = db.Column(db.Integer, default=0)
-    guest_team_red          = db.Column(db.Integer, default=0)
-    guest_team_shots        = db.Column(db.Integer, default=0)
+    host_team_goals = db.Column(db.Integer, default=0)
+    host_team_yellow = db.Column(db.Integer, default=0)
+    host_team_red = db.Column(db.Integer, default=0)
+    host_team_shots = db.Column(db.Integer, default=0)
 
-    # foreign keys
-    host_team_id     = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    guest_team_id    = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
-    # relationships
-    statistics  = db.relationship('Statistics', backref='match', lazy=True)
+    guest_team_goals = db.Column(db.Integer, default=0)
+    guest_team_yellow = db.Column(db.Integer, default=0)
+    guest_team_red = db.Column(db.Integer, default=0)
+    guest_team_shots = db.Column(db.Integer, default=0)
+
+    # Foreign keys
+    host_team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    guest_team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    # Relationships
+    statistics = db.relationship('Statistics', backref='match', lazy=True)
 
     @property
     def host_team_playing(self):
@@ -193,7 +193,7 @@ class Match(db.Model):
         return cnt
 
     def __repr__(self):
-        return f"Match(host team id: {self.host_team_id}, guest team id: {self.guest_team_id})"
+        return f'Match(host team id: {self.host_team_id}, guest team id: {self.guest_team_id})'
                 
 
 class Team(db.Model):
@@ -201,14 +201,14 @@ class Team(db.Model):
     Class which represent TEAM table in database.
     """
     __tablename__ = 'team'
-    id          = db.Column(db.Integer,     primary_key=True)
-    name        = db.Column(db.String(100), nullable=False, unique=True)
-    matches     = db.Column(db.Integer,     nullable=False, default=0)
-    wins        = db.Column(db.Integer,     nullable=False, default=0)
-    losses      = db.Column(db.Integer,     nullable=False, default=0)
-    draws       = db.Column(db.Integer,     nullable=False, default=0)
-    goal_diff   = db.Column(db.Integer,     nullable=False, default=0)
-    logo_image  = db.Column(db.String(20),  nullable=False, default='default.jpg')
+    id = db.Column(db.Integer,     primary_key=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+    matches = db.Column(db.Integer,     nullable=False, default=0)
+    wins = db.Column(db.Integer,     nullable=False, default=0)
+    losses = db.Column(db.Integer,     nullable=False, default=0)
+    draws = db.Column(db.Integer,     nullable=False, default=0)
+    goal_diff = db.Column(db.Integer,     nullable=False, default=0)
+    logo_image = db.Column(db.String(20),  nullable=False, default='default.jpg')
     # foreign keys
     captain_id  = db.Column(db.Integer, db.ForeignKey('player.id'))
     # relationships
@@ -243,7 +243,7 @@ class Statistics(db.Model):
     match_id    = db.Column(db.Integer, db.ForeignKey('match.id'),  nullable=False)
 
     def __repr__(self):
-        return f"Statistics(id = {self.id})"
+        return f'Statistics(id = {self.id})'
 
 
 class PlayingMatch(db.Model):
